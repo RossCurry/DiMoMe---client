@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import { Link } from 'react-router-dom'
 import './Authentication.styles.scss'
+import { registerNewUser } from '../ApiService'
 
-function Authentication({ subscribe }) {
+function Authentication({ subscribe, history }) {
 
 
   const initialState = {
@@ -27,6 +28,7 @@ function Authentication({ subscribe }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const { email, password, name, localSelector, localName} = registry;
+    console.log('registry', registry);
     const newUser = {
       email: base64(email) , 
       password: btoa(password) , 
@@ -35,6 +37,10 @@ function Authentication({ subscribe }) {
       localName: base64(localName) }
 
     console.log('newUser', newUser);
+    const registeredUser = registerNewUser(newUser);
+    console.log('registeredUser', registeredUser);
+    //TODO figure out how to use props.history.psuh
+    history.push(`/profile/${registeredUser.id}`, )
   }
 
   const validateRegister = () => {
@@ -54,10 +60,9 @@ function Authentication({ subscribe }) {
     const regExp = /[^<>]+/g
     const cleanString = str.match(regExp);
     //TODO rewrite to create a msg for the user console.log('input wasnt clean');
-    if (str !== cleanString[0]) 
+    if (str !== cleanString[0]) return;
     return btoa(cleanString[0]);
   }
-
 
   const emailInput = () => {
     return (
@@ -213,12 +218,6 @@ function Authentication({ subscribe }) {
     )
   }
 
-      
-
-
-
-
-
 
 
 
@@ -227,7 +226,7 @@ function Authentication({ subscribe }) {
       <h1 className="subscribe-heading">{
         subscribe 
         ? 'It\'s free to register an account' 
-        : 'To continue, Log in here'
+        : 'To continue log in here'
       }
       </h1>
 
@@ -248,80 +247,8 @@ function Authentication({ subscribe }) {
           {subscribe ? nameInput() : null }
           {subscribe ? localSelectorInput() : null }
           {subscribe ? localNameInput() : null }
-          {subscribe ? submitButtonRegister() : submitButtonLogin() }
+          {subscribe ? submitButtonRegister() : submitButtonLogin()}
         
-
-        {/* <label for="email">What is your email address?</label>
-        <input 
-          type="email" 
-          placeholder="write your email here..." 
-          name="email"
-          value={registry.email}
-          onChange={handleChange}
-        >
-        </input>
-
-        <label for="emailConfirm">Confirm your email address</label>
-        <input 
-          type="email" 
-          placeholder="re-enter your email..." name="emailConfirm"
-          value={registry.emailConfirm}
-          onChange={handleChange}
-        >
-        </input>
-        
-        <label for="password">Create a password</label>
-        <input 
-          type="password" 
-          placeholder="Create a password..." 
-          name="password"
-          value={registry.password}
-          onChange={handleChange}
-        >
-        </input>
-        
-        <label for="name">What would you like your profile name to be? </label>
-        <input 
-          type="text" 
-          placeholder="Write your profile name here..." name="name"
-          value={registry.name}
-          onChange={handleChange}
-        >
-        </input>
-
-        <label for="localSelector">What kind of place do you have? </label>
-        <select 
-        name="localSelector" 
-        id="localSelect"
-        value={registry.localSelector}
-        onChange={handleChange}
-        >
-          <option value="">--Please choose an option--</option>
-          <option value="restaurant">Restaurant</option>
-          <option value="cafe">Cafe</option>
-          <option value="bar">Bar</option>
-        </select>
-
-        <label for="localName">What's the name of your place</label>
-        <input 
-        type="text" 
-        placeholder="Write the name of your place here..." name="localName"
-        value={registry.localName}
-        onChange={handleChange}
-        >
-        </input>
-
-        <input 
-          type="submit" 
-          value={subscribe ? "Register" : "Log in"} 
-          disabled={validateRegister()}></input>
-
-      <div className="subscribe-login">
-        <p>Already have an account?</p>
-        <Link to={'/Login'}>
-          <p>Login here</p>
-        </Link>
-      </div> */}
 
       </form>
 

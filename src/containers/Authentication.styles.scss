@@ -16,6 +16,7 @@
   box-shadow: $darkShadow;
   padding: 0 2em;
   text-align: left;
+  animation: appear 300ms ease-in-out 1 normal;
   input[type="email"],
   input[type="text"],
   input[type="password"],
@@ -46,4 +47,22 @@
     margin-bottom: 2rem;
   }
 
+}
+
+@keyframes appear {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes disappear {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0);
+  }
 }
