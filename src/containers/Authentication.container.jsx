@@ -1,16 +1,16 @@
 import React, {useState} from 'react';
-import
+import { Link } from 'react-router-dom'
 import './Authentication.styles.scss'
 
 function Authentication(props) {
 
   const initialState = {
     email: '',
-    // emailConfirm: '',
-    // password: '',
-    // name: '',
-    // localSelector: '',
-    // localName: ''
+    emailConfirm: '',
+    password: '',
+    name: '',
+    localSelector: '',
+    localName: ''
   };
 
   const [registry, setRegistry] = useState(initialState);
@@ -111,7 +111,9 @@ function Authentication(props) {
 
       <div className="subscribe-login">
         <p>Already have an account?</p>
-        <p>Login here</p>
+        <Link to={'/Login'}>
+          <p>Login here</p>
+        </Link>
       </div>
 
       </form>

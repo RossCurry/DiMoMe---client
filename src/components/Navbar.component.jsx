@@ -10,12 +10,13 @@ function Navbar(props) {
     <div className="navbar">
 
       <Link to={'/'}>
-        <img src={Logo} className="logo" />
+        <img src={Logo} className="logo" alt="Logo for DiMoMe"/>
       </Link>
 
       <div className="login">
+          <p>Already have an account?</p>
         <Link to={'/login'}>
-          <p>Already have an account? Login</p>
+            <p> Login</p>
         </Link>
 
         <Link to={'/subscribe'}>

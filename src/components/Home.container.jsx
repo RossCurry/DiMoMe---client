@@ -25,7 +25,7 @@ function Home(props) {
 
 
           <div className="hero-img">
-            <img src={mobileqr} className="hero-img-bg"/>
+            <img src={mobileqr} className="hero-img-bg" alt="icon logo for DiMoMe"/>
           </div>
 
         </div>

@@ -46,10 +46,14 @@ $fontText: 'Raleway', sans-serif;
   transition: 
     color 200ms linear, 
     background-color 200ms ease-in-out, 
-    border 200ms ease-in-out;
+    border 200ms ease-in-out,
+    transform 200ms ease-in-out,
+    box-shadow 200ms ease-in-out;
   &:hover {
     color: $brandOrange;
     background: white;
     border: 1px solid $brandOrange;
+    transform: scale(1.05);
+    box-shadow: $darkShadow;
   }
 }
