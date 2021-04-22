@@ -1,0 +1,11 @@
+@import '../styles/varibles.styles.scss';
+
+
+.subscribe-container {
+  @include center;
+  flex-direction: column;
+  // background: rgba(210, 105, 30, 0.315);
+  margin: 2rem auto;
+  width: 50vw;
+  text-align: center;
+}

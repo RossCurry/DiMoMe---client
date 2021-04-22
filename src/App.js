@@ -6,6 +6,7 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Dashboard from './containers/Dashboard.container'
 import Navbar from "./components/Navbar.component";
 import Home from './components/Home.container'
+import Subscribe from "./components/Subscribe.component";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Navbar />
           <Switch>
             <Route path='/' exact component={Home} />
+            <Route path='/subscribe' exact component={Subscribe} />
           </Switch>
       </Router>
     </div>

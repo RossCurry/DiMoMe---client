@@ -12,6 +12,11 @@ $darkShadow: 0 0 13px 0 rgb(185, 174, 142);
 $navTextColor: white;
 
 
+//input boxes
+$inputBorderRad: 8px;
+
+
+
 // Raleway:wght@200;400;600
 // font-family: 'Raleway', sans-serif;
 // Rubik:wght@500;900
@@ -23,7 +28,7 @@ $fontText: 'Raleway', sans-serif;
 //centering
 @mixin center {
   display: flex;
-  // justify-content: center;
+  justify-content: center;
   align-items: center;
 }
 
@@ -34,14 +39,14 @@ $fontText: 'Raleway', sans-serif;
   border-radius: 12px ;
   font-size: 1.5rem;
   font-weight: 600;
-  border: transparent;
+  border: 1px solid transparent;
   color: white;
   background-image: linear-gradient($brandOrange, $brandYellow);
   cursor: pointer;
   transition: 
-    color 200ms ease-in-out, 
-    background-color 300ms ease-in-out, 
-    border 300ms ease-in-out;
+    color 200ms linear, 
+    background-color 200ms ease-in-out, 
+    border 200ms ease-in-out;
   &:hover {
     color: $brandOrange;
     background: white;

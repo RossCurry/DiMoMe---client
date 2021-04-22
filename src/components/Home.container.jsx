@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import './Home.styles.scss';
 // import img from '../assets/BG_imgs/emy-XoByiBymX20-unsplash.jpg'
 import mobileqr from '../assets/svg/mobileQR.svg'
@@ -15,7 +17,9 @@ function Home(props) {
             <p>Convert your menu to an interactive, <strong>mobile friendly</strong> version in minutes</p>
             <div className="hero-invite">
               <h2>Try for Free!</h2>
-              <button>CREATE</button>
+              <Link to={'/subscribe'}>
+                <button>CREATE</button>
+              </Link>
             </div>
           </div>
 

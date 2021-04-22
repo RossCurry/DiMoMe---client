@@ -1,0 +1,49 @@
+@import '../styles/varibles.styles.scss';
+
+.subscribe-heading {
+  margin: 1rem 0 2rem 0;
+  color: $brandOrange;
+}
+
+.subscribe-form {
+  display: flex;
+  flex-direction: column;
+  // background: chartreuse;
+  width: 100%;
+  height: 100%;
+  border: 2px solid $brandYellow;
+  border-radius: $inputBorderRad;
+  box-shadow: $darkShadow;
+  padding: 0 2em;
+  text-align: left;
+  input[type="email"],
+  input[type="text"],
+  input[type="password"],
+  #localSelect {
+    padding: 1em 2em;
+    font-size: 1rem;
+    margin-bottom: .5rem;
+    border-radius: $inputBorderRad;
+    border: 1px solid $brandYellow;
+  }
+  label {
+    font-weight: 600;
+    padding: 1em 2em;
+    font-size: 1rem;
+    margin-bottom: .5rem;
+  }
+  h3 {
+    text-align: center;
+    margin: 1rem 0;
+  }
+  input[type="submit"] {
+    @include hero-btn;
+    margin: 1rem auto 2rem auto;
+  }
+  .subscribe-login {
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 2rem;
+  }
+
+}
