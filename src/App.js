@@ -7,6 +7,7 @@ import Dashboard from './containers/Dashboard.container'
 import Navbar from "./components/Navbar.component";
 import Home from './components/Home.container'
 import Subscribe from "./components/Subscribe.component";
+import Login from "./components/Login.component";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Switch>
             <Route path='/' exact component={Home} />
             <Route path='/subscribe' exact component={Subscribe} />
+            <Route path='/login' exact component={Login} />
           </Switch>
       </Router>
     </div>

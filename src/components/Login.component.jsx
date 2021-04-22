@@ -1,14 +1,13 @@
 import React from 'react';
-import './Subscribe.styles.scss'
 import Authentication from '../containers/Authentication.container'
 
-function subscribe({ match }) {
-
+function Login({ match }) {
+  
   return (
     <div className="subscribe-container">
-      <Authentication subscribe={match.isExact}/>
+      <Authentication subscribe={!match.isExact} />
     </div>
   );
 }
 
-export default subscribe;
+export default Login;
