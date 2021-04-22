@@ -1,0 +1,85 @@
+@import '../styles/varibles.styles.scss';
+
+.home-section {
+  height: 100vh;
+  width: 100vw;
+  margin-top: 3rem;
+  
+  
+  .hero-card {
+    @include center;
+    margin: 0 auto;
+    padding: 0;
+    width: 80vw;
+    min-height: 30vh;
+    box-shadow: $darkShadow;
+    border-radius: 12px;
+    transition: transform 300ms ease-in-out;
+    &:hover {
+      transform: scale(.98)
+    }
+    // background-color: chocolate;
+    
+    
+    .hero-text {
+      width: 50%;
+      height: 100%;
+      background-color: white;
+      border-radius: 12px 0 0 12px;
+      text-align: center;
+      h2 {
+        margin: 2rem 0.5rem 0 .5rem;
+        font-family: $fontLogo;
+        font-size: 2.5rem;
+        font-weight: 400;
+        color: $brandOrange;
+      }
+      p {
+        margin: 2rem;
+        color: $brandOrange;
+        font-size: 1.5rem;
+        font-weight: 400;
+      }
+      button {
+        @include hero-btn;
+      }
+      .hero-invite {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+      }
+    }
+
+    
+    
+    .hero-img {
+      // @include center;
+      width: 50%;
+      height: 100%;
+      border-radius: 0 12px 12px 0;
+      display: flex;
+      justify-content: center;
+      
+      background: 
+        linear-gradient($brandOrangeTrans, $brandYellowTrans),
+          url('../assets/BG_imgs/emy-XoByiBymX20-unsplash.jpg');
+      background-position: center;
+      background-size: 180%;
+      background-repeat: no-repeat;
+      transition: background-size 300ms ease-in-out;
+      &:hover {
+        background-size: 190%;
+      }
+      img {
+        width: 50%;
+        height: 100%;
+        overflow: hidden;
+        border-radius: 19%;
+        margin: 2rem 0;
+        padding: 1em;
+      }
+      
+    }
+  }
+}
+

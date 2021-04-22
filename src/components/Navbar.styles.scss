@@ -1,0 +1,42 @@
+@import '../styles/varibles.styles.scss';
+
+.navbar {
+  width: 100%;
+  background-image: linear-gradient(180deg, $brandOrange, $brandYellow);
+  display: flex;
+  justify-content: space-between;
+  box-shadow: $navShadow;
+
+  .logo {
+    width: 200px;
+
+    margin-left: 2rem;
+    font-family: $fontLogo;
+    font-size: 3rem;
+    font-weight: 800;
+    color: white;
+    
+    // &::before{
+    //   background-image: url('../assets/SVG/qr_logo.svg');
+    //   background-size: contain;
+    //   background-repeat: no-repeat;
+    //   background-position: center;
+    // }
+  }
+
+  .login {
+    background-image: url('../assets/svg/login_icon.svg');
+    background-size: $loginIconSize;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-right: 2rem;
+  }
+}
+
+// seems like nothing is there
+// this might cause problems later
+// this padding is creating the size of the navbar
+.navbar > * {
+  padding: 2em;
+}
+

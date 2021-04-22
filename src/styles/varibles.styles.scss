@@ -1,0 +1,48 @@
+$brandOrange: #ff6000ff;
+$brandYellow: #ffb600ff;
+
+$brandOrangeTrans: rgba(255, 98, 0, 0.5);
+$brandYellowTrans: rgba(255, 183, 0, 0.5);
+
+$loginIconSize: 40px 40px;
+
+$navShadow: 0 0 13px 0 rgb(209, 155, 5);
+$darkShadow: 0 0 13px 0 rgb(185, 174, 142);
+
+
+// Raleway:wght@200;400;600
+// font-family: 'Raleway', sans-serif;
+// Rubik:wght@500;900
+// font-family: 'Rubik', sans-serif;
+$fontLogo: 'Rubik', sans-serif;
+$fontText: 'Raleway', sans-serif;
+
+
+//centering
+@mixin center {
+  display: flex;
+  // justify-content: center;
+  align-items: center;
+}
+
+@mixin hero-btn {
+  width: 50%;
+  padding: .5em 1em .5em 1em;
+  margin: 2rem;
+  border-radius: 12px ;
+  font-size: 1.5rem;
+  font-weight: 600;
+  border: transparent;
+  color: white;
+  background-image: linear-gradient($brandOrange, $brandYellow);
+  cursor: pointer;
+  transition: 
+    color 200ms ease-in-out, 
+    background-color 300ms ease-in-out, 
+    border 300ms ease-in-out;
+  &:hover {
+    color: $brandOrange;
+    background: white;
+    border: 1px solid $brandOrange;
+  }
+}
