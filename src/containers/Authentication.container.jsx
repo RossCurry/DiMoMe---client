@@ -1,37 +1,33 @@
 import React, {useState} from 'react';
+import
 import './Authentication.styles.scss'
 
 function Authentication(props) {
 
   const initialState = {
     email: '',
-    emailConfirm: '',
-    password: '',
-    name: '',
-    localSelector: '',
-    localName: ''
+    // emailConfirm: '',
+    // password: '',
+    // name: '',
+    // localSelector: '',
+    // localName: ''
   };
 
   const [registry, setRegistry] = useState(initialState);
 
   const handleChange = (e) => {
-    const { name, value } = e.target.value;
-    // console.log('e.target.value: ', e.target.value);
-    // setRegistry((prevState) => {
-    //   return {...prevState,[name]: value}
-    // })
+    const { name, value } = e.target;
     setRegistry((prevState) => ({
       ...prevState,
       [name]: value,
     }));
-    // console.log('registry', registry);
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const { email, password, name, localSelector, localName} = registry;
-    password = btoa(password);
-    const newUser = {email, password, name, localSelector, localName}
+    const base64Password = btoa(password);
+    const newUser = {email, base64Password, name, localSelector, localName}
     console.log('newUser', newUser);
   }
 
@@ -96,7 +92,7 @@ function Authentication(props) {
         value={registry.localSelector}
         onChange={handleChange}
         >
-          <option selected value="">--Please choose an option--</option>
+          <option value="">--Please choose an option--</option>
           <option value="restaurant">Restaurant</option>
           <option value="cafe">Cafe</option>
           <option value="bar">Bar</option>
