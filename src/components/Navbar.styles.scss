@@ -14,7 +14,8 @@
     font-family: $fontLogo;
     font-size: 3rem;
     font-weight: 800;
-    color: white;
+    color: $navTextColor;
+    ;
     
     // &::before{
     //   background-image: url('../assets/SVG/qr_logo.svg');
@@ -25,13 +26,30 @@
   }
 
   .login {
-    background-image: url('../assets/svg/login_icon.svg');
-    background-size: $loginIconSize;
-    background-repeat: no-repeat;
-    background-position: center;
-    margin-right: 2rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    p {
+      color: $navTextColor;
+      margin-right: 2rem;
+      font-size: 1rem;
+      font-weight: 300;
+    }
+    .login-img {
+      width: 40px;
+      height: 40px;
+      background-image: url('../assets/svg/login_icon.svg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      margin-right: 2rem;
+    }
   }
+
+  
 }
+
+
 
 // seems like nothing is there
 // this might cause problems later

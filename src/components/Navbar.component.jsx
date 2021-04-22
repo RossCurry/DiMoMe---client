@@ -10,11 +10,19 @@ function Navbar(props) {
     <div className="navbar">
 
       <Link to={'/'}>
-          <img src={Logo} className="logo"/>
+        <img src={Logo} className="logo" />
       </Link>
 
-      <div className="login"></div>
-    </div>
+      <div className="login">
+        <Link to={'/login'}>
+          <p>Already have an account? Login</p>
+        </Link>
+
+        <Link to={'/subscribe'}>
+          < div className="login-img"></div>
+        </Link>
+      </div>
+    </div >
   );
 }
 
