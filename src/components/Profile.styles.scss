@@ -27,6 +27,7 @@
 
 .profile-options-container {
   @include center;
+  margin: 0;
   justify-content: space-between;
   margin-bottom: 3rem;
   .profile-card {

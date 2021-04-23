@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addCategory } from '../redux/actions'
 import { newCategoryDB } from '../ApiService';
@@ -8,13 +9,16 @@ function Category(props) {
   
   const userMenu = useSelector(state => state.userMenu);
   const currentUser = useSelector(state => state.currentUser.user)
+  const history = useHistory();
   const dispatch = useDispatch();
   //TODO a more complete list to store in the database?
   const defaultCategories = ['starters', 'Mains', 'Desserts', 'Drinks', 'Coffees', 'Teas']
 
+  if (!currentUser) history.push(`/login`);
+
   const initialState = {
     categoryName: '',
-    userId: currentUser.id || 0 
+    userId: 0 
   };
   
   const [category, setCategory] = useState(initialState)

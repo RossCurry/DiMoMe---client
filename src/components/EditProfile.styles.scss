@@ -1,0 +1,36 @@
+@import '../styles/varibles.styles.scss';
+
+.edit-profile-container {
+  @include cardBorders;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 3rem auto;
+  width: 80vw;
+  // background-color: lightblue;
+  border-radius: 20px;
+  .edit-profile-left{
+    width: 30%;
+    background-color: coral;
+  }
+  .edit-profile-form{
+    width: 100%;
+    background-color: darkcyan;
+    display: flex;
+    flex-direction: column;
+    padding: 0 2em;
+    margin: 1rem 0;
+    text-align: left;
+    label{
+      @include formLabelStyles;
+    }
+    input[type=text]{
+      @include formInputStyles
+    }
+    input[type=submit]{
+      @include hero-btn;
+      margin: 1rem auto;
+      padding: .5em 1.5em;
+    }
+  }
+}

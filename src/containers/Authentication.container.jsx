@@ -2,14 +2,13 @@ import React, {useState} from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import './Authentication.styles.scss';
-import { registerNewUser } from '../ApiService';
+import { registerNewUser, loginUser } from '../ApiService';
 import { updateUser } from '../redux/actions';
 
 function Authentication({ subscribe }) {
 
   const history = useHistory();
   const dispatch = useDispatch();
-  console.log('history', history);
 
   const initialState = {
     email: '',
@@ -32,21 +31,29 @@ function Authentication({ subscribe }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { email, password, name, localSelector, localName} = registry;
+    if (subscribe) {
+    const { email, password, name, localSelector, localName } = registry;
     const newUser = {
-      email: base64(email) , 
-      password: btoa(password) , 
-      name: base64(name) , 
-      localSelector: base64(localSelector) , 
-      localName: base64(localName) }
-
+      email: base64(email),
+      password: btoa(password),
+      name: base64(name),
+      localSelector: base64(localSelector),
+      localName: base64(localName)
+    }
     // TO and FROM API  
-    const registeredUser = await registerNewUser(newUser);
-    console.log('registeredUser', registeredUser);
-
-
-    dispatch(updateUser(registeredUser));
-    history.push(`/profile/${registeredUser._id}`, registeredUser);
+      const registeredUser = await registerNewUser(newUser);
+      dispatch(updateUser(registeredUser));
+      history.push(`/profile/${registeredUser._id}`, registeredUser);
+    } else {
+      const { email, password } = registry;
+      const userLoginDetails = {
+        email: base64(email),
+        password: btoa(password)
+      }
+      const userInfo = await loginUser(userLoginDetails);
+      dispatch(updateUser(userInfo));
+      history.push(`/profile/${userInfo._id}`, userInfo);
+    }
 
   }
 
@@ -54,15 +61,15 @@ function Authentication({ subscribe }) {
 
     if (subscribe) {
       return (
-          !registry.email || !registry.emailConfirm || !registry.password || !registry.name || !registry.localName
-        )
+        !registry.email || !registry.emailConfirm || !registry.password || !registry.name || !registry.localName
+      )
     } else {
       return (!registry.email || !registry.password)
     }
   };
 
-  
-  
+
+
   const base64 = (str) => {
     const regExp = /[^<>]+/g
     const cleanString = str.match(regExp);
@@ -75,17 +82,17 @@ function Authentication({ subscribe }) {
     return (
       <React.Fragment>
         <label for="email">{
-          subscribe 
-          ? "What is your email address?"
-          : "Please use your email address to sign in"
-          }
+          subscribe
+            ? "What is your email address?"
+            : "Please use your email address to sign in"
+        }
         </label>
         <input
           type="email"
           placeholder={
-            subscribe 
-            ? "write your email here..."
-            : "Type your email here..."
+            subscribe
+              ? "write your email here..."
+              : "Type your email here..."
           }
           name="email"
           value={registry.email}
@@ -95,7 +102,7 @@ function Authentication({ subscribe }) {
       </React.Fragment>
     )
   };
-  
+
   const emailConfirm = () => {
     return (
       <React.Fragment>
@@ -110,23 +117,23 @@ function Authentication({ subscribe }) {
       </React.Fragment>
     )
   }
-  
+
 
   const passwordInput = () => {
     return (
       <React.Fragment>
         <label for="password">{
-          subscribe 
-          ? "Create a password"
-          : "Use your Password"
-          }
+          subscribe
+            ? "Create a password"
+            : "Use your Password"
+        }
         </label>
         <input
           type="password"
           placeholder={
-            subscribe 
-            ? "Create a password..."
-            : "Type your password here..."}
+            subscribe
+              ? "Create a password..."
+              : "Type your password here..."}
           name="password"
           value={registry.password}
           onChange={handleChange}
@@ -135,8 +142,8 @@ function Authentication({ subscribe }) {
       </React.Fragment>
     )
   }
-        
-     
+
+
   const nameInput = () => {
     return (
       <React.Fragment>
@@ -151,17 +158,17 @@ function Authentication({ subscribe }) {
       </React.Fragment>
     )
   }
-        
-      
+
+
   const localSelectorInput = () => {
     return (
       <React.Fragment>
         <label for="localSelector">What kind of place do you have? </label>
-        <select 
-        name="localSelector" 
-        id="localSelect"
-        value={registry.localSelector}
-        onChange={handleChange}
+        <select
+          name="localSelector"
+          id="localSelect"
+          value={registry.localSelector}
+          onChange={handleChange}
         >
           <option value="">--Please choose an option--</option>
           <option value="restaurant">Restaurant</option>
@@ -170,9 +177,9 @@ function Authentication({ subscribe }) {
         </select>
       </React.Fragment >
     )
-}
+  }
 
-        
+
   const localNameInput = () => {
     return (
       <React.Fragment>
@@ -207,7 +214,7 @@ function Authentication({ subscribe }) {
     )
   }
 
-  const submitButtonLogin= () => {
+  const submitButtonLogin = () => {
     return (
       <React.Fragment>
         <input
@@ -231,31 +238,31 @@ function Authentication({ subscribe }) {
   return (
     <div>
       <h1 className="subscribe-heading">{
-        subscribe 
-        ? 'It\'s free to register an account' 
-        : 'To continue log in here'
+        subscribe
+          ? 'It\'s free to register an account'
+          : 'To continue log in here'
       }
       </h1>
 
-      <form 
-        className="subscribe-form" 
+      <form
+        className="subscribe-form"
         onSubmit={handleSubmit}
       >
-        <h3>{ 
-          subscribe 
-          ? 'Registerbelow with an email' 
-          : 'Login below with your email & password'} 
+        <h3>{
+          subscribe
+            ? 'Registerbelow with an email'
+            : 'Login below with your email & password'}
         </h3>
 
-        
-          {subscribe ? emailInput() : emailInput()}
-          {subscribe ? emailConfirm() : null }
-          {subscribe ? passwordInput() : passwordInput()}
-          {subscribe ? nameInput() : null }
-          {subscribe ? localSelectorInput() : null }
-          {subscribe ? localNameInput() : null }
-          {subscribe ? submitButtonRegister() : submitButtonLogin()}
-        
+
+        {subscribe ? emailInput() : emailInput()}
+        {subscribe ? emailConfirm() : null}
+        {subscribe ? passwordInput() : passwordInput()}
+        {subscribe ? nameInput() : null}
+        {subscribe ? localSelectorInput() : null}
+        {subscribe ? localNameInput() : null}
+        {subscribe ? submitButtonRegister() : submitButtonLogin()}
+
 
       </form>
 

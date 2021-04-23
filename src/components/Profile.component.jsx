@@ -9,12 +9,13 @@ import editUser from '../assets/svg/edit_user.svg'
 function Profile(props) {
 
   const userFromProps = props.location.state;
+  // console.log('userFromProps', userFromProps);
 
   const initialState = {
     name: '',
     localName: '',
     localType: '',
-    id: 0,
+    _id: 0,
   }
 
   const [user, setUser] = useState(initialState);
@@ -33,14 +34,14 @@ function Profile(props) {
 
       <div className="profile-options-container">
         
-        <Link to={`/editProfile/${user.id}`}>
+        <Link to={`/editProfile/${user._id}`}>
           <div className="profile-card">
             <h2>Edit Profile</h2>
             <img src={ editUser} alt="Edit user profile icon" />
           </div>
         </Link>
         
-        <Link to={`/editMenu/${user.id}/:${user.localName}`}>
+        <Link to={`/editMenu/${user._id}/${user.localName}`}>
           <div className="profile-card">
             <h2>Edit {user.localName}</h2>
             <img src={editLocal } alt="Edit user local icon" />
