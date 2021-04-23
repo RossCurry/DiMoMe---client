@@ -1,11 +1,14 @@
 import React, {useState} from 'react';
-import { Link, useHistory } from 'react-router-dom'
-import './Authentication.styles.scss'
-import { registerNewUser } from '../ApiService'
+import { Link, useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import './Authentication.styles.scss';
+import { registerNewUser } from '../ApiService';
+import { updateUser } from '../redux/actions';
 
 function Authentication({ subscribe }) {
 
   const history = useHistory();
+  const dispatch = useDispatch();
   console.log('history', history);
 
   const initialState = {
@@ -37,7 +40,9 @@ function Authentication({ subscribe }) {
       localSelector: base64(localSelector) , 
       localName: base64(localName) }
 
+    // TO and FROM API  
     const registeredUser = registerNewUser(newUser);
+    dispatch(updateUser(registeredUser));
     history.push(`/profile/${registeredUser.id}`, registeredUser)
 
   }

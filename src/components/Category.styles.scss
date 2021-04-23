@@ -3,4 +3,8 @@
 .category-container {
   height: 100vh;
   background-color: rgb(230, 208, 112);
+  .category-form{
+    display: flex;
+    flex-direction: column;
+  }
 }

@@ -1,0 +1,46 @@
+{
+  "category": {
+    "categoryName": "starters",
+    "categoryId": 1,
+    "userId": 1,
+    "menuItems": [
+      {}
+    ]
+  },
+  "menuItem": {
+    "itemName": "salad",
+    "itemId": 1,
+    "description": "var256",
+    "itemPrice": 12.95,
+    "allergyContent": [
+      {}
+    ],
+    "dietaryContent": [
+      {}
+    ]
+  },
+  "allergenLabel": {
+    "A": "Cereals containing gluten",
+    "B": "Crustaceans",
+    "C": "Eggs",
+    "D": "Fish",
+    "E": "Peanuts",
+    "F": "Soybeans",
+    "G": "Milk (including lactose)",
+    "H": "Nuts",
+    "L": "Celery",
+    "M": "Mustard",
+    "N": "Sesame seeds",
+    "O": "Sulphur dioxide and sulphites",
+    "P": "Lupin",
+    "R": "Molluscs"
+  },
+  "dietaryLabels": {
+    "Lacto-ovo vegetarian": "description",
+    "Lacto-vegetarian": "description",
+    "Vegan": "description",
+    "Pescatarian": "description",
+    "Beegan": "description",
+    "Flexitarian": "description"
+  }
+}
