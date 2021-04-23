@@ -1,8 +1,9 @@
 import React from 'react';
+import './Category.styles.scss'
 
 function Category(props) {
   return (
-    <div>
+    <div className="category-container">
       <h2>im the Category list</h2>
     </div>
   );

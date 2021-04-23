@@ -38,6 +38,13 @@
     border-radius: 20px;
     @include center;
     flex-direction: column;
+    transition: 
+      transform 300ms ease-in-out,
+      box-shadow 300ms ease-in-out;
+    &:hover{
+      transform: scale(1.05);
+      box-shadow: 0 0 12px 0 rgba(70, 70, 70, 0.8);
+    }
     h2 {
       font-family: $fontLogo;
       font-weight: 500;

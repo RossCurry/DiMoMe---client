@@ -9,6 +9,8 @@ import Home from './components/Home.container'
 import Subscribe from "./components/Subscribe.component";
 import Login from "./components/Login.component";
 import Profile from "./components/Profile.component";
+import EditProfile from "./components/EditProfile.component";
+import EditMenu from './containers/EditMenu.container'
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
             <Route path='/subscribe' exact component={Subscribe} />
             <Route path='/login' exact component={Login} />
             <Route path='/Profile/:id' exact component={Profile} />
+            <Route path='/editProfile/:id' exact component={EditProfile} />
+            <Route path='/editMenu/:id/:localName' exact component={EditMenu} />
           </Switch>
       </Router>
     </div>

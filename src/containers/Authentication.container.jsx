@@ -30,7 +30,6 @@ function Authentication({ subscribe }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const { email, password, name, localSelector, localName} = registry;
-    console.log('registry', registry);
     const newUser = {
       email: base64(email) , 
       password: btoa(password) , 
@@ -38,10 +37,7 @@ function Authentication({ subscribe }) {
       localSelector: base64(localSelector) , 
       localName: base64(localName) }
 
-    console.log('newUser', newUser);
     const registeredUser = registerNewUser(newUser);
-    console.log('registeredUser', registeredUser);
-    //TODO figure out how to use props.history.psuh
     history.push(`/profile/${registeredUser.id}`, registeredUser)
 
   }
