@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addCategory } from '../redux/actions'
+import { newCategoryDB } from '../ApiService';
 import './Category.styles.scss'
 
 function Category(props) {
@@ -8,6 +9,8 @@ function Category(props) {
   const userMenu = useSelector(state => state.userMenu);
   const currentUser = useSelector(state => state.currentUser.user)
   const dispatch = useDispatch();
+  //TODO a more complete list to store in the database?
+  const defaultCategories = ['starters', 'Mains', 'Desserts', 'Drinks', 'Coffees', 'Teas']
 
   const initialState = {
     categoryName: '',
@@ -27,19 +30,29 @@ function Category(props) {
 
   const handleSubmit = (e) =>  {
     e.preventDefault();
+    //TODO database insertion here
     // validation of some sort
     // send category to DB
-    console.log('category to send to DB', category);
-    dispatch(addCategory(category));
+    const storedCategory = newCategoryDB(category);
+    // would add DB category to the store
+    dispatch(addCategory(storedCategory));
     setCategory(initialState);
-    console.log('userMenu: ', userMenu);
   }
 
 
   return (
     <div className="category-container">
+
+      <div className="local-title">
+        <h1>
+        {currentUser.localName} {currentUser.localType}
+        </h1>
+        <p>
+          {currentUser.name}, use the form below to add categories to your menu
+        </p>
+      </div>
+
       <form onSubmit={handleSubmit} className="category-form">
-        <h2>im the Category list</h2>
         <label for="category">Create a New Catergory</label>
         <input 
           type="text" 
@@ -51,11 +64,23 @@ function Category(props) {
         <input type="submit" value="Add Category" />
       </form>
 
-      <div className="category-list">
+       {/* <div className="category-list">
         {userMenu.map(category => (
-          <div>{category.categoryName}</div>
+          <div key={category.categoryid}>{category.categoryName}</div>
+          ))}  
+      </div>  */}
+
+          {/*
+          //TODO send to menu item list
+      //TODO default options for categories//
+      */}
+
+      {/* <div className="category-list">
+        {defaultCategories.map((category, index) => (
+          <div key={category} className="category-items">{category}</div>
         ))}  
-      </div>
+      </div> */}
+
 
     </div>
   );

@@ -64,3 +64,44 @@ $fontText: 'Raleway', sans-serif;
   box-shadow: $darkShadow;
   animation: appear 300ms ease-in-out 1 normal;
 }
+
+@mixin formInputStyles {
+  padding: 1em 2em;
+  font-size: 1rem;
+  margin-bottom: .5rem;
+  border-radius: $inputBorderRad;
+  border: 1px solid $brandYellow;
+}
+
+@mixin formLabelStyles {
+  font-weight: 600;
+  padding: 1em 2em;
+  font-size: 1rem;
+  margin-bottom: .5rem;
+}
+
+@mixin category-btn {
+  width: 50%;
+  padding: .5em 1em .5em 1em;
+  margin: 2rem;
+  border-radius: 12px ;
+  font-size: 1.5rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+  color: white;
+  background-image: linear-gradient($brandOrange, $brandYellow);
+  cursor: pointer;
+  transition: 
+    color 200ms linear, 
+    background-color 200ms ease-in-out, 
+    border 200ms ease-in-out,
+    transform 200ms ease-in-out,
+    box-shadow 200ms ease-in-out;
+  &:hover {
+    color: $brandOrange;
+    background: white;
+    border: 1px solid $brandOrange;
+    transform: scale(1.05);
+    box-shadow: $darkShadow;
+  }
+}

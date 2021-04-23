@@ -23,4 +23,21 @@ const registerNewUser = (newUser) => {
 
 }
 
-module.exports = {registerNewUser, usersDB}
+//TODO DELETE ONCE YOU HAVE DB
+let categoryId = 1
+const newCategoryDB = (newCategory) => {
+
+  const { categoryName, userId} = newCategory;
+  //TODO send to DB
+  // add fake values to the newCategory
+  const returnCategory = {
+    categoryName: categoryName,
+    categoryId: categoryId,
+    userId: userId,
+    menuItems: []
+  }
+  categoryId++
+  return returnCategory
+};
+
+module.exports = {registerNewUser, newCategoryDB, usersDB}

@@ -1,10 +1,41 @@
 @import '../styles/varibles.styles.scss';
 
 .category-container {
-  height: 100vh;
-  background-color: rgb(230, 208, 112);
+  @include cardBorders;
+  width: 90%;
+  height: 50%;
+  margin: 0 auto;
+  margin-top: 3rem;
+  // background-color: rgb(230, 208, 112);
+  .local-title{
+    margin: 1rem .5rem;
+    h1,
+    p {
+      margin: 1rem .5rem;
+      color: $brandOrange;
+    }
+    
+    
+  } 
   .category-form{
     display: flex;
     flex-direction: column;
+    margin: 2rem .5rem;
+    label {
+      @include formLabelStyles;
+      padding: .5em 2em;
+      margin-bottom: .5rem;
+      color: $brandOrange;
+    }
+    input[type="text"] {
+      @include formInputStyles;
+    }
+    input[type="submit"] {
+      @include hero-btn;
+      width: 90%;
+      margin: 1rem;
+    }  
   }
+
+  
 }
