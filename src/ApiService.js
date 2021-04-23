@@ -1,27 +1,26 @@
-const usersDB = [];
-let fakeId = 1;
+const BASE_URL = "http://localhost:3005"
 
-const registerNewUser = (newUser) => {
+
+async function registerNewUser(newUser) {
 
   //TODO fetch to server, send new user to DB
   // TODO return user from server with id
-  // TODO use id to login to profile/:id
-  const user = {...newUser, id: fakeId}
-  const { email, id, name, localSelector, localName} = user;
-  const registeredUser = {
-      email: atob(email) , 
-      name: atob(name) , 
-      localType: atob(localSelector) , 
-      localName: atob(localName),
-      id: id,
-  }
-  fakeId++
-  // go to profile by returning user to auth page with id
-  usersDB.push(registeredUser);
-  return registeredUser;
+  const sendBody = JSON.stringify(newUser);
+  const USER_PATH = '/user/subscribe'
 
-
+  return await fetch(BASE_URL + USER_PATH, {
+    method: 'POST',
+    credentials: 'include',
+    mode: 'cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: sendBody
+  })
+    .then((res) => res.json())
+    .then(data => data)
+    .catch((err) => console.log(err));
 }
+  
+
 
 //TODO DELETE ONCE YOU HAVE DB
 let categoryId = 1
@@ -40,4 +39,4 @@ const newCategoryDB = (newCategory) => {
   return returnCategory
 };
 
-module.exports = {registerNewUser, newCategoryDB, usersDB}
+module.exports = { registerNewUser }

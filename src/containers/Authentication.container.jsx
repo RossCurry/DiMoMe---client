@@ -30,7 +30,7 @@ function Authentication({ subscribe }) {
     }));
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const { email, password, name, localSelector, localName} = registry;
     const newUser = {
@@ -41,9 +41,12 @@ function Authentication({ subscribe }) {
       localName: base64(localName) }
 
     // TO and FROM API  
-    const registeredUser = registerNewUser(newUser);
+    const registeredUser = await registerNewUser(newUser);
+    console.log('registeredUser', registeredUser);
+
+
     dispatch(updateUser(registeredUser));
-    history.push(`/profile/${registeredUser.id}`, registeredUser)
+    history.push(`/profile/${registeredUser._id}`, registeredUser);
 
   }
 
