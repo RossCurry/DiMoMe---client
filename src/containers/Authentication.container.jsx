@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import './Authentication.styles.scss'
 import { registerNewUser } from '../ApiService'
 
-function Authentication({ subscribe, history }) {
+function Authentication({ subscribe }) {
 
+  const history = useHistory();
+  console.log('history', history);
 
   const initialState = {
     email: '',
@@ -40,7 +42,8 @@ function Authentication({ subscribe, history }) {
     const registeredUser = registerNewUser(newUser);
     console.log('registeredUser', registeredUser);
     //TODO figure out how to use props.history.psuh
-    history.push(`/profile/${registeredUser.id}`, )
+    history.push(`/profile/${registeredUser.id}`, registeredUser)
+
   }
 
   const validateRegister = () => {

@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import { usersDB } from '../ApiService'
 
-function Profile({ match }) {
+function Profile(props) {
 
-  const pathId = match.params;
-  console.log('pathId', pathId);
+  const pathId = props.match.params;
+  const userFromProps = props.location.state;
 
   const initialState = {
     name: '',
@@ -13,22 +13,15 @@ function Profile({ match }) {
     id: 0,
   }
 
-  const [user, setUser] = useState(initialState)
+  const [user, setUser] = useState(initialState);
 
-
-  const getProfile = () => {
-    //normally from api
-    
-  }
-
-  useEffect(() => {
-    getProfile()
-  }, [])
-
+  useEffect(()=>{
+    setUser(userFromProps);
+  },[]);
 
   return (
     <div>
-      <h2>I'm your profile</h2>
+      <h2>Hi {user.name}!</h2>
     </div>
   );
 }
