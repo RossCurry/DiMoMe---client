@@ -57,3 +57,10 @@ $fontText: 'Raleway', sans-serif;
     box-shadow: $darkShadow;
   }
 }
+
+@mixin cardBorders {
+  border: 2px solid $brandYellow;
+  border-radius: $inputBorderRad;
+  box-shadow: $darkShadow;
+  animation: appear 300ms ease-in-out 1 normal;
+}

@@ -1,0 +1,55 @@
+@import '../styles/varibles.styles.scss';
+
+.profile-page {
+  @include center;
+  flex-direction: column;
+  // background-color: bisque;
+}
+
+.profile-msg {
+  @include cardBorders;
+  width: 40vw;
+  margin: 2rem 0;
+  padding: 1em 2em;
+  text-align: center;
+  border-radius: 20px;
+  color: $brandOrange;
+  background-color: white;
+  h2 {
+    margin: 1rem 0;
+    font-size: 2rem;
+  }
+  p {
+    font-size: 1.2rem;
+    margin: .5rem 0;
+  }
+}
+
+.profile-options-container {
+  @include center;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+  .profile-card {
+    @include cardBorders;
+    min-width: 25vw;
+    min-height: 25vw;
+    background-color: white;
+    margin: 0 3rem;
+    border-radius: 20px;
+    @include center;
+    flex-direction: column;
+    h2 {
+      font-family: $fontLogo;
+      font-weight: 500;
+      font-size: 2rem;
+      color: $brandOrange;
+      margin: 1rem 0;
+    }
+    img {
+      width: 70%;
+      
+    }
+  }
+}
+
+
