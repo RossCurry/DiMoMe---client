@@ -5,55 +5,59 @@ import { addCategory } from '../../redux/actions'
 import { newCategoryDB } from '../../ApiService';
 import './Category.styles.scss'
 
-function Category(props) {
+function Category({ addNewCategory }) {
   
-  const userMenu = useSelector(state => state.userMenu);
+  // const userMenu = useSelector(state => state.userMenu);
   const currentUser = useSelector(state => state.currentUser.user)
   const history = useHistory();
   const dispatch = useDispatch();
   //TODO a more complete list to store in the database?
-  const defaultCategories = ['starters', 'Mains', 'Desserts', 'Drinks', 'Coffees', 'Teas']
+  // const defaultCategories = ['starters', 'Mains', 'Desserts', 'Drinks', 'Coffees', 'Teas']
 
   if (!currentUser) history.push(`/login`);
 
-  const initialState = {
-    categoryName: '',
-    userId: 0 
-  };
   
-  const [category, setCategory] = useState(initialState)
+  const [text, setText] = useState('')
   
 
   const handleInput = (e) => {
-    const { value } = e.target;
-    setCategory(prevState => ({
-      ...prevState,
-      categoryName: value
-    }));
+    const textInput = e.target.value;
+    setText(textInput);
   }
 
   const handleSubmit = (e) =>  {
     e.preventDefault();
     //TODO database insertion here
     // validation of some sort
-    // send category to DB
-    const storedCategory = newCategoryDB(category);
-    // would add DB category to the store
-    dispatch(addCategory(storedCategory));
-    setCategory(initialState);
+    //TODO send to edit menu page
+    addNewCategory(text);
+    setText('');
   }
 
+  const userGreetingMessage = () => 
+    currentUser 
+      ? (<React.Fragment>
+        <h1>
+            {currentUser.localName} {currentUser.localType}
+          </h1>
+          <p>
+            {currentUser.name}, use the form below to add categories to your menu
+          </p>
+      </React.Fragment>)
+      : (<React.Fragment>
+        <h1>
+          Restaurant
+          </h1>
+          <p>
+            Use the form below to add categories to your menu
+          </p>
+      </React.Fragment>)
 
   return (
     <div className="category-container">
 
       <div className="local-title">
-        <h1>
-        {currentUser.localName} {currentUser.localType}
-        </h1>
-        <p>
-          {currentUser.name}, use the form below to add categories to your menu
-        </p>
+        {userGreetingMessage}
       </div>
 
       <form onSubmit={handleSubmit} className="category-form">
@@ -62,7 +66,7 @@ function Category(props) {
           type="text" 
           name="categoryName"
           placeholder="Insert a Category Name..." 
-          value={category.categoryName} 
+          value={text} 
           onChange={handleInput}
         ></input>
         <input type="submit" value="Add Category" />

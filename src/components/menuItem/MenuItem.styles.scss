@@ -1,6 +1,27 @@
 @import '../../styles/varibles.styles.scss';
 
 .menu-item-container {
+  @include cardBorders;
+  width: 90%;
+  // height: 50%;
+  margin: 0 auto;
+  margin-top: 3rem;
   height: 100vh;
-  background-color: rgb(197, 178, 95);
+  background-color: $brandYellowTrans;
+  .category-list {
+    display: flex;
+    flex-direction: row;
+    margin: 2rem .5rem;
+  }
+}
+
+.category-card {
+  width: 200px;
+  height: 50px;
+  background-color: $brandYellowTrans;
+  padding: .5em 2em;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 400;
+
 }

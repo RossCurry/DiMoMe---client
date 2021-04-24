@@ -1,6 +1,8 @@
 @import '../../styles/varibles.styles.scss';
 
 .edit-menu-container {
-  display: grid;
-  grid-template-columns: 25% 30% 40%; 
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  // grid-template-columns: 25% 30% 40%; 
 }

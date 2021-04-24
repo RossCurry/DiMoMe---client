@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
 
-const userMenu = (state = [], action) => {
+const userCategories = (state = [], action) => {
   switch (action.type) {
     case 'ADD_CATEGORY':
       state.push(action.payload);
@@ -31,7 +31,7 @@ const currentUser = (state = {}, action) => {
 
 
 const reducers = combineReducers({
-  userMenu,
+  userCategories,
   currentUser
 })
 export default reducers;

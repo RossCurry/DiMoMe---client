@@ -4,7 +4,7 @@ const BASE_URL = "http://localhost:3005"
 async function registerNewUser(newUser) {
 
   const sendBody = JSON.stringify(newUser);
-  const USER_PATH = '/user/subscribe'
+  const USER_PATH = '/users/subscribe'
 
   return await fetch(BASE_URL + USER_PATH, {
     method: 'POST',
@@ -21,7 +21,7 @@ async function registerNewUser(newUser) {
 async function loginUser(userLogin) {
   
   const sendBody = JSON.stringify(userLogin);
-  const USER_PATH = '/user/login';
+  const USER_PATH = '/users/login';
 
   return await fetch(BASE_URL + USER_PATH, {
     method: 'POST',
@@ -54,4 +54,4 @@ const newCategoryDB = (newCategory) => {
   return returnCategory
 };
 
-module.exports = { registerNewUser, loginUser }
+module.exports = { registerNewUser, loginUser, newCategoryDB }
