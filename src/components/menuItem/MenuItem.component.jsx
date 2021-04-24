@@ -47,8 +47,10 @@ function MenuItem({ categoryList, addMenuItem, menuItemList, handleSelected, han
         {/*
         //TODO delete me
         */}
-        <div className="label-title">
-          <h2>Your menu catergoies</h2>
+        <div>
+          <h2 className="label-title">
+            Your menu catergoies
+          </h2>
         </div>
 
        <div className="category-list">

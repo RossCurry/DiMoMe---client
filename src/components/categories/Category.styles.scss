@@ -2,8 +2,10 @@
 
 .category-container {
   @include cardBorders;
-  max-width: 33%;
-  height: 50%;
+  // max-width: 33%;
+  // height: 50%;
+  width: 20%;
+  height: 60vh;
   margin: 0 auto;
   margin-top: 3rem;
   // background-color: rgb(230, 208, 112);

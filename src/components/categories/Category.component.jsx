@@ -34,34 +34,44 @@ function Category({ addNewCategory }) {
     setText('');
   }
 
-  const userGreetingMessage = () => 
-    currentUser 
-      ? (<React.Fragment>
+  const userGreetingMessage = () => {
+    return (
+      <React.Fragment>
         <h1>
-            {currentUser.localName} {currentUser.localType}
-          </h1>
-          <p>
-            {currentUser.name}, use the form below to add categories to your menu
+          {currentUser.localName} {currentUser.localType}
+        </h1>
+        <p>
+          {currentUser.name}, use the form below to add categories to your menu
           </p>
-      </React.Fragment>)
-      : (<React.Fragment>
+      </React.Fragment>
+    )
+  };
+
+
+
+  const defaultGreeting = () => {
+    return (
+      <React.Fragment>
         <h1>
           Restaurant
-          </h1>
-          <p>
-            Use the form below to add categories to your menu
-          </p>
-      </React.Fragment>)
+        </h1>
+        <p>
+          Use the form below to add categories to your menu
+        </p>
+      </React.Fragment>
+    )
+  };
+      
 
   return (
     <div className="category-container">
 
       <div className="local-title">
-        {userGreetingMessage}
+        {currentUser ? userGreetingMessage() : defaultGreeting()}
       </div>
 
       <form onSubmit={handleSubmit} className="category-form">
-        <label for="category">Create a New Catergory</label>
+        <label htmlFor="category">Create a New Catergory</label>
         <input 
           type="text" 
           name="categoryName"

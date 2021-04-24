@@ -4,11 +4,15 @@
   @include cardBorders;
   display: flex;
   flex-direction: column;
-  max-width: 33%;
+  width: 30%;
+  height: 60vh;
+  // max-width: 33%;
   // height: 50%;
   margin: 0 auto;
   margin-top: 3rem;
-  height: 100vh;
+  .label-title{
+    @include labelTitle
+  }
   .category-list {
     display: flex;
     flex-direction: row;
@@ -69,6 +73,4 @@
   }
 }
 
-.label-title{
-  @include labelTitle
-}
+

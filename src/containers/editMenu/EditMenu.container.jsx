@@ -33,7 +33,6 @@ function EditMenu(props) {
 
   //send menu item to menu detail comp.
   const handleMenuItem = (menuItem) => {
-    console.log('handlemenu item');
     setItemSelected(menuItem);
   }
 
