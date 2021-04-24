@@ -2,7 +2,9 @@
 
 .menu-item-container {
   @include cardBorders;
-  width: 90%;
+  display: flex;
+  flex-direction: column;
+  max-width: 33%;
   // height: 50%;
   margin: 0 auto;
   margin-top: 3rem;
@@ -12,16 +14,53 @@
     display: flex;
     flex-direction: row;
     margin: 2rem .5rem;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
   }
+  .menu-item-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    label {
+      @include formLabelStyles;
+      padding: .5em 2em;
+      margin-bottom: .5rem;
+      color: $brandOrange;
+    }
+    input[type=text]{
+      @include formInputStyles;
+      margin: .5rem;
+    }
+    input[type=submit]{
+      @include hero-btn;
+      margin: .5rem auto;
+    }
+            
+  }
+
 }
 
 .category-card {
-  width: 200px;
-  height: 50px;
   background-color: $brandYellowTrans;
   padding: .5em 2em;
+  margin: .5rem 1rem;
   text-align: center;
   font-size: 2rem;
+  font-weight: 400;
+}
+
+//TODO create logic to be able to use this
+.border-select {
+  border: 3px solid $brandOrange;
+}
+
+.menu-item-list{
+  
+}
+
+.menu-item-label {
+  color: $brandOrange;
+  font-size: 1.5rem;
   font-weight: 400;
 
 }

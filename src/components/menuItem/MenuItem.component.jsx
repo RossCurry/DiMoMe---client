@@ -3,23 +3,28 @@ import { useDispatch, useSelector } from 'react-redux';
 import './MenuItem.styles.scss'
 
 
-function MenuItem({ categoryList }) {
+function MenuItem({ categoryList, addMenuItem, menuItemList }) {
 
+  const [text, setText] = useState('');
+  
 
-  console.log('categoryList', categoryList);
-  const renderCategories = () => {
-    return (
-      <React.Fragment>
-        {categoryList.map( (category) => { 
-          return (
-            <div key={category.categoryId}>{category.categoryName}</div>
-          )
-        })}
-      </React.Fragment>
-    )
+  const handleInput = (e) => {
+    const textInput = e.target.value;
+    setText(textInput);
+  }
+  
+  const handleSubmit = (e) =>  {
+    e.preventDefault();
+    //TODO database insertion here
+    // validation of some sort
+    //TODO send to edit menu page
+    addMenuItem(text)
+    setText('');
   }
 
-  const categoryItems = categoryList.map( category => (
+
+
+  const categoryNames = categoryList.map( category => (
     //TODO make a categoryItem component for each iteration
       <div 
         key={category.categoryId}
@@ -30,15 +35,50 @@ function MenuItem({ categoryList }) {
     )
   )
 
+ const menuItemNames = menuItemList.map( item => 
+      <div 
+        key={item.itemId+item.itemName}
+        className="menu-item-label"
+      >
+        {item.itemName}
+      </div>
+  )
+
   return (
     <React.Fragment>
       <div className="menu-item-container">
-       <div className="category-list">
+        {/*
+        //TODO delete me
+        */}
         <h2>List of categories from props</h2>
-        <h3>{categoryItems}</h3>
+
+       <div className="category-list">
+        {categoryNames}
        </div>
-       <button>add new item</button>
-       <div>List of items added</div>
+
+       <form 
+        onSubmit={handleSubmit} 
+        className="menu-item-form">
+          <label for="menuItemInput">
+            Create a new menu item here
+          </label>
+          <input 
+            type="text" 
+            name="menuItemInput" 
+            id="menuItemInput"
+            placeholder="Type your menu item here..."
+            value={text}
+            onChange={handleInput}
+          />
+          <input 
+            type="submit" 
+            value="Add Item"
+        />
+       </form>
+       <div className="menu-item-list">
+         <h3>List of items added</h3>
+         {menuItemNames}
+       </div>
 
 
       </div>

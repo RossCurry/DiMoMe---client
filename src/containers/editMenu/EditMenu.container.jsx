@@ -17,7 +17,8 @@ function EditMenu(props) {
   
   // state for list
   const [ categoryList, setCategoryList ] = useState([]);
-
+  // state for menu items
+  const [ menuItemList, setMenuItemList ] = useState([]);
 
   // send to API
   const addNewCategory = (newCategory) => {
@@ -38,13 +39,32 @@ function EditMenu(props) {
     //setCategory(initialState);
   }
  
+  //send to aPI
+  const addMenuItem = (newItem) => {
+    const menuItemObj = {
+      itemName: newItem,
+      itemId: 1,
+      description: 'var256',
+      itemPrice: 12.95,
+      allergyContent: [{}],
+      dietaryContent: [{}]
+    }
+  
+    //TODO send to API & return
+    const currentList = [...menuItemList]
+    currentList.push(menuItemObj)
+    setMenuItemList(currentList);
+  };
 
   return (
     <div className="edit-menu-container">
       <Category addNewCategory={addNewCategory} />
-      <MenuItem categoryList={categoryList}/>
-      
-      {/* <ItemDetail /> */}
+      <MenuItem 
+        categoryList={categoryList}
+        menuItemList={menuItemList}
+        addMenuItem={addMenuItem}
+      />
+      <ItemDetail menuItemList={menuItemList}/>
     </div>
   );
 }

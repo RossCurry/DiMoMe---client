@@ -17,7 +17,7 @@ function Category({ addNewCategory }) {
   if (!currentUser) history.push(`/login`);
 
   
-  const [text, setText] = useState('')
+  const [text, setText] = useState('');
   
 
   const handleInput = (e) => {
@@ -72,24 +72,7 @@ function Category({ addNewCategory }) {
         <input type="submit" value="Add Category" />
       </form>
 
-       {/* <div className="category-list">
-        {userMenu.map(category => (
-          <div key={category.categoryid}>{category.categoryName}</div>
-          ))}  
-      </div>  */}
-
-          {/*
-          //TODO send to menu item list
-      //TODO default options for categories//
-      */}
-
-      {/* <div className="category-list">
-        {defaultCategories.map((category, index) => (
-          <div key={category} className="category-items">{category}</div>
-        ))}  
-      </div> */}
-
-
+       
     </div>
   );
 }
