@@ -1,4 +1,3 @@
-import e from 'express';
 import React, { useState } from 'react';
 import './ItemDetail.styles.scss'
 
@@ -94,7 +93,7 @@ function ItemDetail({ itemSelected }) {
                 step="0.01" 
                 min="0" 
                 max="1000" 
-                name="product-price"
+                name="itemPrice"
                 value={product.price}
                 onChange={handleChange}
               />
