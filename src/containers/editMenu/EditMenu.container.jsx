@@ -59,11 +59,10 @@ function EditMenu(props) {
   const addMenuItem = (newItem) => {
     const menuItemObj = {
       itemName: newItem,
-      itemId: 1,
-      description: 'var256',
-      itemPrice: 12.95,
-      allergyContent: [{}],
-      dietaryContent: [{}]
+      description: '',
+      itemPrice: 0,
+      allergyContent: [],
+      dietaryContent: []
     }
   
     //TODO send to API & return

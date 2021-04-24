@@ -1,10 +1,23 @@
-import React from 'react';
+import e from 'express';
+import React, { useState } from 'react';
 import './ItemDetail.styles.scss'
 
 function ItemDetail({ itemSelected }) {
 
   console.log('itemSelected', itemSelected);
 
+
+  const initialState = {
+    itemName: '',
+    description: '',
+    itemPrice: 0,
+    allergyContent: [],
+    dietaryContent: []
+  }
+  
+  const [ product, setProduct ] = useState(initialState)
+
+  //TODO change default to include the layout of the edit item
   const defaultDisplay = () => {
     return (
       <div className="item-detail-container">
@@ -22,11 +35,40 @@ function ItemDetail({ itemSelected }) {
     )
   }
   
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    console.log('name', name);
+    console.log('value', value);
+    setProduct( prevState => ({
+      ...prevState, 
+      [name]: value,
+    }))
+  }
+  
+  const handleChecked = (e) => {
+    // console.log('e.target.value: ', e.target.value);
+    const { value } = e.target;
+    const { checked } = e.target;
+    if (checked) setProduct( prevState => {
+      return {
+        ...prevState,
+        allergyContent: [...prevState.allergyContent, value]
+      }
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    product.itemName = itemSelected.itemName;
+    console.log('handleSubmit: ', product);
+  }
+
   const editMenuItem = () => {
     return (
       // left side
       <React.Fragment>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="item-detail-sub-container">
             <div className="edit-item-left">
               <h1>{itemSelected.itemName.toUpperCase()}</h1>
@@ -42,10 +84,20 @@ function ItemDetail({ itemSelected }) {
                 wrap="soft"
                 maxLength={120}
                 rows={4}
-
+                value={product.description}
+                onChange={handleChange}
               />
               <label htmlFor="product-price">Product price</label>
-              <input type="number" placeholder="Insert a price. eg. 2.50" step="0.01" min="0" max="1000" name="product-price"></input>
+              <input 
+                type="number" 
+                placeholder="Insert a price. eg. 2.50" 
+                step="0.01" 
+                min="0" 
+                max="1000" 
+                name="product-price"
+                value={product.price}
+                onChange={handleChange}
+              />
               {/* <div className="check-box-left">
              
       
@@ -67,6 +119,7 @@ function ItemDetail({ itemSelected }) {
                   id="gluten"
                   name="gluten"
                   value="gluten"
+                  onChange={handleChecked}
                 />
                 <label for="gluten">Gluten</label>
                 <br />
@@ -75,6 +128,7 @@ function ItemDetail({ itemSelected }) {
                   id="crustaceans"
                   name="crustaceans"
                   value="crustaceans"
+                  onChange={handleChecked}
                 />
                 <label for="crustaceans">Crustaceans</label>
 <br />
@@ -83,6 +137,7 @@ function ItemDetail({ itemSelected }) {
                   id="eggs"
                   name="eggs"
                   value="eggs"
+                  onChange={handleChecked}
                 />
                 <label for="eggs">Eggs</label>
 <br />
@@ -91,6 +146,7 @@ function ItemDetail({ itemSelected }) {
                   id="fish"
                   name="fish"
                   value="fish"
+                  onChange={handleChecked}
                 />
                 <label for="fish">Fish</label>
 <br />
@@ -99,6 +155,7 @@ function ItemDetail({ itemSelected }) {
                   id="peanuts"
                   name="peanuts"
                   value="peanuts"
+                  onChange={handleChecked}
                 />
                 <label for="peanuts">Peanuts</label>
 <br />
@@ -107,6 +164,7 @@ function ItemDetail({ itemSelected }) {
                   id="soybeans"
                   name="soybeans"
                   value="soybeans"
+                  onChange={handleChecked}
                 />
                 <label for="soybeans">Soybeans</label>
 <br />
@@ -115,6 +173,7 @@ function ItemDetail({ itemSelected }) {
                   id="lactose"
                   name="lactose"
                   value="lactose"
+                  onChange={handleChecked}
                 />
                 <label for="lactose">Lactose</label>
 <br />
@@ -126,6 +185,7 @@ function ItemDetail({ itemSelected }) {
                   id="nuts"
                   name="nuts"
                   value="nuts"
+                  onChange={handleChecked}
                 />
                 <label for="nuts">Nuts</label>
 <br />
@@ -134,6 +194,7 @@ function ItemDetail({ itemSelected }) {
                   id="celery"
                   name="celery"
                   value="celery"
+                  onChange={handleChecked}
                 />
                 <label for="celery">Celery</label>
 <br />
@@ -142,6 +203,7 @@ function ItemDetail({ itemSelected }) {
                   id="mustard"
                   name="mustard"
                   value="mustard"
+                  onChange={handleChecked}
                 />
                 <label for="mustard">Mustard</label>
 <br />
@@ -150,6 +212,7 @@ function ItemDetail({ itemSelected }) {
                   id="sesame"
                   name="sesame"
                   value="sesame"
+                  onChange={handleChecked}
                 />
                 <label for="sesame">Sesame seeds</label>
 <br />
@@ -158,6 +221,7 @@ function ItemDetail({ itemSelected }) {
                   id="sulphur"
                   name="sulphur"
                   value="sulphur"
+                  onChange={handleChecked}
                 />
                 <label for="sulphur">Sulphites</label>
 <br />
@@ -166,6 +230,7 @@ function ItemDetail({ itemSelected }) {
                   id="lupin"
                   name="lupin"
                   value="lupin"
+                  onChange={handleChecked}
                 />
                 <label for="lupin">Lupin </label>
 <br />
@@ -174,12 +239,14 @@ function ItemDetail({ itemSelected }) {
                   id="molluscs"
                   name="molluscs"
                   value="molluscs"
+                  onChange={handleChecked}
                 />
                 <label for="molluscs">Molluscs </label>
-                </div>
-
-
+                </div> 
+                
               </div>
+
+
               <input type="submit" value="Save details" />
             </div>
           </div>
@@ -188,11 +255,11 @@ function ItemDetail({ itemSelected }) {
     )
   }
 
+  
+
   return (
     <React.Fragment>
      {itemSelected ? displaySelectedItem() : defaultDisplay()}
-      
-
     </React.Fragment>
   );
 }
