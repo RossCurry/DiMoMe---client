@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { addCategory } from '../redux/actions'
-import { newCategoryDB } from '../ApiService';
+import { addCategory } from '../../redux/actions'
+import { newCategoryDB } from '../../ApiService';
 import './Category.styles.scss'
 
 function Category(props) {

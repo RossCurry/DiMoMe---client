@@ -2,7 +2,7 @@ import React from 'react';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import './Dashboard.styles.scss';
 
-import Home from '../components/Home.container'
+import Home from '../../components/home/Home.container'
 
 function Dashboard(props) {
   return (

@@ -1,4 +1,4 @@
-@import '../styles/varibles.styles.scss';
+@import '../../styles/varibles.styles.scss';
 
 .navbar {
   width: 100%;
@@ -38,7 +38,7 @@
     .login-img {
       width: 40px;
       height: 40px;
-      background-image: url('../assets/svg/login_icon.svg');
+      background-image: url('../../assets/svg/login_icon.svg');
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;

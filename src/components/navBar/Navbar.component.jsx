@@ -1,7 +1,7 @@
 import React from 'react';
 import './Navbar.styles.scss'
 import { Link } from 'react-router-dom';
-import Logo from '../assets/svg/logo.svg';
+import Logo from '../../assets/svg/logo.svg';
 
 // const Logo = require('../assets/svg/logo.svg')
 

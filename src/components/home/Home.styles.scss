@@ -1,4 +1,4 @@
-@import '../styles/varibles.styles.scss';
+@import '../../styles/varibles.styles.scss';
 
 .home-section {
   height: 100vh;
@@ -62,7 +62,7 @@
       
       background: 
         linear-gradient($brandOrangeTrans, $brandYellowTrans),
-          url('../assets/BG_imgs/emy-XoByiBymX20-unsplash.jpg');
+          url('../../assets/BG_imgs/emy-XoByiBymX20-unsplash.jpg');
       background-position: center;
       background-size: 180%;
       background-repeat: no-repeat;

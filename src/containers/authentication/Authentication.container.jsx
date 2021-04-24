@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import './Authentication.styles.scss';
-import { registerNewUser, loginUser } from '../ApiService';
-import { updateUser } from '../redux/actions';
+import { registerNewUser, loginUser } from '../../ApiService';
+import { updateUser } from '../../redux/actions';
 
 function Authentication({ subscribe }) {
 

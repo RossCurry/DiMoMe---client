@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import './Home.styles.scss';
 // import img from '../assets/BG_imgs/emy-XoByiBymX20-unsplash.jpg'
-import mobileqr from '../assets/svg/mobileQR.svg'
+import mobileqr from '../../assets/svg/mobileQR.svg'
 
 function Home(props) {
   return (

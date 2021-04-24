@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
-import { usersDB } from '../ApiService' // might need, might not, redux solution
+import { usersDB } from '../../ApiService' // might need, might not, redux solution
 import './Profile.styles.scss'
-import editLocal from '../assets/svg/edit_local.svg'
-import editUser from '../assets/svg/edit_user.svg'
+import editLocal from '../../assets/svg/edit_local.svg'
+import editUser from '../../assets/svg/edit_user.svg'
 
 
 function Profile(props) {

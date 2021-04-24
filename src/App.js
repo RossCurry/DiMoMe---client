@@ -3,14 +3,14 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 // import Background from './assets/BG_imgs/emy-XoByiBymX20-unsplash.jpg'
 
 // COMPONENTS
-import Dashboard from './containers/Dashboard.container'
-import Navbar from "./components/Navbar.component";
-import Home from './components/Home.container'
-import Subscribe from "./components/Subscribe.component";
-import Login from "./components/Login.component";
-import Profile from "./components/Profile.component";
-import EditProfile from "./components/EditProfile.component";
-import EditMenu from './containers/EditMenu.container'
+import Dashboard from './containers/dashboard/Dashboard.container'
+import Navbar from "./components/navBar/Navbar.component";
+import Home from './components/home/Home.container'
+import Subscribe from "./components/subscribe/Subscribe.component";
+import Login from "./components/login/Login.component";
+import Profile from "./components/profile/Profile.component";
+import EditProfile from "./components/editProfile/EditProfile.component";
+import EditMenu from './containers/editMenu/EditMenu.container'
 
 function App() {
   return (
