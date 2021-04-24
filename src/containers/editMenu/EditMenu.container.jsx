@@ -17,16 +17,25 @@ function EditMenu(props) {
   
   // state for list
   const [ categoryList, setCategoryList ] = useState([]);
+  
   // state for menu items
   const [ menuItemList, setMenuItemList ] = useState([]);
+  
+  // item to send to detail
+  const [ itemSelected, setItemSelected ] = useState(null);
 
-
-
+//TODO try to figure out how to re-render
+  // indicates a selected item in category list
   const handleSelected = (category) => {
     console.log('e.target', category);
     category.selected = !category.selected;
   }
 
+  //send menu item to menu detail comp.
+  const handleMenuItem = (menuItem) => {
+    console.log('handlemenu item');
+    setItemSelected(menuItem);
+  }
 
   // send to API
   const addNewCategory = (newCategory) => {
@@ -72,11 +81,12 @@ function EditMenu(props) {
         menuItemList={menuItemList}
         addMenuItem={addMenuItem}
         handleSelected={handleSelected}
+        handleMenuItem={handleMenuItem}
       />
       {/* 
       //TODO send only the selected item
       */}
-      <ItemDetail menuItemList={menuItemList}/>
+      <ItemDetail itemSelected={itemSelected}/>
     </div>
   );
 }

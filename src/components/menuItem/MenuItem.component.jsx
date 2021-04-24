@@ -4,7 +4,7 @@ import CategoryItem from '../catergoryItem/CategoryItem.componet';
 import './MenuItem.styles.scss'
 
 
-function MenuItem({ categoryList, addMenuItem, menuItemList, handleSelected }) {
+function MenuItem({ categoryList, addMenuItem, menuItemList, handleSelected, handleMenuItem }) {
 
   const [text, setText] = useState('');
   
@@ -35,6 +35,7 @@ function MenuItem({ categoryList, addMenuItem, menuItemList, handleSelected }) {
       <div 
         key={item.itemId+item.itemName}
         className="menu-item-label"
+        onClick={() => handleMenuItem(item)}
       >
         {item.itemName}
       </div>
