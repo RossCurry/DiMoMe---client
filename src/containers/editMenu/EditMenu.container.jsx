@@ -20,6 +20,14 @@ function EditMenu(props) {
   // state for menu items
   const [ menuItemList, setMenuItemList ] = useState([]);
 
+
+
+  const handleSelected = (category) => {
+    console.log('e.target', category);
+    category.selected = !category.selected;
+  }
+
+
   // send to API
   const addNewCategory = (newCategory) => {
 
@@ -63,7 +71,11 @@ function EditMenu(props) {
         categoryList={categoryList}
         menuItemList={menuItemList}
         addMenuItem={addMenuItem}
+        handleSelected={handleSelected}
       />
+      {/* 
+      //TODO send only the selected item
+      */}
       <ItemDetail menuItemList={menuItemList}/>
     </div>
   );

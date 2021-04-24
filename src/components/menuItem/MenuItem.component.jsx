@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import CategoryItem from '../catergoryItem/CategoryItem.componet';
 import './MenuItem.styles.scss'
 
 
-function MenuItem({ categoryList, addMenuItem, menuItemList }) {
+function MenuItem({ categoryList, addMenuItem, menuItemList, handleSelected }) {
 
   const [text, setText] = useState('');
   
@@ -25,13 +26,8 @@ function MenuItem({ categoryList, addMenuItem, menuItemList }) {
 
 
   const categoryNames = categoryList.map( category => (
-    //TODO make a categoryItem component for each iteration
-      <div 
-        key={category.categoryId}
-        className="category-card"
-      >
-        {category.categoryName}
-      </div>
+    //TODO toggle selected category in the array
+      <CategoryItem category={category} handleSelected={handleSelected}/>
     )
   )
 
@@ -50,7 +46,9 @@ function MenuItem({ categoryList, addMenuItem, menuItemList }) {
         {/*
         //TODO delete me
         */}
-        <h2>List of categories from props</h2>
+        <div className="label-title">
+          <h2>Your menu catergoies</h2>
+        </div>
 
        <div className="category-list">
         {categoryNames}
@@ -76,7 +74,7 @@ function MenuItem({ categoryList, addMenuItem, menuItemList }) {
         />
        </form>
        <div className="menu-item-list">
-         <h3>List of items added</h3>
+         <h2 className="label-title">Your menu items</h2>
          {menuItemNames}
        </div>
 

@@ -48,7 +48,8 @@ const newCategoryDB = (newCategory) => {
     categoryName: categoryName,
     categoryId: categoryId,
     userId: userId,
-    menuItems: []
+    menuItems: [],
+    selected: false
   }
   categoryId++
   return returnCategory
