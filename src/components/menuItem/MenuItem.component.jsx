@@ -27,7 +27,7 @@ function MenuItem({ categoryList, addMenuItem, menuItemList, handleSelected, han
 
   const categoryNames = categoryList.map( category => (
     //TODO toggle selected category in the array
-      <CategoryItem category={category} handleSelected={handleSelected}/>
+      <CategoryItem key={category._id} category={category} handleSelected={handleSelected}/>
     )
   )
 

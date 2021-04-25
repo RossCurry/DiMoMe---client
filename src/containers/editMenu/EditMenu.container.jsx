@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import './EditMenu.styles.scss';
-import { newCategoryDB, newMenuItemDB, editMenuItemDB } from '../../ApiService';
+import { newCategoryDB, newMenuItemDB, editMenuItemDB, fetchAllCategoriesByUserId } from '../../ApiService';
 
 //COMPONENTS
 import Category from '../../components/categories/Category.component'
@@ -11,6 +11,10 @@ import ItemDetail from '../../components/itemDetail/ItemDetail.component'
 
 
 function EditMenu(props) {
+
+
+  
+
 
   // get user details to insert into category
   const currentUser = useSelector(state => state.currentUser.user)
@@ -69,7 +73,8 @@ function EditMenu(props) {
       description: 'Write a small description of the product here...',
       itemPrice: 0,
       allergyContent: [],
-      dietaryContent: []
+      dietaryContent: [],
+      userId: currentUser._id
     }
     const storedMenuItem = await newMenuItemDB(menuItemObj);
     const currentList = [...menuItemList]
@@ -87,6 +92,21 @@ function EditMenu(props) {
     //TODO client side, RELOAD DATA TO ANOTHER COMPONENT TO LOAD: eg. PRODUCT DISPLAY COMP.
   };
 
+
+
+  const fetchAllCategories = async () => {
+    const allCategories = await fetchAllCategoriesByUserId(currentUser._id);
+    console.log('allCategories fetched', allCategories);
+    setCategoryList(allCategories)
+    
+  }
+
+  useEffect(()=>{
+    //fetchAllCategoriesWithUserID
+    //fetchAllMenuItemsWithUserID
+    // Set both
+    fetchAllCategories()
+  }, [])
 
   return (
     <div className="edit-menu-container">

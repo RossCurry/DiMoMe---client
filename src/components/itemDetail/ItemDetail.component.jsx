@@ -51,6 +51,7 @@ function ItemDetail({ itemSelected, editMenuItem }) {
     if (checked) setProduct( prevState => {
       return {
         ...prevState,
+        //TODO ask staff how to fix this problem
         allergyContent: [...prevState.allergyContent, value]
       }
     });
