@@ -70,7 +70,34 @@ const newMenuItemDB = async (newMenuItem) => {
     .then(data => data)
     .catch((err) => console.log(err));
 
-
 }
 
-module.exports = { registerNewUser, loginUser, newCategoryDB, newMenuItemDB }
+const editMenuItemDB = async (menuItem) => {
+  
+  console.log('menuItem to send to DB', menuItem);
+  const { _id } = menuItem;
+
+  // The ID might be unnecessary
+  const PRODUCT_PATH = `/item/${_id}`;
+
+  return await fetch(BASE_URL + PRODUCT_PATH, {
+    method: 'PUT',
+    credentials: 'include',
+    mode: 'cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(menuItem)
+  })
+    .then((res) => res.json())
+    .then(data => data)
+    .catch((err) => console.log(err));
+
+};
+
+
+module.exports = { 
+  registerNewUser, 
+  loginUser, 
+  newCategoryDB, 
+  newMenuItemDB,
+  editMenuItemDB
+ }

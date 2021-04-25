@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import './ItemDetail.styles.scss'
 
-function ItemDetail({ itemSelected }) {
+function ItemDetail({ itemSelected, editMenuItem }) {
 
 
   const initialState = {
     itemName: '',
+    _id: '',
     description: '',
     itemPrice: 0,
     allergyContent: [],
     dietaryContent: []
   }
   
-  console.log('DETAIL: itemSelected', itemSelected);
-
   const [ product, setProduct ] = useState(itemSelected ? itemSelected : initialState)
+
 
   //TODO change default to include the layout of the edit item
   const defaultDisplay = () => {
@@ -25,11 +25,12 @@ function ItemDetail({ itemSelected }) {
       </div>
     )
   }
+
   const displaySelectedItem = () => {
     return (
       <div className="item-detail-container">
         <h2 className="section-title">Im the menu detail</h2>
-        {editMenuItem()}
+        {editMenuItemView()}
       </div>
     )
   }
@@ -57,13 +58,15 @@ function ItemDetail({ itemSelected }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // ADD NAME AND ID
     product.itemName = itemSelected.itemName;
+    product._id = itemSelected._id;
     //TODO call a function from edit menu component
-    console.log('handleSubmit: ', product);
+    editMenuItem(product);
   }
 
   //COMPONENT VIEW
-  const editMenuItem = () => {
+  const editMenuItemView = () => {
     return (
       // left side
       <React.Fragment>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import './EditMenu.styles.scss';
-import { newCategoryDB, newMenuItemDB } from '../../ApiService';
+import { newCategoryDB, newMenuItemDB, editMenuItemDB } from '../../ApiService';
 
 //COMPONENTS
 import Category from '../../components/categories/Category.component'
@@ -72,11 +72,21 @@ function EditMenu(props) {
       dietaryContent: []
     }
     const storedMenuItem = await newMenuItemDB(menuItemObj);
-    //TODO send to API & return
     const currentList = [...menuItemList]
     currentList.push(storedMenuItem)
     setMenuItemList(currentList);
   };
+
+  // send to API to Edit Item
+  const editMenuItem = async (menuItem) => {
+    console.log('editMenuItem', menuItem);
+    //SEND TO API
+    const editedItem = await editMenuItemDB(menuItem);
+    console.log('editedItem', editedItem);
+
+    //TODO client side, RELOAD DATA TO ANOTHER COMPONENT TO LOAD: eg. PRODUCT DISPLAY COMP.
+  };
+
 
   return (
     <div className="edit-menu-container">
@@ -91,7 +101,10 @@ function EditMenu(props) {
       {/* 
       //TODO send only the selected item
       */}
-      <ItemDetail itemSelected={itemSelected}/>
+      <ItemDetail 
+        itemSelected={itemSelected}
+        editMenuItem={editMenuItem}
+      />
     </div>
   );
 }
