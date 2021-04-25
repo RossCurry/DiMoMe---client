@@ -12,7 +12,9 @@ function ItemDetail({ itemSelected }) {
     dietaryContent: []
   }
   
-  const [ product, setProduct ] = useState(initialState)
+  console.log('DETAIL: itemSelected', itemSelected);
+
+  const [ product, setProduct ] = useState(itemSelected ? itemSelected : initialState)
 
   //TODO change default to include the layout of the edit item
   const defaultDisplay = () => {

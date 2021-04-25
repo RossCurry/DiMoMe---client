@@ -54,4 +54,23 @@ const newCategoryDB = async (newCategory) => {
 
 };
 
-module.exports = { registerNewUser, loginUser, newCategoryDB }
+
+const newMenuItemDB = async (newMenuItem) => {
+
+  const PRODUCT_PATH = '/item';
+  
+  return await fetch(BASE_URL + PRODUCT_PATH, {
+    method: 'POST',
+    credentials: 'include',
+    mode: 'cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(newMenuItem)
+  })
+    .then((res) => res.json())
+    .then(data => data)
+    .catch((err) => console.log(err));
+
+
+}
+
+module.exports = { registerNewUser, loginUser, newCategoryDB, newMenuItemDB }

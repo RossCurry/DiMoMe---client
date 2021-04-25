@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import './EditMenu.styles.scss';
-import { newCategoryDB } from '../../ApiService';
+import { newCategoryDB, newMenuItemDB } from '../../ApiService';
 
 //COMPONENTS
 import Category from '../../components/categories/Category.component'
@@ -36,19 +36,24 @@ function EditMenu(props) {
     setItemSelected(menuItem);
   }
 
-  // send to API
+  ///////////////
+  // API CALLS //
+  ///////////////
+
   const addNewCategory = async (newCategory) => {
 
-    //TODO has fake stats so far
+    //Basic category object for DB
     const categoryObj = {
       categoryName: newCategory,
       userId: currentUser._id 
     };
+
+    //Category Object from DB
     const storedCategory = await newCategoryDB(categoryObj);
-    console.log('storedCategory', storedCategory);
-    // const currentList = [...categoryList]
-    // currentList.push(storedCategory)
-    // setCategoryList(currentList);
+    // console.log('storedCategory', storedCategory);
+    const currentList = [...categoryList]
+    currentList.push(storedCategory)
+    setCategoryList(currentList);
 
     //TODO use dispatch to send to redux store
     // would add DB category to the store
@@ -57,18 +62,19 @@ function EditMenu(props) {
   }
  
   //send to aPI
-  const addMenuItem = (newItem) => {
+  const addMenuItem = async (newItem) => {
+
     const menuItemObj = {
       itemName: newItem,
-      description: '',
+      description: 'Write a small description of the product here...',
       itemPrice: 0,
       allergyContent: [],
       dietaryContent: []
     }
-  
+    const storedMenuItem = await newMenuItemDB(menuItemObj);
     //TODO send to API & return
     const currentList = [...menuItemList]
-    currentList.push(menuItemObj)
+    currentList.push(storedMenuItem)
     setMenuItemList(currentList);
   };
 
