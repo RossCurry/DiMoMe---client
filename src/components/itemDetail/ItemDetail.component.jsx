@@ -3,8 +3,6 @@ import './ItemDetail.styles.scss'
 
 function ItemDetail({ itemSelected }) {
 
-  console.log('itemSelected', itemSelected);
-
 
   const initialState = {
     itemName: '',
@@ -37,8 +35,6 @@ function ItemDetail({ itemSelected }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target
-    console.log('name', name);
-    console.log('value', value);
     setProduct( prevState => ({
       ...prevState, 
       [name]: value,
@@ -60,9 +56,11 @@ function ItemDetail({ itemSelected }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     product.itemName = itemSelected.itemName;
+    //TODO call a function from edit menu component
     console.log('handleSubmit: ', product);
   }
 
+  //COMPONENT VIEW
   const editMenuItem = () => {
     return (
       // left side
@@ -71,9 +69,6 @@ function ItemDetail({ itemSelected }) {
           <div className="item-detail-sub-container">
             <div className="edit-item-left">
               <h1>{itemSelected.itemName.toUpperCase()}</h1>
-              {/* <form
-              className="edit-item-form"
-            > */}
               <label htmlFor="description">Product description</label>
               <textarea
                 type="textarea"
@@ -87,162 +82,156 @@ function ItemDetail({ itemSelected }) {
                 onChange={handleChange}
               />
               <label htmlFor="product-price">Product price</label>
-              <input 
-                type="number" 
-                placeholder="Insert a price. eg. 2.50" 
-                step="0.01" 
-                min="0" 
-                max="1000" 
+              <input
+                type="number"
+                placeholder="Insert a price. eg. 2.50"
+                step="0.01"
+                min="0"
+                max="1000"
                 name="itemPrice"
                 value={product.price}
                 onChange={handleChange}
               />
-              {/* <div className="check-box-left">
-             
-      
-            </div> */}
-              {/* </form> */}
             </div >
             {/*
           //right side // image and save button
            */}
             <div className="edit-item-right">
               <div className="item-photo">photo here</div>
-              {/* <button>Save details</button> */}
               <h3>Select the product allergens</h3>
               <div className="check-box-right">
 
                 <div className="sub-left">
-                <input
-                  type="checkbox"
-                  id="gluten"
-                  name="gluten"
-                  value="gluten"
-                  onChange={handleChecked}
-                />
-                <label for="gluten">Gluten</label>
-                <br />
-                <input
-                  type="checkbox"
-                  id="crustaceans"
-                  name="crustaceans"
-                  value="crustaceans"
-                  onChange={handleChecked}
-                />
-                <label for="crustaceans">Crustaceans</label>
-<br />
-                <input
-                  type="checkbox"
-                  id="eggs"
-                  name="eggs"
-                  value="eggs"
-                  onChange={handleChecked}
-                />
-                <label for="eggs">Eggs</label>
-<br />
-                <input
-                  type="checkbox"
-                  id="fish"
-                  name="fish"
-                  value="fish"
-                  onChange={handleChecked}
-                />
-                <label for="fish">Fish</label>
-<br />
-                <input
-                  type="checkbox"
-                  id="peanuts"
-                  name="peanuts"
-                  value="peanuts"
-                  onChange={handleChecked}
-                />
-                <label for="peanuts">Peanuts</label>
-<br />
-                <input
-                  type="checkbox"
-                  id="soybeans"
-                  name="soybeans"
-                  value="soybeans"
-                  onChange={handleChecked}
-                />
-                <label for="soybeans">Soybeans</label>
-<br />
-                <input
-                  type="checkbox"
-                  id="lactose"
-                  name="lactose"
-                  value="lactose"
-                  onChange={handleChecked}
-                />
-                <label for="lactose">Lactose</label>
-<br />
+                  <input
+                    type="checkbox"
+                    id="gluten"
+                    name="gluten"
+                    value="gluten"
+                    onChange={handleChecked}
+                  />
+                  <label for="gluten">Gluten</label>
+                  <br />
+                  <input
+                    type="checkbox"
+                    id="crustaceans"
+                    name="crustaceans"
+                    value="crustaceans"
+                    onChange={handleChecked}
+                  />
+                  <label for="crustaceans">Crustaceans</label>
+                  <br />
+                  <input
+                    type="checkbox"
+                    id="eggs"
+                    name="eggs"
+                    value="eggs"
+                    onChange={handleChecked}
+                  />
+                  <label for="eggs">Eggs</label>
+                  <br />
+                  <input
+                    type="checkbox"
+                    id="fish"
+                    name="fish"
+                    value="fish"
+                    onChange={handleChecked}
+                  />
+                  <label for="fish">Fish</label>
+                  <br />
+                  <input
+                    type="checkbox"
+                    id="peanuts"
+                    name="peanuts"
+                    value="peanuts"
+                    onChange={handleChecked}
+                  />
+                  <label for="peanuts">Peanuts</label>
+                  <br />
+                  <input
+                    type="checkbox"
+                    id="soybeans"
+                    name="soybeans"
+                    value="soybeans"
+                    onChange={handleChecked}
+                  />
+                  <label for="soybeans">Soybeans</label>
+                  <br />
+                  <input
+                    type="checkbox"
+                    id="lactose"
+                    name="lactose"
+                    value="lactose"
+                    onChange={handleChecked}
+                  />
+                  <label for="lactose">Lactose</label>
+                  <br />
                 </div>
 
                 <div className="sub-right">
-                <input
-                  type="checkbox"
-                  id="nuts"
-                  name="nuts"
-                  value="nuts"
-                  onChange={handleChecked}
-                />
-                <label for="nuts">Nuts</label>
-<br />
-                <input
-                  type="checkbox"
-                  id="celery"
-                  name="celery"
-                  value="celery"
-                  onChange={handleChecked}
-                />
-                <label for="celery">Celery</label>
-<br />
-                <input
-                  type="checkbox"
-                  id="mustard"
-                  name="mustard"
-                  value="mustard"
-                  onChange={handleChecked}
-                />
-                <label for="mustard">Mustard</label>
-<br />
-                <input
-                  type="checkbox"
-                  id="sesame"
-                  name="sesame"
-                  value="sesame"
-                  onChange={handleChecked}
-                />
-                <label for="sesame">Sesame seeds</label>
-<br />
-                <input
-                  type="checkbox"
-                  id="sulphur"
-                  name="sulphur"
-                  value="sulphur"
-                  onChange={handleChecked}
-                />
-                <label for="sulphur">Sulphites</label>
-<br />
-                <input
-                  type="checkbox"
-                  id="lupin"
-                  name="lupin"
-                  value="lupin"
-                  onChange={handleChecked}
-                />
-                <label for="lupin">Lupin </label>
-<br />
-                <input
-                  type="checkbox"
-                  id="molluscs"
-                  name="molluscs"
-                  value="molluscs"
-                  onChange={handleChecked}
-                />
-                <label for="molluscs">Molluscs </label>
-                </div> 
-                
+                  <input
+                    type="checkbox"
+                    id="nuts"
+                    name="nuts"
+                    value="nuts"
+                    onChange={handleChecked}
+                  />
+                  <label for="nuts">Nuts</label>
+                  <br />
+                  <input
+                    type="checkbox"
+                    id="celery"
+                    name="celery"
+                    value="celery"
+                    onChange={handleChecked}
+                  />
+                  <label for="celery">Celery</label>
+                  <br />
+                  <input
+                    type="checkbox"
+                    id="mustard"
+                    name="mustard"
+                    value="mustard"
+                    onChange={handleChecked}
+                  />
+                  <label for="mustard">Mustard</label>
+                  <br />
+                  <input
+                    type="checkbox"
+                    id="sesame"
+                    name="sesame"
+                    value="sesame"
+                    onChange={handleChecked}
+                  />
+                  <label for="sesame">Sesame seeds</label>
+                  <br />
+                  <input
+                    type="checkbox"
+                    id="sulphur"
+                    name="sulphur"
+                    value="sulphur"
+                    onChange={handleChecked}
+                  />
+                  <label for="sulphur">Sulphites</label>
+                  <br />
+                  <input
+                    type="checkbox"
+                    id="lupin"
+                    name="lupin"
+                    value="lupin"
+                    onChange={handleChecked}
+                  />
+                  <label for="lupin">Lupin </label>
+                  <br />
+                  <input
+                    type="checkbox"
+                    id="molluscs"
+                    name="molluscs"
+                    value="molluscs"
+                    onChange={handleChecked}
+                  />
+                  <label for="molluscs">Molluscs </label>
+                </div>
+
               </div>
 
 
@@ -255,7 +244,7 @@ function ItemDetail({ itemSelected }) {
   }
 
   
-
+// COMPONENT RENDER
   return (
     <React.Fragment>
      {itemSelected ? displaySelectedItem() : defaultDisplay()}

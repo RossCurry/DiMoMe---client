@@ -37,17 +37,18 @@ function EditMenu(props) {
   }
 
   // send to API
-  const addNewCategory = (newCategory) => {
+  const addNewCategory = async (newCategory) => {
 
     //TODO has fake stats so far
     const categoryObj = {
       categoryName: newCategory,
       userId: currentUser._id 
     };
-    const storedCategory = newCategoryDB(categoryObj);
-    const currentList = [...categoryList]
-    currentList.push(storedCategory)
-    setCategoryList(currentList);
+    const storedCategory = await newCategoryDB(categoryObj);
+    console.log('storedCategory', storedCategory);
+    // const currentList = [...categoryList]
+    // currentList.push(storedCategory)
+    // setCategoryList(currentList);
 
     //TODO use dispatch to send to redux store
     // would add DB category to the store
