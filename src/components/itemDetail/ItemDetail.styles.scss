@@ -1,53 +1,40 @@
 @import '../../styles/varibles.styles.scss';
 
 .item-detail-container {
-  // @include cardBorders;
-  // min-width: 60%;
-  // min-height: 60vh;
-  // width: 33%;
   width: 100%;
-  height: 100%;
   margin: 0 1rem 0 2rem;
   padding: 1em 1em;
   border-left: 2px solid $brandYellow;
-  background-color: bisque;
-  // .section-title {
-  //   @include labelTitle;
-  // }
+  .section-title {
+    @include labelTitle;
+  }
   .item-detail-sub-container{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin: 0;
+    width: 100%;
+    margin: 0 0 0 2rem;
     padding: 0;
+  
     .row-1-item-detail{
       display: flex;
-      justify-content: space-between;
-      .col-1-item-detail {
+      height: 50%;
+      margin-bottom: 2rem;
+      .col-top-left-item-detail {
         display: flex;
-        // flex-flow: start;
-        // justify-content: space-between;
-        // align-items: center;
+        justify-content: center;
+        align-items: center;
         width: 50%;
-        height: 100%;
-        margin: 0 1rem 0 0;
-        // background-color: rgb(127, 255, 255);
         h1 {
-          margin: 0rem 0 2rem 0;
-          font-size: 3rem;
+          font-size: 3.5rem;
           font-family: $fontText;
           font-weight: 800;
           color: $brandOrange;
         }
       }
-      .col-2-item-detail{
+      .col-top-right-item-detail{
         width: 50%;
+        display: flex;
+        justify-content: center;
         .item-photo{
-          width: 100%;
-          // height: 100px;
-          background-color: beige;
-          margin: 2rem auto 3rem auto;
-          padding:0;
+          // background-color: beige;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -60,7 +47,12 @@
       }
     }
     .row-2-item-detail{
-      .col-1-item-detail{
+      width: 100%;
+      display: flex;
+      .col-bottom-left-item-detail{
+        width: 50%;
+        display: flex;
+        flex-direction: column;
         label{
           @include formLabelStyles;
           margin: 0 0 1rem 0;
@@ -76,31 +68,25 @@
           font-family: $fontText;
           overflow: scroll;
           resize: none;
-          margin: 0 0 2rem 0;
+          margin: 0 1rem 1rem 0;
         }
         input[type=number]{
           @include formInputStyles;
-          margin: 0 0 1.5rem 0;
+          margin: 0 1rem 1.5rem 0;
         }
       }
-      .col-2-item-detail {
+      .col-bottom-right-item-detail {
+        width: 50%;
         display: flex;
         flex-direction: column;
-        // align-content: space-between;
-        width: 50%;
-        // height: 100%;
-        // background-color: rgb(96, 192, 192);
-        // button {
-        //   @include category-btn;
-        // }
         h3 {
           color: $brandOrange;
-          margin: 0 0 1rem 0;
+          margin: 0 0 1rem 1rem;
         }
         .check-box-container {
           display: flex;
           flex-wrap: wrap;
-          justify-content: space-evenly;
+          margin: 0 0 0 1rem;
           .checkbox-wrap {
             display: flex;
             justify-content: space-between;

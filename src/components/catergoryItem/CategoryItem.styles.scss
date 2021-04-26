@@ -1,12 +1,13 @@
 @import '../../styles/varibles.styles.scss';
 
 .category-card {
-  background-color: $brandYellowTrans;
+  background-color: $brandYellow;
   padding: .5em 2em;
   margin: .5rem 1rem;
   text-align: center;
   font-size: 2rem;
   font-weight: 400;
+  color: white
 }
 
 .border-select {

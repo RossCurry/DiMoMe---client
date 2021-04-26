@@ -1,5 +1,14 @@
+// ORIGINAL DESIGN
 $brandOrange: #ff6000ff;
 $brandYellow: #ffb600ff;
+
+//COMPLEMENTARY SEPARATION 5 COLORS
+$SKYBLUE: #60E1EB;
+$TUQUISEISH:#39979E;
+$REDDISHPINK: #EB7B6C;
+$NEONGREEN: #7FEB78;
+$GRASSYGREEN: #5D9E59;
+
 
 $brandOrangeTrans: rgba(255, 98, 0, 0.5);
 $brandYellowTrans: rgba(255, 183, 0, 0.5);
@@ -15,8 +24,7 @@ $navTextColor: white;
 //input boxes
 $inputBorderRad: 8px;
 
-
-
+// FONTS //
 // Raleway:wght@200;400;600
 // font-family: 'Raleway', sans-serif;
 // Rubik:wght@500;900
@@ -108,12 +116,13 @@ $fontText: 'Raleway', sans-serif;
 }
 
 @mixin labelTitle {
-    background: linear-gradient(180deg, $brandYellowTrans, $brandOrangeTrans);
+    // background: linear-gradient(180deg, $brandYellowTrans, $brandOrangeTrans);
+    background-color: $brandYellow;
     color: white;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     font-weight: 500;
     text-align: center;
-    padding: .25em .5em;
+    padding: .5em .5em;
     margin: .5rem .5rem;
-    border-radius: 20px;
+    border-radius: 5px;
 }

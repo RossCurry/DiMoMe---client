@@ -195,38 +195,44 @@ function ItemDetail({ itemSelected, editMenuItem }) {
       <React.Fragment>
         <form onSubmit={handleSubmit}>
           <div className="item-detail-sub-container">
+
             <div className="row-1-item-detail">
-              <div className="col-1-item-detail">
+
+              <div className="col-top-left-item-detail">
                 <h1>{itemSelected.itemName.toUpperCase()}</h1>
               </div>
-              <div className="col-2-item-detail">
-              <div className="item-photo">
-                photo here
-                
-                <img 
-                  src={previewImageFile ? previewImageFile : cameraIcon} 
-                  alt="image upload icon" 
-                  className="image-upload-icon"
-                  style={{height: "200px"}}
-                />
+              {/* <div className="col-bottom-left-item-detail"> */}
+               
+              <div className="col-top-right-item-detail">
+                  <div className="item-photo">
+                  
+                    <img 
+                      src={previewImageFile ? previewImageFile : cameraIcon} 
+                      alt="upload icon" 
+                      className="image-upload-icon"
+                      style={{height: "200px"}}
+                    />
 
-                <input 
-                  type="file" 
-                  name="addImage" 
-                  id="addImage"
-                  multiple={false}
-                  accept='image/png, image/jpeg'
-                  onChange={handleChangeImage}
-                />
+                    <input 
+                      type="file" 
+                      name="addImage" 
+                      id="addImage"
+                      multiple={false}
+                      accept='image/png, image/jpeg'
+                      onChange={handleChangeImage}
+                    />
 
-              {/* <Image 
-                cloudName='dimome'
-                // public_id='https://res.cloudinary.com/dimome/image/upload/v1619437624/test-images/pip2ttqzeobbydfvcynt.jpg'
-              /> */}
+                    {/* <Image 
+                      cloudName='dimome'
+                      // public_id='https://res.cloudinary.com/dimome/image/upload/v1619437624/test-images/pip2ttqzeobbydfvcynt.jpg'
+                    /> */}
+                  </div>
               </div>
+              
             </div>
+
             <div className="row-2-item-detail">
-              <div className="col-1-item-detail">
+              <div className="col-bottom-left-item-detail">
                 <label htmlFor="description">Product description</label>
                 <textarea
                   type="textarea"
@@ -251,37 +257,38 @@ function ItemDetail({ itemSelected, editMenuItem }) {
                   onChange={handleChange}
                 />
               </div >
-              <div className="col-2-item-detail">
+              <div className="col-bottom-right-item-detail">
                 <h3>Select the product allergens</h3>
                 <div className="check-box-container">
                   {allergensList && allergensList.map((allergen) => {
                     return (
-                      <div className="checkbox-wrap">
+                      <div 
+                        className="checkbox-wrap"
+                        key={allergen.name}
+                      >
                         <input
                           type="checkbox"
                           id={allergen.name}
                           name={allergen.name}
                           value={allergen.name}
                           onChange={handleChecked}
-                          key={allergen.name}
                           checked={allergen.checked}
                         />
                         <label for={allergen.name}>{allergen.name}</label>
                         <br />
                       </div>
                     )
+            
                   })}
                 
                 </div>
-              {/*//TODO /we can use <button /> with a type="submit" to submit forms */}
-              <input type="submit" value="Save details" />
+                <input type="submit" value="Save details" />
               </div>
             </div>
          
             
               
 
-            </div>
           </div>
         </form>
       </React.Fragment>
