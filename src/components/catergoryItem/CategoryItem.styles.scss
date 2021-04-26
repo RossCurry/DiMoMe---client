@@ -7,7 +7,17 @@
   text-align: center;
   font-size: 2rem;
   font-weight: 400;
-  color: white
+  color: white;
+  border: 3px solid $brandYellow;
+  transition: 
+    background-color 250ms ease-in-out,
+    border 250ms ease-in-out;
+
+  &:hover{
+    cursor: pointer;
+    background-color: $brandOrangeTrans;
+    border: 3px solid $brandOrange;
+  }
 }
 
 .border-select {

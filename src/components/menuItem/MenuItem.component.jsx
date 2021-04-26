@@ -86,7 +86,7 @@ function MenuItem({
                 type="text"
                 name="menuItemInput"
                 id="menuItemInput"
-                placeholder="Type your menu item here..."
+                placeholder="Type new items here..."
                 value={text}
                 onChange={handleInput}
               />

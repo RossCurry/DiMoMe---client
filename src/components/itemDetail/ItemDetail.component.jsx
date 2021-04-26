@@ -210,7 +210,7 @@ function ItemDetail({ itemSelected, editMenuItem }) {
                       src={previewImageFile ? previewImageFile : cameraIcon} 
                       alt="upload icon" 
                       className="image-upload-icon"
-                      style={{height: "200px"}}
+                      // style={{height: "200px"}}
                     />
 
                     <input 
