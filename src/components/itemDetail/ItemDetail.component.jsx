@@ -36,6 +36,8 @@ function ItemDetail({ itemSelected, editMenuItem }) {
   }
   
 
+
+
   const handleChange = (e) => {
     const { name, value } = e.target
     setProduct( prevState => ({
@@ -55,15 +57,20 @@ function ItemDetail({ itemSelected, editMenuItem }) {
         allergyContent: [...prevState.allergyContent, value]
       }
     });
+    setProduct(initialState);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    //TODO pretty sure I'm not supposed to edit state like this.
     // ADD NAME AND ID
     product.itemName = itemSelected.itemName;
     product._id = itemSelected._id;
+    
     //TODO call a function from edit menu component
     editMenuItem(product);
+
   }
 
   //COMPONENT VIEW

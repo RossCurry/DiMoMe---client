@@ -33,7 +33,7 @@ function MenuItem({ categoryList, addMenuItem, menuItemList, handleSelected, han
 
  const menuItemNames = menuItemList.map( item => 
       <div 
-        key={item.itemId+item.itemName}
+        key={item._id}
         className="menu-item-label"
         onClick={() => handleMenuItem(item)}
       >

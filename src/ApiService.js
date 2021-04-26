@@ -94,9 +94,9 @@ const editMenuItemDB = async (menuItem) => {
 };
 
 
-const fetchAllCategoriesByUserId = async (id) => {
+const fetchAllCategoriesByUserId = async (userId) => {
 
-  const CATEGORY_PATH = `/categories/${id}`;
+  const CATEGORY_PATH = `/categories/${userId}`;
   
   return await fetch(BASE_URL + CATEGORY_PATH, {
     method: 'GET',
@@ -110,9 +110,20 @@ const fetchAllCategoriesByUserId = async (id) => {
 
 };
 
-// const fetchAllMenuItemsByUserId = () => {
+const fetchAllMenuItemsByUserId = async (userId) => {
 
-// };
+  const CATEGORY_PATH = `/items/${userId}`;
+  
+  return await fetch(BASE_URL + CATEGORY_PATH, {
+    method: 'GET',
+    credentials: 'include',
+    mode: 'cors',
+    headers: { 'Content-Type': 'application/json' },
+  })
+    .then((res) => res.json())
+    .then(data => data)
+    .catch((err) => console.log(err));
+};
 
 
 module.exports = { 
@@ -121,5 +132,6 @@ module.exports = {
   newCategoryDB, 
   newMenuItemDB,
   editMenuItemDB,
-  fetchAllCategoriesByUserId
+  fetchAllCategoriesByUserId,
+  fetchAllMenuItemsByUserId
  }

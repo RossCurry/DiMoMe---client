@@ -1,7 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import './EditMenu.styles.scss';
-import { newCategoryDB, newMenuItemDB, editMenuItemDB, fetchAllCategoriesByUserId } from '../../ApiService';
+
+// API Services
+import { 
+  newCategoryDB, 
+  newMenuItemDB, 
+  editMenuItemDB, 
+  fetchAllCategoriesByUserId, 
+  fetchAllMenuItemsByUserId 
+} from '../../ApiService';
 
 //COMPONENTS
 import Category from '../../components/categories/Category.component'
@@ -28,17 +36,23 @@ function EditMenu(props) {
   // item to send to detail
   const [ itemSelected, setItemSelected ] = useState(null);
 
+  // category selected 
+  const [ categorySelected, setCategorySelected ] = useState(null);
+
 //TODO try to figure out how to re-render
   // indicates a selected item in category list
   const handleSelected = (category) => {
     console.log('e.target', category);
     category.selected = !category.selected;
+    setCategorySelected(category);
   }
 
   //send menu item to menu detail comp.
   const handleMenuItem = (menuItem) => {
     setItemSelected(menuItem);
   }
+
+ 
 
   ///////////////
   // API CALLS //
@@ -68,14 +82,19 @@ function EditMenu(props) {
   //send to aPI
   const addMenuItem = async (newItem) => {
 
+    console.log('addMenuItem category', categorySelected._id );
+
     const menuItemObj = {
       itemName: newItem,
       description: 'Write a small description of the product here...',
       itemPrice: 0,
       allergyContent: [],
       dietaryContent: [],
-      userId: currentUser._id
+      userId: currentUser._id,
+      categoryId: categorySelected._id
     }
+
+    console.log('menuItem to send to DB', menuItemObj);
     const storedMenuItem = await newMenuItemDB(menuItemObj);
     const currentList = [...menuItemList]
     currentList.push(storedMenuItem)
@@ -97,15 +116,29 @@ function EditMenu(props) {
   const fetchAllCategories = async () => {
     const allCategories = await fetchAllCategoriesByUserId(currentUser._id);
     console.log('allCategories fetched', allCategories);
-    setCategoryList(allCategories)
-    
+    setCategoryList(allCategories);
+
+    // // auto select a category to avoid errores
+    // const autoSelectCategory = async () => {
+    //   const [firstCategory] =  await categoryList;
+    //   setCategorySelected(firstCategory);
+    //   console.log('category autoSelected ', firstCategory);
+    //   console.log('category selected ', categorySelected);
+    // }
+    // autoSelectCategory();
+  }
+
+  const fetchAllMenuItems = async () => {
+    const allMenuItems = await fetchAllMenuItemsByUserId(currentUser._id);
+    console.log('MenuItems fetched', allMenuItems);
+    setMenuItemList(allMenuItems);
   }
 
   useEffect(()=>{
     //fetchAllCategoriesWithUserID
     //fetchAllMenuItemsWithUserID
-    // Set both
-    fetchAllCategories()
+    fetchAllCategories();
+    fetchAllMenuItems();
   }, [])
 
   return (
