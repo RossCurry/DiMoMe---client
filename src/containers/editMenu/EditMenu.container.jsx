@@ -150,14 +150,16 @@ function EditMenu(props) {
         addMenuItem={addMenuItem}
         handleSelected={handleSelected}
         handleMenuItem={handleMenuItem}
+        itemSelected={itemSelected}
+        editMenuItem={editMenuItem}
       />
       {/* 
       //TODO send only the selected item
       */}
-      <ItemDetail 
+      {/* <ItemDetail 
         itemSelected={itemSelected}
         editMenuItem={editMenuItem}
-      />
+      /> */}
     </div>
   );
 }

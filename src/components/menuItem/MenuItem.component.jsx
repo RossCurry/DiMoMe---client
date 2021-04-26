@@ -1,10 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
+//COMPONENTS
+import ItemDetail from '../itemDetail/ItemDetail.component'
 import CategoryItem from '../catergoryItem/CategoryItem.componet';
 import './MenuItem.styles.scss'
 
 
-function MenuItem({ categoryList, addMenuItem, menuItemList, handleSelected, handleMenuItem }) {
+function MenuItem({ 
+  categoryList, 
+  addMenuItem, 
+  menuItemList, 
+  handleSelected, 
+  handleMenuItem,
+  itemSelected,
+  editMenuItem }) 
+  {
 
   const [text, setText] = useState('');
   
@@ -47,41 +58,56 @@ function MenuItem({ categoryList, addMenuItem, menuItemList, handleSelected, han
         {/*
         //TODO delete me
         */}
-        <div>
+        {/* <div>
           <h2 className="label-title">
             Your menu catergoies
           </h2>
+        </div> */}
+
+        <div className="row-1">
+          <div className="category-list">
+            {categoryNames}
+          </div>
         </div>
+        <div className="row-2">
 
-       <div className="category-list">
-        {categoryNames}
-       </div>
+          <div className="col-1">
+              <label for="menuItemInput">
+                Add a new item
+              </label>
+            <form
+              onSubmit={handleSubmit}
+              className="menu-item-form">
+                <input
+                  type="submit"
+                  value="+"
+                />
+              <input
+                type="text"
+                name="menuItemInput"
+                id="menuItemInput"
+                placeholder="Type your menu item here..."
+                value={text}
+                onChange={handleInput}
+              />
+            </form>
+            <div className="menu-item-list">
+              {/*}
+              //TODO insert selected category name
+      */}
+              <h2 className="label-title">"selected  category"</h2>
+              {menuItemNames}
+            </div>
+          </div>
 
-       <form 
-        onSubmit={handleSubmit} 
-        className="menu-item-form">
-          <label for="menuItemInput">
-            Create a new menu item here
-          </label>
-          <input 
-            type="text" 
-            name="menuItemInput" 
-            id="menuItemInput"
-            placeholder="Type your menu item here..."
-            value={text}
-            onChange={handleInput}
-          />
-          <input 
-            type="submit" 
-            value="Add Item"
-        />
-       </form>
-       <div className="menu-item-list">
-         <h2 className="label-title">Your menu items</h2>
-         {menuItemNames}
-       </div>
+          <div className="col-2">
+            <ItemDetail
+              itemSelected={itemSelected}
+              editMenuItem={editMenuItem}
+            />
+          </div>
 
-
+        </div>
       </div>
     </React.Fragment>
   );
