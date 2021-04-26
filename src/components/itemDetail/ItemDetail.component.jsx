@@ -67,19 +67,21 @@ function ItemDetail({ itemSelected, editMenuItem }) {
 
 
   const handleChangeImage = async (e) => {
-    
+
     // ONE: way to get the image for preview
     // // show image client side
     // const image = URL.createObjectURL(e.target.files[0]);
     // setPreviewImageFile(image);
 
     // TWO:get the image for preview
-    const selectedImageFile = e.target.files[0];
-    const reader = new FileReader(selectedImageFile)
-    reader.readAsDataURL(selectedImageFile);
-    reader.onloadend = () => {
-      console.log('reader.result', reader.result);
-      setPreviewImageFile(reader.result);
+    if (e.target.files[0]) {
+      const selectedImageFile = e.target.files[0];
+      const reader = new FileReader(selectedImageFile)
+      reader.readAsDataURL(selectedImageFile);
+      reader.onloadend = () => {
+        console.log('reader.result', reader.result);
+        setPreviewImageFile(reader.result);
+      }
     }
 
 
@@ -122,10 +124,17 @@ function ItemDetail({ itemSelected, editMenuItem }) {
     product.itemName = itemSelected.itemName;
     product._id = itemSelected._id;
     //TODO send image to OUR SERVER - possible change the function location once working
-    // previewImageFile is 64baseEncoded
+    
     uploadImage(previewImageFile)
+    .then(res => res.json())
+    .then(data => product.public_id = data.public_id)
+    .then(() => editMenuItem(product))
+    .catch((err) => console.log(err));
     //TODO call a function from edit menu component
-    editMenuItem(product);
+    //fetch image details, 
+    // then add to the menuItem
+    // save menu item
+    // editMenuItem(product);
     setProduct(initialState);
   }
 
@@ -133,12 +142,12 @@ function ItemDetail({ itemSelected, editMenuItem }) {
     const BASE_URL = "http://localhost:3005"
     const API_PATH = '/image/upload'
     try {
-      await fetch(BASE_URL+API_PATH, {
+      return await fetch(BASE_URL+API_PATH, {
         method: 'POST',
         headers: {
           'Content-type': 'application/json'
         },
-        body: JSON.stringify({data: image})
+        body: JSON.stringify({data: image, itemId: itemSelected._id })
       })
     } catch (error) {
       console.error(error);
