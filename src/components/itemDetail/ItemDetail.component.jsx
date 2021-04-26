@@ -15,7 +15,11 @@ function ItemDetail({ itemSelected, editMenuItem }) {
     dietaryContent: []
   }
   
+  const allergensInit = [{name: 'Lactose', checked:false}, {name: 'Gluten', checked:false}, {name: 'Nuts', checked:false}]
+
   const [ product, setProduct ] = useState(itemSelected ? itemSelected : initialState)
+
+  const [ allergensList, setAllergensList ] = useState(allergensInit);
 
   const [ previewImageFile, setPreviewImageFile ] = useState(null);
   
@@ -52,16 +56,28 @@ function ItemDetail({ itemSelected, editMenuItem }) {
   }
   
   const handleChecked = (e) => {
-    // console.log('e.target.value: ', e.target.value);
     const { value } = e.target;
     const { checked } = e.target;
-    if (checked) setProduct( prevState => {
-      return {
-        ...prevState,
-        //TODO ask staff how to fix this problem
-        allergyContent: [...prevState.allergyContent, value]
+    const newState = allergensList.map( item => {
+      if (item.name === value) {
+        item.checked = !item.checked;
+        return item;
+      } else {
+        return item;
       }
     });
+    setAllergensList(newState);
+
+    // if (checked) {
+
+    //   setProduct( prevState => {
+    //    return {
+    //      ...prevState,
+    //      //TODO ask staff how to fix this problem
+    //      allergyContent: [...prevState.allergyContent, value]
+    //    }
+    //   });
+    // }
     
   };
 
@@ -120,9 +136,10 @@ function ItemDetail({ itemSelected, editMenuItem }) {
       return;
     } 
     //TODO pretty sure I'm not supposed to edit state like this.
-    // ADD NAME AND ID
+    // ADD NAME, ID and 
     product.itemName = itemSelected.itemName;
     product._id = itemSelected._id;
+    product.allergyContent = allergensList.filter( allergen => allergen.checked === true );
     //TODO send image to OUR SERVER - possible change the function location once working
     
     uploadImage(previewImageFile)
@@ -135,6 +152,7 @@ function ItemDetail({ itemSelected, editMenuItem }) {
     // then add to the menuItem
     // save menu item
     // editMenuItem(product);
+    setAllergensList(allergensInit);
     setProduct(initialState);
   }
 
@@ -184,7 +202,7 @@ function ItemDetail({ itemSelected, editMenuItem }) {
                 min="0"
                 max="1000"
                 name="itemPrice"
-                value={product.price}
+                value={product.itemPrice}
                 onChange={handleChange}
               />
             </div >
@@ -219,13 +237,31 @@ function ItemDetail({ itemSelected, editMenuItem }) {
               <h3>Select the product allergens</h3>
               <div className="check-box-right">
 
-                <div className="sub-left">
+                {allergensList && allergensList.map((allergen) => {
+                  return (
+                    <React.Fragment>
+                      <input
+                        type="checkbox"
+                        id={allergen.name}
+                        name={allergen.name}
+                        value={allergen.name}
+                        onChange={handleChecked}
+                        key={allergen.name}
+                        checked={allergen.checked}
+                      />
+                      <label for={allergen.name}>{allergen.name}</label>
+                      <br />
+                    </React.Fragment>
+                  )
+                })}
+                {/* <div className="sub-left">
                   <input
                     type="checkbox"
                     id="gluten"
                     name="gluten"
                     value="gluten"
                     onChange={handleChecked}
+                    checked={false}
                   />
                   <label for="gluten">Gluten</label>
                   <br />
@@ -348,7 +384,7 @@ function ItemDetail({ itemSelected, editMenuItem }) {
                     onChange={handleChecked}
                   />
                   <label for="molluscs">Molluscs </label>
-                </div>
+                </div> */}
 
               </div>
 
