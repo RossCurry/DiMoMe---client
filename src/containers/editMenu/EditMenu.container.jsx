@@ -143,7 +143,7 @@ function EditMenu(props) {
 
   return (
     <div className="edit-menu-container">
-      <Category addNewCategory={addNewCategory} />
+      {/* <Category addNewCategory={addNewCategory} /> */}
       <MenuItem 
         categoryList={categoryList}
         menuItemList={menuItemList}

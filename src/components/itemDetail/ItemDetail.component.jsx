@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import cameraIcon from '../../assets/svg/camera.svg'
+import {Image, Video, Transformation, CloudinaryContext} from 'cloudinary-react';
 import './ItemDetail.styles.scss'
 
 function ItemDetail({ itemSelected, editMenuItem }) {
@@ -16,7 +17,9 @@ function ItemDetail({ itemSelected, editMenuItem }) {
   
   const [ product, setProduct ] = useState(itemSelected ? itemSelected : initialState)
 
-  const [ imageFile, setImageFile ] = useState(null);
+  const [ previewImageFile, setPreviewImageFile ] = useState(null);
+  
+  const [ imageForCloud, setImageForCloud ] = useState(null);
 
   //TODO change default to include the layout of the edit item
   const defaultDisplay = () => {
@@ -59,28 +62,89 @@ function ItemDetail({ itemSelected, editMenuItem }) {
         allergyContent: [...prevState.allergyContent, value]
       }
     });
-    setProduct(initialState);
+    
   };
 
 
-  const handleChangeImage = (e) => {
-    console.log('e.target.file', e.target.files[0]);
-    const image = URL.createObjectURL(e.target.files[0]);
-    setImageFile(image);
+  const handleChangeImage = async (e) => {
+    
+    // ONE: way to get the image for preview
+    // // show image client side
+    // const image = URL.createObjectURL(e.target.files[0]);
+    // setPreviewImageFile(image);
+
+    // TWO:get the image for preview
+    const selectedImageFile = e.target.files[0];
+    const reader = new FileReader(selectedImageFile)
+    reader.readAsDataURL(selectedImageFile);
+    reader.onloadend = () => {
+      console.log('reader.result', reader.result);
+      setPreviewImageFile(reader.result);
+    }
+
+
+    // METHOD ONE FOR IMAGE UPLOAD
+    // image for cloud
+    // const selectedImage = e.target.files[0];
+    // setImageForCloud(selectedImage)
+    // const formData = new FormData();
+    // formData.append("file", selectedImage); 
+    // formData.append("upload_preset", 'n2bzbolf');
+    // formData.append("public_id", image);
+
+    // send to cloudinary // METHOD ONE - 
+    // const cloudinaryURL = 'https://api.cloudinary.com/v1_1/dimome/image/upload';
+    // fetch(cloudinaryURL, {
+    //   method: 'POST',
+    //   mode: 'no-cors',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: formData
+    // })
+    // .then(res => console.log(res))
+    // .catch(err => console.error(err));
+
+
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+    //TODO delele me - for testing submit
+    // console.log('submit button');
+    // console.log('product.description', product.description);
+    // console.log('product.price', product.itemPrice);
+    // console.log('previewImageFile', previewImageFile);
+    if (!product.description || !product.itemPrice || !previewImageFile ){
+      console.log('mising description, price or image');
+      return;
+    } 
     //TODO pretty sure I'm not supposed to edit state like this.
     // ADD NAME AND ID
     product.itemName = itemSelected.itemName;
     product._id = itemSelected._id;
-    
+    //TODO send image to OUR SERVER - possible change the function location once working
+    // previewImageFile is 64baseEncoded
+    uploadImage(previewImageFile)
     //TODO call a function from edit menu component
     editMenuItem(product);
-
+    setProduct(initialState);
   }
+
+   const uploadImage = async (image) => {
+    const BASE_URL = "http://localhost:3005"
+    const API_PATH = '/image/upload'
+    try {
+      await fetch(BASE_URL+API_PATH, {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify({data: image})
+      })
+    } catch (error) {
+      console.error(error);
+    }
+   }
+
 
   //COMPONENT VIEW
   const editMenuItemView = () => {
@@ -123,7 +187,10 @@ function ItemDetail({ itemSelected, editMenuItem }) {
                 photo here
                 
                 <img 
-                  src={imageFile ? imageFile : cameraIcon} alt="image upload icon" className="image-upload-icon"
+                  src={previewImageFile ? previewImageFile : cameraIcon} 
+                  alt="image upload icon" 
+                  className="image-upload-icon"
+                  style={{height: "200px"}}
                 />
 
                 <input 
@@ -135,6 +202,10 @@ function ItemDetail({ itemSelected, editMenuItem }) {
                   onChange={handleChangeImage}
                 />
 
+              <Image 
+                cloudName='dimome'
+                // public_id='https://res.cloudinary.com/dimome/image/upload/v1619437624/test-images/pip2ttqzeobbydfvcynt.jpg'
+              />
               </div>
               <h3>Select the product allergens</h3>
               <div className="check-box-right">
@@ -272,7 +343,7 @@ function ItemDetail({ itemSelected, editMenuItem }) {
 
               </div>
 
-
+              {/*//TODO /we can use <button /> with a type="submit" to submit forms */}
               <input type="submit" value="Save details" />
             </div>
           </div>
