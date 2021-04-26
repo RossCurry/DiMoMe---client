@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import cameraIcon from '../../assets/svg/camera.svg'
 import './ItemDetail.styles.scss'
 
 function ItemDetail({ itemSelected, editMenuItem }) {
@@ -15,6 +16,7 @@ function ItemDetail({ itemSelected, editMenuItem }) {
   
   const [ product, setProduct ] = useState(itemSelected ? itemSelected : initialState)
 
+  const [ imageFile, setImageFile ] = useState(null);
 
   //TODO change default to include the layout of the edit item
   const defaultDisplay = () => {
@@ -58,6 +60,13 @@ function ItemDetail({ itemSelected, editMenuItem }) {
       }
     });
     setProduct(initialState);
+  };
+
+
+  const handleChangeImage = (e) => {
+    console.log('e.target.file', e.target.files[0]);
+    const image = URL.createObjectURL(e.target.files[0]);
+    setImageFile(image);
   };
 
   const handleSubmit = (e) => {
@@ -110,7 +119,23 @@ function ItemDetail({ itemSelected, editMenuItem }) {
           //right side // image and save button
            */}
             <div className="edit-item-right">
-              <div className="item-photo">photo here</div>
+              <div className="item-photo">
+                photo here
+                
+                <img 
+                  src={imageFile ? imageFile : cameraIcon} alt="image upload icon" className="image-upload-icon"
+                />
+
+                <input 
+                  type="file" 
+                  name="addImage" 
+                  id="addImage"
+                  multiple={false}
+                  accept='image/png, image/jpeg'
+                  onChange={handleChangeImage}
+                />
+
+              </div>
               <h3>Select the product allergens</h3>
               <div className="check-box-right">
 
