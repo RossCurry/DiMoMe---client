@@ -44,7 +44,7 @@ function Profile(props) {
         
         <Link to={`/editMenu/${currentUser._id}/${currentUser.localName}`}>
           <div className="profile-card">
-            <h2>Edit {currentUser.localName}</h2>
+            <h2>{currentUser.localName}</h2>
             <img src={editLocal } alt="Edit user local icon" />
           </div>
         </Link>

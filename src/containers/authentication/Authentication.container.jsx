@@ -171,9 +171,9 @@ function Authentication({ subscribe }) {
           onChange={handleChange}
         >
           <option value="">--Please choose an option--</option>
-          <option value="restaurant">Restaurant</option>
-          <option value="cafe">Cafe</option>
-          <option value="bar">Bar</option>
+          <option value="Restaurant">Restaurant</option>
+          <option value="Coffeeshop">Coffeeshop</option>
+          <option value="Bar">Bar</option>
         </select>
       </React.Fragment >
     )

@@ -32,8 +32,8 @@
   margin-bottom: 3rem;
   .profile-card {
     @include cardBorders;
-    min-width: 25vw;
-    min-height: 25vw;
+    width: 30vw;
+    height: 30vw;
     background-color: white;
     margin: 0 3rem;
     border-radius: 20px;

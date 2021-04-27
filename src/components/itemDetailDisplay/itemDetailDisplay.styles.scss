@@ -36,14 +36,16 @@
       background-color: #dbd8d0be;
       width: 50%;
       max-height: 80%;
-      padding: 0 0 0 2em;
+      padding: .5em 0 1em 2em;
       display: flex;
       justify-content: flex-start;
+      border-radius: $inputBorderRad 0 0 $inputBorderRad;
       .item-info {
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
         width: 80%;
+        padding-left: 1em;
         h1 {
           color: $brandOrange;
           font-size: 2.5rem;
@@ -52,7 +54,7 @@
         h3 {
           color: $brandOrange;
           font-size: 1.4rem; 
-          margin: 0 0 .25rem 0;
+          margin: 0 0 .5rem 0;
         }
         p{
           color: white;

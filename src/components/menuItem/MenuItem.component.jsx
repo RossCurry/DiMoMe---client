@@ -38,6 +38,7 @@ function MenuItem({
   
   const handleSubmit = (e) =>  {
     e.preventDefault();
+    if (!text) return;
     //TODO database insertion here
     // validation of some sort
     //TODO send to edit menu page
