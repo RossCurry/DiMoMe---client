@@ -40,8 +40,7 @@ console.log('itemSelected ', itemSelected);
             </div>
             <div className="allergen-price">
               
-                <div>🍈 🥑 🥦
-                //todo replace with ICONS
+                <div className="allergens-type">
                   {itemSavedForDisplay.allergyContent.map(allergy => <p key={allergy.name}>{allergy.name}</p>)}
                 </div>
              
@@ -50,7 +49,7 @@ console.log('itemSelected ', itemSelected);
               </div>
 
             </div>
-              <button onClick={() => setState('edit')}>Edit Item</button>
+              <button onClick={() => setState('edit')} className="edit-item-btn">Edit Item</button>
           </div>
         </div>
       </div>
@@ -80,8 +79,8 @@ console.log('itemSelected ', itemSelected);
               </div>
               <div className="allergen-price">
                 
-                  <div>🍈 🥑 🥦
-                  //todo replace with ICONS
+                  <div>
+                    <h3>Allergen types:</h3>
                     {itemSelected.allergyContent.map(allergy => <p key={allergy.name}>{allergy.name}</p>)}
                   </div>
                
@@ -90,7 +89,11 @@ console.log('itemSelected ', itemSelected);
                 </div>
 
               </div>
-                <button onClick={() => setState('edit')}>Edit Item</button>
+                <button 
+                  onClick={() => setState('edit')}
+                  className="edit-item-btn"
+                >
+                  Edit Item</button>
             </div>
           </div>
         </div>

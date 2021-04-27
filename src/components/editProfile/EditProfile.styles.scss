@@ -6,16 +6,14 @@
   justify-content: space-evenly;
   align-items: center;
   margin: 3rem auto;
-  width: 80vw;
+  width: 50vw;
   // background-color: lightblue;
   border-radius: 20px;
   .edit-profile-left{
-    width: 30%;
-    background-color: coral;
+    width: 0;
   }
   .edit-profile-form{
     width: 100%;
-    background-color: darkcyan;
     display: flex;
     flex-direction: column;
     padding: 0 2em;

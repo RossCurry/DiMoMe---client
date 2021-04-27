@@ -58,8 +58,6 @@ function ItemDetail({ itemSelected, editMenuItem, setToggleState, setState }) {
   const displaySelectedItem = () => {
     return (
       <div className="item-detail-container">
-        {/* <h2 className="section-title">Im the menu detail</h2> */}
-        // TODO choose here to render edit item or display item
         {editMenuItemView() }
       </div>
     )
@@ -180,7 +178,7 @@ function ItemDetail({ itemSelected, editMenuItem, setToggleState, setState }) {
                   <div className="item-photo">
                   
                     <img 
-                      src={previewImageFile ? previewImageFile : cameraIcon} 
+                      src={previewImageFile || itemSelected ? previewImageFile || itemSelected.imageUrl : cameraIcon} 
                       alt="upload icon" 
                       className={cameraIcon ? "image-upload-icon" : "image-upload-file" }
                     />
