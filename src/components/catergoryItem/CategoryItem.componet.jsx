@@ -1,7 +1,7 @@
 import React from 'react';
 import './CategoryItem.styles.scss'
 
-function CategoryItem({ category, handleSelected }) {
+function CategoryItem({ category, handleSelected, selectedCategory, setSelectedCategory }) {
 
   return (
     <div

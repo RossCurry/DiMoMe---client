@@ -37,17 +37,18 @@ function EditMenu(props) {
   const [ itemSelected, setItemSelected ] = useState(null);
 
   // category selected 
-  const [ categorySelected, setCategorySelected ] = useState(null);
+  const [ selectedCategory, setSelectedCategory ] = useState(null);
 
   // edited item returned from DB
   const [ itemSavedForDisplay, setItemSavedForDisplay ] = useState(null);
+
 
 //TODO try to figure out how to re-render
   // indicates a selected item in category list
   const handleSelected = (category) => {
     console.log('e.target', category);
     category.selected = !category.selected;
-    setCategorySelected(category);
+    setSelectedCategory(category);
   }
 
   //send menu item to menu detail comp.
@@ -85,7 +86,7 @@ function EditMenu(props) {
   //send to aPI
   const addMenuItem = async (newItem) => {
 
-    console.log('addMenuItem category', categorySelected._id );
+    console.log('addMenuItem category', selectedCategory._id );
 
     const menuItemObj = {
       itemName: newItem,
@@ -94,7 +95,7 @@ function EditMenu(props) {
       allergyContent: [],
       dietaryContent: [],
       userId: currentUser._id,
-      categoryId: categorySelected._id
+      categoryId: selectedCategory._id
     }
 
     console.log('menuItem to send to DB', menuItemObj);
@@ -112,24 +113,17 @@ function EditMenu(props) {
     console.log('editedItem', editedItem);
     setItemSavedForDisplay(editedItem)
 
-    //TODO client side, RELOAD DATA TO ANOTHER COMPONENT TO LOAD: eg. PRODUCT DISPLAY COMP.
   };
 
-
-
   const fetchAllCategories = async () => {
-    const allCategories = await fetchAllCategoriesByUserId(currentUser._id);
-    console.log('allCategories fetched', allCategories);
-    setCategoryList(allCategories);
+    
+    await fetchAllCategoriesByUserId(currentUser._id)
+    .then(res =>  {
+      setCategoryList(res);
+      setSelectedCategory(res[0]);
+    })
+    .catch(err => console.error);
 
-    // // auto select a category to avoid errores
-    // const autoSelectCategory = async () => {
-    //   const [firstCategory] =  await categoryList;
-    //   setCategorySelected(firstCategory);
-    //   console.log('category autoSelected ', firstCategory);
-    //   console.log('category selected ', categorySelected);
-    // }
-    // autoSelectCategory();
   }
 
   const fetchAllMenuItems = async () => {
@@ -147,6 +141,7 @@ function EditMenu(props) {
 
   return (
     <div className="edit-menu-container">
+      {console.log('selectedCategory in div', selectedCategory)}
       {/* <Category addNewCategory={addNewCategory} /> */}
       <MenuItem 
         categoryList={categoryList}
@@ -157,6 +152,8 @@ function EditMenu(props) {
         itemSelected={itemSelected}
         editMenuItem={editMenuItem}
         itemSavedForDisplay={itemSavedForDisplay}
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
       />
       {/* 
       //TODO send only the selected item

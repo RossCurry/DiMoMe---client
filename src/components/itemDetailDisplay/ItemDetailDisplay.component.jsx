@@ -40,14 +40,14 @@ function ItemDetailDisplay({itemSavedForDisplay}) {
                 <p>{itemSavedForDisplay.description}</p>
               </div>
               <div className="allergen-price">
-                <div>
+                
                   <div>🍈 🥑 🥦
                   //todo replace with ICONS
                     {itemSavedForDisplay.allergyContent.map(allergy => <p key={allergy.name}>{allergy.name}</p>)}
                   </div>
-                </div>
+               
                 <div>
-                  <h2>{itemSavedForDisplay.itemPrice}</h2>
+                  <h2>€{itemSavedForDisplay.itemPrice}</h2>
                 </div>
               </div>
             </div>

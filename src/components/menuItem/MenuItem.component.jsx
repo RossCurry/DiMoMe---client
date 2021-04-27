@@ -16,7 +16,8 @@ function MenuItem({
   handleMenuItem,
   itemSelected,
   editMenuItem,
-  itemSavedForDisplay }) 
+  itemSavedForDisplay,
+  selectedCategory }) 
   {
 
   // states
@@ -47,15 +48,23 @@ function MenuItem({
     )
   )
 
- const menuItemNames = menuItemList.map( item => 
-      <div 
+ const menuItemNames = menuItemList.map( item => {
+
+  // IF MENUITEM HAS SAME CATEGORY ID THEN MAP
+      if (item.categoryId === selectedCategory._id){
+      return (<div 
         key={item._id}
         className="menu-item-label"
         onClick={() => handleMenuItem(item)}
       >
         {item.itemName}
-      </div>
-  )
+      </div>)
+      } 
+
+ });
+
+
+
 
   return (
     <React.Fragment>
@@ -100,7 +109,7 @@ function MenuItem({
               {/*}
               //TODO insert selected category name
       */}
-              <h2 className="label-title">"selected  category"</h2>
+              <h2 className="label-title">{selectedCategory ? selectedCategory.categoryName : 'Select a category'}</h2>
               {menuItemNames}
             </div>
           </div>

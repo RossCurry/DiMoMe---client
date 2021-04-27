@@ -7,18 +7,18 @@ import './Category.styles.scss'
 
 function Category({ addNewCategory }) {
   
+  const [text, setText] = useState('');
+  
   // const userMenu = useSelector(state => state.userMenu);
   const currentUser = useSelector(state => state.currentUser.user)
   const history = useHistory();
   const dispatch = useDispatch();
+
   //TODO a more complete list to store in the database?
   // const defaultCategories = ['starters', 'Mains', 'Desserts', 'Drinks', 'Coffees', 'Teas']
 
-  if (!currentUser) history.push(`/login`);
+  if (!currentUser) history.push(`/`);
 
-  
-  const [text, setText] = useState('');
-  
 
   const handleInput = (e) => {
     const textInput = e.target.value;
