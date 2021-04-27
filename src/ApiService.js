@@ -74,7 +74,7 @@ const newMenuItemDB = async (newMenuItem) => {
 
 const editMenuItemDB = async (menuItem) => {
   
-  console.log('menuItem to send to DB', menuItem);
+  // console.log('menuItem to send to DB', menuItem);
   const { _id } = menuItem;
 
   // The ID might be unnecessary

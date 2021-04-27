@@ -39,6 +39,9 @@ function EditMenu(props) {
   // category selected 
   const [ categorySelected, setCategorySelected ] = useState(null);
 
+  // edited item returned from DB
+  const [ itemSavedForDisplay, setItemSavedForDisplay ] = useState(null);
+
 //TODO try to figure out how to re-render
   // indicates a selected item in category list
   const handleSelected = (category) => {
@@ -103,10 +106,11 @@ function EditMenu(props) {
 
   // send to API to Edit Item
   const editMenuItem = async (menuItem) => {
-    console.log('editMenuItem', menuItem);
+    // console.log('editMenuItem', menuItem);
     //SEND TO API
     const editedItem = await editMenuItemDB(menuItem);
     console.log('editedItem', editedItem);
+    setItemSavedForDisplay(editedItem)
 
     //TODO client side, RELOAD DATA TO ANOTHER COMPONENT TO LOAD: eg. PRODUCT DISPLAY COMP.
   };
@@ -152,6 +156,7 @@ function EditMenu(props) {
         handleMenuItem={handleMenuItem}
         itemSelected={itemSelected}
         editMenuItem={editMenuItem}
+        itemSavedForDisplay={itemSavedForDisplay}
       />
       {/* 
       //TODO send only the selected item

@@ -15,7 +15,8 @@ function MenuItem({
   handleSelected, 
   handleMenuItem,
   itemSelected,
-  editMenuItem }) 
+  editMenuItem,
+  itemSavedForDisplay }) 
   {
 
   // states
@@ -105,9 +106,10 @@ function MenuItem({
           </div>
 
           <div className="col-2">
+            {/* {toggleState && itemSavedForDisplay */}
             {toggleState 
               ?
-              <ItemDetailDisplay />
+              <ItemDetailDisplay itemSavedForDisplay={itemSavedForDisplay}/>
               :
               <ItemDetail
               itemSelected={itemSelected}

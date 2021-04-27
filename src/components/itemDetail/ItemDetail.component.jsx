@@ -10,7 +10,7 @@ function ItemDetail({ itemSelected, editMenuItem, setToggleState }) {
     itemName: '',
     _id: '',
     description: '',
-    itemPrice: 0,
+    itemPrice: '',
     allergyContent: [],
     dietaryContent: []
   }
@@ -99,7 +99,6 @@ function ItemDetail({ itemSelected, editMenuItem, setToggleState }) {
       const reader = new FileReader(selectedImageFile)
       reader.readAsDataURL(selectedImageFile);
       reader.onloadend = () => {
-        console.log('reader.result', reader.result);
         setPreviewImageFile(reader.result);
       }
     }
