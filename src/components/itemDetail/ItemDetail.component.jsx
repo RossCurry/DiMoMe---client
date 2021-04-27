@@ -3,7 +3,7 @@ import cameraIcon from '../../assets/svg/camera.svg'
 import {Image, Video, Transformation, CloudinaryContext} from 'cloudinary-react';
 import './ItemDetail.styles.scss'
 
-function ItemDetail({ itemSelected, editMenuItem }) {
+function ItemDetail({ itemSelected, editMenuItem, setToggleState }) {
 
 
   const initialState = {
@@ -32,6 +32,8 @@ function ItemDetail({ itemSelected, editMenuItem }) {
     {name: 'Molluscs', checked:false}, 
   ]
 
+  // states
+
   const [ product, setProduct ] = useState(itemSelected ? itemSelected : initialState)
 
   const [ allergensList, setAllergensList ] = useState(allergensInit);
@@ -39,6 +41,9 @@ function ItemDetail({ itemSelected, editMenuItem }) {
   const [ previewImageFile, setPreviewImageFile ] = useState(null);
   
   const [ imageForCloud, setImageForCloud ] = useState(null);
+
+  
+
 
   //TODO change default to include the layout of the edit item
   const defaultDisplay = () => {
@@ -82,27 +87,11 @@ function ItemDetail({ itemSelected, editMenuItem }) {
       }
     });
     setAllergensList(newState);
-
-    // if (checked) {
-
-    //   setProduct( prevState => {
-    //    return {
-    //      ...prevState,
-    //      //TODO ask staff how to fix this problem
-    //      allergyContent: [...prevState.allergyContent, value]
-    //    }
-    //   });
-    // }
     
   };
 
 
   const handleChangeImage = async (e) => {
-
-    // ONE: way to get the image for preview
-    // // show image client side
-    // const image = URL.createObjectURL(e.target.files[0]);
-    // setPreviewImageFile(image);
 
     // TWO:get the image for preview
     if (e.target.files[0]) {
@@ -114,28 +103,6 @@ function ItemDetail({ itemSelected, editMenuItem }) {
         setPreviewImageFile(reader.result);
       }
     }
-
-
-    // METHOD ONE FOR IMAGE UPLOAD
-    // image for cloud
-    // const selectedImage = e.target.files[0];
-    // setImageForCloud(selectedImage)
-    // const formData = new FormData();
-    // formData.append("file", selectedImage); 
-    // formData.append("upload_preset", 'n2bzbolf');
-    // formData.append("public_id", image);
-
-    // send to cloudinary // METHOD ONE - 
-    // const cloudinaryURL = 'https://api.cloudinary.com/v1_1/dimome/image/upload';
-    // fetch(cloudinaryURL, {
-    //   method: 'POST',
-    //   mode: 'no-cors',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: formData
-    // })
-    // .then(res => console.log(res))
-    // .catch(err => console.error(err));
-
 
   };
 
@@ -155,8 +122,8 @@ function ItemDetail({ itemSelected, editMenuItem }) {
     product.itemName = itemSelected.itemName;
     product._id = itemSelected._id;
     product.allergyContent = allergensList.filter( allergen => allergen.checked === true );
-    //TODO send image to OUR SERVER - possible change the function location once working
     
+    //TODO send image to OUR SERVER - possible change the function location once working
     uploadImage(previewImageFile)
     .then(res => res.json())
     .then(data => product.public_id = data.public_id)
@@ -169,6 +136,8 @@ function ItemDetail({ itemSelected, editMenuItem }) {
     // editMenuItem(product);
     setAllergensList(allergensInit);
     setProduct(initialState);
+    //show detail component
+    setToggleState(true);
   }
 
    const uploadImage = async (image) => {

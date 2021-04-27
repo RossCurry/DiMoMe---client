@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import './MenuItem.styles.scss'
 
 //COMPONENTS
 import ItemDetail from '../itemDetail/ItemDetail.component'
 import CategoryItem from '../catergoryItem/CategoryItem.componet';
-import './MenuItem.styles.scss'
+import ItemDetailDisplay from '../itemDetailDisplay/ItemDetailDisplay.component'
 
 
 function MenuItem({ 
@@ -17,8 +18,11 @@ function MenuItem({
   editMenuItem }) 
   {
 
+  // states
+
   const [text, setText] = useState('');
   
+  const [ toggleState, setToggleState ] = useState(false);
 
   const handleInput = (e) => {
     const textInput = e.target.value;
@@ -101,10 +105,17 @@ function MenuItem({
           </div>
 
           <div className="col-2">
-            <ItemDetail
+            {toggleState 
+              ?
+              <ItemDetailDisplay />
+              :
+              <ItemDetail
               itemSelected={itemSelected}
               editMenuItem={editMenuItem}
-            />
+              setToggleState={setToggleState}
+              />
+            }
+           
           </div>
 
         </div>
