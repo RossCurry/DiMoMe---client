@@ -3,7 +3,7 @@ import cameraIcon from '../../assets/svg/camera.svg'
 import {Image, Video, Transformation, CloudinaryContext} from 'cloudinary-react';
 import './ItemDetail.styles.scss'
 
-function ItemDetail({ itemSelected, editMenuItem, setToggleState }) {
+function ItemDetail({ itemSelected, editMenuItem, setToggleState, setState }) {
 
 
   const initialState = {
@@ -59,7 +59,8 @@ function ItemDetail({ itemSelected, editMenuItem, setToggleState }) {
     return (
       <div className="item-detail-container">
         {/* <h2 className="section-title">Im the menu detail</h2> */}
-        {editMenuItemView()}
+        // TODO choose here to render edit item or display item
+        {editMenuItemView() }
       </div>
     )
   }
@@ -140,7 +141,7 @@ function ItemDetail({ itemSelected, editMenuItem, setToggleState }) {
     setAllergensList(allergensInit);
     setProduct(initialState);
     //show detail component
-    setToggleState(true);
+    setState('view');
   }
 
    const uploadImage = async (image) => {

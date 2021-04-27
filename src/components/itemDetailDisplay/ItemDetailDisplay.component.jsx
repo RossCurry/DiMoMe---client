@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { CloudinaryContext, Image } from 'cloudinary-react'
 import './itemDetailDisplay.styles.scss'
 
 
-function ItemDetailDisplay({itemSavedForDisplay}) {
+function ItemDetailDisplay({itemSavedForDisplay, setToggleState, itemSelected, setState}) {
 
-  const url = 'https://conelmorrofino.com/wp-content/uploads/2019/06/Gobu-Burger-Madrid-Portada.jpg'
+  // const [ product, setProduct ] = useState(itemSelected ? itemSelected : null)
 
+console.log('itemSelected ', itemSelected);
 
 // <CloudinaryContext 
 //         cloudName="dimome" 
@@ -19,13 +20,51 @@ function ItemDetailDisplay({itemSavedForDisplay}) {
 //       </CloudinaryContext>
 
 
+  const renderDisplayOnSave = () => {
+    return (
+      <div 
+      className="item-detail-display-container" 
+      style={{ backgroundImage: `url(${itemSavedForDisplay.imageUrl})` }}
+    >
+      <div className="row-1">
+        <div className="col-1-top-left"></div>
+        <div className="col-2-top-right"></div>
+      </div>
+      <div className="row-2">
+        <div className="col-1-bottom-left"></div>
+        <div className="col-2-bottom-right">
+          <div className="item-info">
+            <div>
+              <h1>{itemSavedForDisplay.itemName}</h1>
+              <p>{itemSavedForDisplay.description}</p>
+            </div>
+            <div className="allergen-price">
+              
+                <div>🍈 🥑 🥦
+                //todo replace with ICONS
+                  {itemSavedForDisplay.allergyContent.map(allergy => <p key={allergy.name}>{allergy.name}</p>)}
+                </div>
+             
+              <div>
+                <h2>€{itemSavedForDisplay.itemPrice}</h2>
+              </div>
 
-  const renderDisplay = () => {
+            </div>
+              <button onClick={() => setState('edit')}>Edit Item</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+  }
+
+
+  const renderDisplayOnSelect = () => {
     console.log('display rendered');
     return (
       <div 
         className="item-detail-display-container" 
-        style={{ backgroundImage: `url(${itemSavedForDisplay.imageUrl})` }}
+        style={{ backgroundImage: `url(${itemSelected.imageUrl})` }}
       >
         <div className="row-1">
           <div className="col-1-top-left"></div>
@@ -36,20 +75,22 @@ function ItemDetailDisplay({itemSavedForDisplay}) {
           <div className="col-2-bottom-right">
             <div className="item-info">
               <div>
-                <h1>{itemSavedForDisplay.itemName}</h1>
-                <p>{itemSavedForDisplay.description}</p>
+                <h1>{itemSelected.itemName}</h1>
+                <p>{itemSelected.description}</p>
               </div>
               <div className="allergen-price">
                 
                   <div>🍈 🥑 🥦
                   //todo replace with ICONS
-                    {itemSavedForDisplay.allergyContent.map(allergy => <p key={allergy.name}>{allergy.name}</p>)}
+                    {itemSelected.allergyContent.map(allergy => <p key={allergy.name}>{allergy.name}</p>)}
                   </div>
                
                 <div>
-                  <h2>€{itemSavedForDisplay.itemPrice}</h2>
+                  <h2>€{itemSelected.itemPrice}</h2>
                 </div>
+
               </div>
+                <button onClick={() => setState('edit')}>Edit Item</button>
             </div>
           </div>
         </div>
@@ -63,9 +104,18 @@ function ItemDetailDisplay({itemSavedForDisplay}) {
     )
   }
 
+  // const defaultDisplay = () => {
+  //   return (
+  //     <div className="item-detail-container">
+  //       <h2 className="section-title">No item selected yet</h2>
+        
+  //     </div>
+  //   )
+  // }
+
   return (
     <React.Fragment>
-      {  itemSavedForDisplay ? renderDisplay() : renderPageLoading()}
+      { itemSavedForDisplay ? renderDisplayOnSave() : renderDisplayOnSelect()}
     </React.Fragment>
   );
 }

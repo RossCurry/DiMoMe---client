@@ -6,6 +6,7 @@ import './MenuItem.styles.scss'
 import ItemDetail from '../itemDetail/ItemDetail.component'
 import CategoryItem from '../catergoryItem/CategoryItem.componet';
 import ItemDetailDisplay from '../itemDetailDisplay/ItemDetailDisplay.component'
+import SelectItem from '../selectItem/SelectItem.component'
 
 
 function MenuItem({ 
@@ -17,14 +18,18 @@ function MenuItem({
   itemSelected,
   editMenuItem,
   itemSavedForDisplay,
-  selectedCategory }) 
+  selectedCategory,
+  state,
+  setState }) 
   {
 
   // states
-
+  //user input on menu item form
   const [text, setText] = useState('');
   
-  const [ toggleState, setToggleState ] = useState(false);
+  
+
+  const [ selectItem , setSelectItem ] = useState(null);
 
   const handleInput = (e) => {
     const textInput = e.target.value;
@@ -50,7 +55,7 @@ function MenuItem({
 
  const menuItemNames = menuItemList.map( item => {
 
-  // IF MENUITEM HAS SAME CATEGORY ID THEN MAP
+  // IF MENU ITEM HAS THE SAME CATEGORY ID AS THE SELECTED ONE THEN MAP
       if (item.categoryId === selectedCategory._id){
       return (<div 
         key={item._id}
@@ -63,20 +68,12 @@ function MenuItem({
 
  });
 
-
+ 
 
 
   return (
     <React.Fragment>
       <div className="menu-item-container">
-        {/*
-        //TODO delete me
-        */}
-        {/* <div>
-          <h2 className="label-title">
-            Your menu catergoies
-          </h2>
-        </div> */}
 
         <div className="row-1">
           <div className="category-list">
@@ -116,16 +113,21 @@ function MenuItem({
 
           <div className="col-2">
             {/* {toggleState && itemSavedForDisplay */}
-            {toggleState 
-              ?
-              <ItemDetailDisplay itemSavedForDisplay={itemSavedForDisplay}/>
-              :
-              <ItemDetail
+            {state === 'view' && 
+            (<ItemDetailDisplay 
+              itemSavedForDisplay={itemSavedForDisplay}
               itemSelected={itemSelected}
-              editMenuItem={editMenuItem}
-              setToggleState={setToggleState}
-              />
-            }
+              setState={setState}/>
+            )}
+            {state === 'edit' && 
+            (<ItemDetail
+            itemSelected={itemSelected}
+            editMenuItem={editMenuItem}
+            setState={setState}/>
+            )}
+            {state === 'select' && (
+            <SelectItem />
+            )}
            
           </div>
 

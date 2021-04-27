@@ -42,6 +42,9 @@ function EditMenu(props) {
   // edited item returned from DB
   const [ itemSavedForDisplay, setItemSavedForDisplay ] = useState(null);
 
+  // state to change edit/view of item
+  const [ state, setState ] = useState('select');
+
 
 //TODO try to figure out how to re-render
   // indicates a selected item in category list
@@ -53,7 +56,11 @@ function EditMenu(props) {
 
   //send menu item to menu detail comp.
   const handleMenuItem = (menuItem) => {
+    // toggle state
+    // send item to
+    setState('view');
     setItemSelected(menuItem);
+    // toggle state
   }
 
  
@@ -154,6 +161,8 @@ function EditMenu(props) {
         itemSavedForDisplay={itemSavedForDisplay}
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
+        state={state}
+        setState={setState}
       />
       {/* 
       //TODO send only the selected item
