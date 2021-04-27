@@ -125,7 +125,11 @@ function ItemDetail({ itemSelected, editMenuItem, setToggleState }) {
     //TODO send image to OUR SERVER - possible change the function location once working
     uploadImage(previewImageFile)
     .then(res => res.json())
-    .then(data => product.public_id = data.public_id)
+    .then(data => {
+      product.public_id = data.public_id;
+      product.imageUrl = data.url;
+    }
+    )
     .then(() => editMenuItem(product))
     .catch((err) => console.log(err));
     //TODO call a function from edit menu component
