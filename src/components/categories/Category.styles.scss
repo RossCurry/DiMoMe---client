@@ -1,42 +1,50 @@
 @import '../../styles/varibles.styles.scss';
 
 .category-container {
-  @include cardBorders;
+  // @include cardBorders;
   // max-width: 33%;
   // height: 50%;
-  width: 20%;
-  min-height: 60vh;
-  margin: 0 auto;
-  margin-top: 3rem;
-  // background-color: rgb(230, 208, 112);
+  // width: 30%;
+  margin: 0 01rem 0 2rem;
+  // margin-top: 3rem;
   .local-title{
-    margin: 1rem .5rem;
+    // margin: 1rem .5rem;
     h1,
     p {
-      margin: 1rem .5rem;
+      margin: 0 0 .5rem 0;
       color: $brandOrange;
     }
     
     
   } 
+  label {
+    @include formLabelStyles;
+    margin-bottom: 1.5rem;
+    color: $brandOrange;
+  }
   .category-form{
     display: flex;
-    flex-direction: column;
-    margin: 2rem .5rem;
-    label {
-      @include formLabelStyles;
-      padding: .5em 2em;
-      margin-bottom: .5rem;
-      color: $brandOrange;
-    }
-    input[type="text"] {
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 0;
+    input[type=text]{
       @include formInputStyles;
+      padding: 0 0 0 1em;
+      border-radius: 0 $inputBorderRad $inputBorderRad 0;
+      margin: .5rem 0;
+      width: 80%
     }
-    input[type="submit"] {
+    input[type=submit]{
       @include hero-btn;
-      width: 90%;
-      margin: 1rem;
-    }  
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      max-width: 20%;
+      text-align: center;
+      margin: .5rem 0;
+      border-radius: $inputBorderRad 0 0 $inputBorderRad;
+      // padding-right: .5em;
+    }
   }
 
   

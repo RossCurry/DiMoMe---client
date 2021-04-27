@@ -30,7 +30,7 @@ function Category({ addNewCategory }) {
     //TODO database insertion here
     // validation of some sort
     //TODO send to edit menu page
-    addNewCategory(text);
+    addNewCategory(text.toUpperCase());
     setText('');
   }
 
@@ -40,9 +40,9 @@ function Category({ addNewCategory }) {
         <h1>
           {currentUser.localName} {currentUser.localType}
         </h1>
-        <p>
+        {/* <p>
           {currentUser.name}, use the form below to add categories to your menu
-          </p>
+          </p> */}
       </React.Fragment>
     )
   };
@@ -55,9 +55,9 @@ function Category({ addNewCategory }) {
         <h1>
           Restaurant
         </h1>
-        <p>
+        {/* <p>
           Use the form below to add categories to your menu
-        </p>
+        </p> */}
       </React.Fragment>
     )
   };
@@ -70,8 +70,10 @@ function Category({ addNewCategory }) {
         {currentUser ? userGreetingMessage() : defaultGreeting()}
       </div>
 
+      <label htmlFor="category">Create a New Catergory</label>
+
       <form onSubmit={handleSubmit} className="category-form">
-        <label htmlFor="category">Create a New Catergory</label>
+        <input type="submit" value="+" />
         <input 
           type="text" 
           name="categoryName"
@@ -79,7 +81,6 @@ function Category({ addNewCategory }) {
           value={text} 
           onChange={handleInput}
         ></input>
-        <input type="submit" value="Add Category" />
       </form>
 
        

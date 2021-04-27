@@ -9,18 +9,28 @@
   // max-width: 33%;
   // height: 50%;
   margin: 0 auto;
-  margin-top: 3rem;
+  margin-top: 2rem;
   .row-1 {
     // .label-title{
     //   @include labelTitle
     // }
+    display: flex;
+    flex-direction: row;
     width: 100%;
+    border-bottom: 3px solid $brandOrangeTrans;
+    margin: 0 0 1.5rem 0;
+    padding: 0 0 1.5rem 0;
+    .col-1{
+      width: 30%;
+    }
     .category-list {
       display: flex;
       flex-direction: row;
+      width: 70%;
       margin: 0 .25rem 1rem .25rem;
       overflow-x: scroll;
       scroll-behavior: smooth;
+      border-left: 3px solid $brandOrangeTrans;
       .category-card {
         background-color: $brandYellowTrans;
         padding: .5em 2em;

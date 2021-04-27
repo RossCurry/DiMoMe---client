@@ -148,10 +148,11 @@ function EditMenu(props) {
 
   return (
     <div className="edit-menu-container">
-      {console.log('selectedCategory in div', selectedCategory)}
+      {/* {console.log('selectedCategory in div', selectedCategory)} */}
       {/* <Category addNewCategory={addNewCategory} /> */}
       <MenuItem 
         categoryList={categoryList}
+        addNewCategory={addNewCategory}
         menuItemList={menuItemList}
         addMenuItem={addMenuItem}
         handleSelected={handleSelected}
@@ -164,13 +165,7 @@ function EditMenu(props) {
         state={state}
         setState={setState}
       />
-      {/* 
-      //TODO send only the selected item
-      */}
-      {/* <ItemDetail 
-        itemSelected={itemSelected}
-        editMenuItem={editMenuItem}
-      /> */}
+     
     </div>
   );
 }

@@ -3,13 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import './MenuItem.styles.scss'
 
 //COMPONENTS
-import ItemDetail from '../itemDetail/ItemDetail.component'
+import Category from '../categories/Category.component'
 import CategoryItem from '../catergoryItem/CategoryItem.componet';
+import ItemDetail from '../itemDetail/ItemDetail.component'
 import ItemDetailDisplay from '../itemDetailDisplay/ItemDetailDisplay.component'
 import SelectItem from '../selectItem/SelectItem.component'
 
 
 function MenuItem({ 
+  addNewCategory,
   categoryList, 
   addMenuItem, 
   menuItemList, 
@@ -77,6 +79,7 @@ function MenuItem({
       <div className="menu-item-container">
 
         <div className="row-1">
+        <Category addNewCategory={addNewCategory} className="col-1" />
           <div className="category-list">
             {categoryNames}
           </div>

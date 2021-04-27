@@ -26,13 +26,13 @@ console.log('itemSelected ', itemSelected);
       className="item-detail-display-container" 
       style={{ backgroundImage: `url(${itemSavedForDisplay.imageUrl})` }}
     >
-      <div className="row-1">
-        <div className="col-1-top-left"></div>
-        <div className="col-2-top-right"></div>
+      <div className="row-1-display-item">
+        <div className="col-1-top-left-display-item"></div>
+        <div className="col-2-top-right-display-item"></div>
       </div>
-      <div className="row-2">
-        <div className="col-1-bottom-left"></div>
-        <div className="col-2-bottom-right">
+      <div className="row-2-display-item-display-item">
+        <div className="col-1-bottom-left-display-item"></div>
+        <div className="col-2-bottom-right-display-item">
           <div className="item-info">
             <div>
               <h1>{itemSavedForDisplay.itemName}</h1>
@@ -65,13 +65,13 @@ console.log('itemSelected ', itemSelected);
         className="item-detail-display-container" 
         style={{ backgroundImage: `url(${itemSelected.imageUrl})` }}
       >
-        <div className="row-1">
-          <div className="col-1-top-left"></div>
-          <div className="col-2-top-right"></div>
+        <div className="row-1-display-item">
+          <div className="col-1-top-left-display-item"></div>
+          <div className="col-2-top-right-display-item"></div>
         </div>
-        <div className="row-2">
-          <div className="col-1-bottom-left"></div>
-          <div className="col-2-bottom-right">
+        <div className="row-2-display-item">
+          <div className="col-1-bottom-left-display-item"></div>
+          <div className="col-2-bottom-right-display-item">
             <div className="item-info">
               <div>
                 <h1>{itemSelected.itemName}</h1>

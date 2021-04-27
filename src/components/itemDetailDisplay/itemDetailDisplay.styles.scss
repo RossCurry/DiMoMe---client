@@ -12,25 +12,26 @@
   background-position: left;
   background-repeat: no-repeat;
   background-size: cover;
+
   // position: absolute;
   
-  .row-1{
+  .row-1-display-item{
     width: 100%;
-    .col-1-top-left {
+    .col-1-top-left-display-item {
       width: 50%;
     }
-    .col-2-top-right {
+    .col-2-top-right-display-item {
       width: 50%;
     }
   }
-  .row-2{
+  .row-2-display-item{
     display: flex;
     width: 100%;
     margin: 3rem 0 0 0;
-    .col-1-bottom-left {
+    .col-1-bottom-left-display-item {
       width: 50%;
     }
-    .col-2-bottom-right {
+    .col-2-bottom-right-display-item {
       // background-color: rgba(241, 218, 111, 0.801);
       // background-color: #f1d9a5be;
       background-color: #dbd8d0be;
