@@ -51,16 +51,30 @@ function EditMenu(props) {
   const handleSelected = (category) => {
     console.log('e.target', category);
     category.selected = !category.selected;
+    const newList = categoryList.map( item => {
+      if (item._id !== category._id )
+      item.selected = false
+      return item;
+    })
+    setCategoryList(newList)
+    console.log('category.selected', category.selected);
     setSelectedCategory(category);
   }
 
-  //send menu item to menu detail comp.
+  //send menu item to menu detail comp. & toggle views
   const handleMenuItem = (menuItem) => {
-    // toggle state
-    // send item to
-    setState('view');
-    setItemSelected(menuItem);
-    // toggle state
+
+    if (menuItem !== itemSelected) {
+      setState('view')
+      setItemSelected(menuItem);
+    } else if ( menuItem === itemSelected && state === 'view') {
+      setState('edit')
+      setItemSelected(menuItem);
+    } else if (menuItem === itemSelected && state === 'edit') {
+      setState('view')
+      setItemSelected(menuItem);
+    }
+
   }
 
  

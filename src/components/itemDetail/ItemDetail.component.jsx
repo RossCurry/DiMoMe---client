@@ -34,7 +34,8 @@ function ItemDetail({ itemSelected, editMenuItem, setToggleState, setState }) {
 
   // states
 
-  const [ product, setProduct ] = useState(itemSelected ? itemSelected : initialState)
+  // const [ product, setProduct ] = useState(itemSelected ? itemSelected : initialState)
+  const [ product, setProduct ] = useState(initialState)
 
   const [ allergensList, setAllergensList ] = useState(allergensInit);
 
@@ -178,7 +179,7 @@ function ItemDetail({ itemSelected, editMenuItem, setToggleState, setState }) {
                   <div className="item-photo">
                   
                     <img 
-                      src={previewImageFile || itemSelected ? previewImageFile || itemSelected.imageUrl : cameraIcon} 
+                      src={previewImageFile ? previewImageFile  : cameraIcon} 
                       alt="upload icon" 
                       className={cameraIcon ? "image-upload-icon" : "image-upload-file" }
                     />

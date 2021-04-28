@@ -33,7 +33,7 @@ function Navbar(props) {
       </Link>
 
       <div className="login">
-          <p>{!currentUser ? "Already have an account?" : `${currentUser.localName} ${currentUser.localType} `}</p>
+          <p>{!currentUser ? "Already have an account?" : ``}</p>
         <Link to={currentUser ? '/login' : '/login'}>
             <p>{currentUser ?  "Log out" : 'Log in'}</p>
         </Link>

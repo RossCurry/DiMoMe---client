@@ -106,10 +106,8 @@ function MenuItem({
                 onChange={handleInput}
               />
             </form>
+            
             <div className="menu-item-list">
-              {/*}
-              //TODO insert selected category name
-      */}
               <h2 className="label-title">{selectedCategory ? selectedCategory.categoryName : 'Select a category'}</h2>
               {menuItemNames}
             </div>

@@ -1,12 +1,15 @@
 @import '../../styles/varibles.styles.scss';
 
 .category-card {
+  display: flex;
+  align-items: center;
   background-color: $brandYellow;
   padding: .5em 2em;
   margin: .5rem 1rem;
   text-align: center;
   font-size: 2rem;
-  font-weight: 400;
+  font-weight: 500;
+  font-family: $fontLogo;
   color: white;
   border: 3px solid $brandYellow;
   transition: 
@@ -21,5 +24,6 @@
 }
 
 .border-select {
-  border: 3px solid $brandOrange;
+  border: 10px solid $brandOrange;
+  box-shadow: 0 0 10px 0 rgb(148, 85, 2);
 }
