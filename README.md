@@ -1,70 +1,56 @@
-# Getting Started with Create React App
+Git hub readme - client
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**DiMoMe**
 
-## Available Scripts
+![dimome - logo - orange](/Users/rosscurry/Documents/CODING & LEARNING/CODEWORKS/SENIOR PROGRAM/CAREER WEEK/PNG/dimome - logo - orange.png)
 
-In the project directory, you can run:
+DiMoMe (digital mobile menu)  is a web app designed for any restaurant, bar or coffeeshop owners. The app aims to be a platform that provides easy access for customers to view digital menus in a comfortable to use format, readable on mobile devices, even allowing customers to filter products for allergens.
 
-### `yarn start`
+Since 2016 the EU has made it a requirement for any eatery to provide information on allergens and intolerances, not just on the request of the customer. DiMoMe provides an useful solution to this problem, as well as taking into account the effects of Covid-19 in the sector, like not sharing menus. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Furthermore the use of DiMoMe will lead to savings in menu print costs. It's a win for customers and restauranteurs alike.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+**screenshot**
 
-### `yarn test`
+![dimome-mock](/Users/rosscurry/Documents/CODING & LEARNING/CODEWORKS/SENIOR PROGRAM/CAREER WEEK/PNG/dimome-mock.jpg)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**Getting started - dependencies, versions**
 
-### `yarn build`
+NodeJS v15 or greater npm v7.5 or greater.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Cloudinary was used for the image handling. You will need to setup an account. Checkout the server repo for more info on how to get that up and running. The backend repo is available [here](https://github.com/RossCurry/DiMoMe---Server)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**Built with**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+DiMoMe has been built with:
 
-### `yarn eject`
+[React](https://reactjs.org/): View components have all been made with react v17
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+[Redux](https://redux.js.org/): User state was handled by redux v7. Redux Toolkit was not used.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+[SCSS](https://sass-lang.com/): No frameworks were used in the making of this web app, just good old SCSS.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+**Installation - steps to install**
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Important: make sure to have the server repo installed and running first. Available [here](https://github.com/RossCurry/DiMoMe---Server).
 
-## Learn More
+To get things going on the client. 
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Clone this repo: https://github.com/RossCurry/DiMoMe---client.git
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Once cloned in your local repo folder, install all dependencies:
 
-### Code Splitting
+`npm i`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Make sure to have the server repo setup first. Then start the react app:
 
-### Analyzing the Bundle Size
+`npm start`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Thats it! Enjoy
 
-### Making a Progressive Web App
+**Author - name and links to linkedin**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Created by your truly, Ross Curry. 
+If you want to get in touch, try me on: 
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**LinkedIn**: [Ross Curry](https://www.linkedin.com/in/ross-curry-7a79a741/) 
