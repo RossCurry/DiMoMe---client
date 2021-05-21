@@ -1,6 +1,6 @@
 Git hub readme - client
 
-**DiMoMe**
+# **DiMoMe**
 
 ![dimome - logo - orange](https://i.imgur.com/oGfJKGS.png)
 
@@ -11,17 +11,17 @@ Since 2016 the EU has made it a requirement for any eatery to provide informatio
 
 Furthermore the use of DiMoMe will lead to savings in menu print costs. It's a win for customers and restauranteurs alike.
 
-**screenshot**
+### **screenshot**
 
 ![dimome-mock](https://i.imgur.com/vsrkH0u.jpg)
 
-**Getting started - dependencies, versions**
+### **Getting started - dependencies, versions**
 
 NodeJS v15 or greater npm v7.5 or greater.
 
 Cloudinary was used for the image handling. You will need to setup an account. Checkout the server repo for more info on how to get that up and running. The backend repo is available [here](https://github.com/RossCurry/DiMoMe---Server)
 
-**Built with**
+### **Built with**
 
 DiMoMe has been built with:
 
@@ -31,7 +31,7 @@ DiMoMe has been built with:
 
 [SCSS](https://sass-lang.com/): No frameworks were used in the making of this web app, just good old SCSS.
 
-**Installation - steps to install**
+### **Installation - steps to install**
 
 Important: make sure to have the server repo installed and running first. Available [here](https://github.com/RossCurry/DiMoMe---Server).
 
@@ -49,7 +49,7 @@ Make sure to have the server repo setup first. Then start the react app:
 
 Thats it! Enjoy
 
-**Author - name and links to linkedin**
+### **Author - name and links to linkedin**
 
 Created by your truly, Ross Curry. 
 If you want to get in touch, try me on: 
