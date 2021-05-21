@@ -2,7 +2,8 @@ Git hub readme - client
 
 **DiMoMe**
 
-![dimome - logo - orange](/Users/rosscurry/Documents/CODING & LEARNING/CODEWORKS/SENIOR PROGRAM/CAREER WEEK/PNG/dimome - logo - orange.png)
+![dimome - logo - orange](https://i.imgur.com/oGfJKGS.png)
+
 
 DiMoMe (digital mobile menu)  is a web app designed for any restaurant, bar or coffeeshop owners. The app aims to be a platform that provides easy access for customers to view digital menus in a comfortable to use format, readable on mobile devices, even allowing customers to filter products for allergens.
 
@@ -12,7 +13,7 @@ Furthermore the use of DiMoMe will lead to savings in menu print costs. It's a w
 
 **screenshot**
 
-![dimome-mock](/Users/rosscurry/Documents/CODING & LEARNING/CODEWORKS/SENIOR PROGRAM/CAREER WEEK/PNG/dimome-mock.jpg)
+![dimome-mock](https://i.imgur.com/vsrkH0u.jpg)
 
 **Getting started - dependencies, versions**
 
