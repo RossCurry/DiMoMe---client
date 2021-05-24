@@ -15,7 +15,6 @@
   
     .row-1-item-detail{
       display: flex;
-      // height: 30%;
       margin-bottom: 2rem;
       .col-top-left-item-detail {
         display: flex;
@@ -42,14 +41,10 @@
           //TODO fix this conditional class
           .image-upload-icon{
               width: 100%;
-              // height: 30%;
-              
             }
             .image-upload-file {
               
               width: 100%;
-              // height: 100%;
-            
           }
         }
       }

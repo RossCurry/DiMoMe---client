@@ -1,8 +1,5 @@
 import './App.scss';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-// import Background from './assets/BG_imgs/emy-XoByiBymX20-unsplash.jpg'
-
-// COMPONENTS
 import Dashboard from './containers/dashboard/Dashboard.container'
 import Navbar from "./components/navBar/Navbar.component";
 import Home from './components/home/Home.container'
@@ -15,7 +12,6 @@ import EditMenu from './containers/editMenu/EditMenu.container'
 function App() {
   return (
     <div >
-      {/* <img src={Background} /> */}
       <Dashboard />
       <Router>
         <Navbar />

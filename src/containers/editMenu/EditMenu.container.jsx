@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import './EditMenu.styles.scss';
-
-// API Services
 import { 
   newCategoryDB, 
   newMenuItemDB, 
@@ -10,20 +8,9 @@ import {
   fetchAllCategoriesByUserId, 
   fetchAllMenuItemsByUserId 
 } from '../../ApiService';
-
-//COMPONENTS
-import Category from '../../components/categories/Category.component'
 import MenuItem from '../../components/menuItem/MenuItem.component'
-import ItemDetail from '../../components/itemDetail/ItemDetail.component'
-
-
 
 function EditMenu(props) {
-
-
-  
-
-
   // get user details to insert into category
   const currentUser = useSelector(state => state.currentUser.user)
   
@@ -45,7 +32,6 @@ function EditMenu(props) {
   // state to change edit/view of item
   const [ state, setState ] = useState('select');
 
-
 //TODO try to figure out how to re-render
   const handleSelected = (category) => {
     category.selected = !category.selected;
@@ -60,7 +46,6 @@ function EditMenu(props) {
 
   //send menu item to menu detail comp. & toggle views
   const handleMenuItem = (menuItem) => {
-
     if (menuItem !== itemSelected) {
       setState('view')
       setItemSelected(menuItem);
@@ -71,7 +56,6 @@ function EditMenu(props) {
       setState('view')
       setItemSelected(menuItem);
     }
-
   }
 
   ///////////////
@@ -85,13 +69,11 @@ function EditMenu(props) {
       categoryName: newCategory,
       userId: currentUser._id 
     };
-
     //Category Object from DB
     const storedCategory = await newCategoryDB(categoryObj);
     const currentList = [...categoryList]
     currentList.push(storedCategory)
     setCategoryList(currentList);
-
     //TODO use dispatch to send to redux store
   }
  
@@ -116,7 +98,6 @@ function EditMenu(props) {
   const editMenuItem = async (menuItem) => {
     const editedItem = await editMenuItemDB(menuItem);
     setItemSavedForDisplay(editedItem)
-
   };
 
   const fetchAllCategories = async () => {

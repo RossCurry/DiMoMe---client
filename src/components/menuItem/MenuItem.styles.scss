@@ -1,19 +1,11 @@
 @import '../../styles/varibles.styles.scss';
 
 .menu-item-container {
-  // @include cardBorders;
-  // display: flex;
-  // flex-direction: column;
   width: 100%;
   max-height: 90vh;
-  // max-width: 33%;
-  // height: 50%;
   margin: 0 auto;
   margin-top: 2rem;
   .row-1 {
-    // .label-title{
-    //   @include labelTitle
-    // }
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -54,7 +46,6 @@
       width: 30%;
       label {
         @include formLabelStyles;
-        // padding: .5em 2em;
         margin: 0 auto;
         color: $brandOrange;
       }

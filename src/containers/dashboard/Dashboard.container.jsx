@@ -1,18 +1,12 @@
 import React from 'react';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import './Dashboard.styles.scss';
-
-import Home from '../../components/home/Home.container'
 
 function Dashboard(props) {
   return (
     <Router>
       <Switch>
-        
         <div className="dashboard">
-        
-        {/* <h2>Dashboard</h2> */}
-        {/* <Home /> */}
         </div>
       </Switch>
     </Router>

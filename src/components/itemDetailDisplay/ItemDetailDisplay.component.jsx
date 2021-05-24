@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { CloudinaryContext, Image } from 'cloudinary-react'
 import './itemDetailDisplay.styles.scss'
 
-
 function ItemDetailDisplay({itemSavedForDisplay, setToggleState, itemSelected, setState}) {
-
 useEffect( () => {
   renderDisplayOnSelect()
 }, [itemSelected])
@@ -28,16 +26,13 @@ useEffect( () => {
                 <p>{itemSavedForDisplay.description}</p>
               </div>
               <div className="allergen-price">
-
                 <div>
                   <h3>{itemSavedForDisplay.allergyContent.length > 0 ? 'Allergen types:' : ''}</h3>
                   {itemSavedForDisplay.allergyContent.map(allergy => <p key={allergy.name}>{allergy.name}</p>)}
                 </div>
-
                 <div>
                   <h2>€{itemSavedForDisplay.itemPrice}</h2>
                 </div>
-
               </div>
               <button
                 onClick={() => setState('edit')}
@@ -50,7 +45,6 @@ useEffect( () => {
       </div>
     )
   }
-
 
   const renderDisplayOnSelect = () => {
     return (

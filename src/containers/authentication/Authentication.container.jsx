@@ -58,7 +58,6 @@ function Authentication({ subscribe }) {
   }
 
   const validateRegister = () => {
-
     if (subscribe) {
       return (
         !registry.email || !registry.emailConfirm || !registry.password || !registry.name || !registry.localName

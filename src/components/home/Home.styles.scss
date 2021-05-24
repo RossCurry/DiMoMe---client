@@ -5,7 +5,6 @@
   width: 100vw;
   margin-top: 3rem;
   
-  
   .hero-card {
     @include center;
     margin: 0 auto;
@@ -14,13 +13,6 @@
     min-height: 30vh;
     box-shadow: $darkShadow;
     border-radius: 12px;
-    // transition: transform 300ms ease-in-out;
-    // &:hover {
-    //   transform: scale(.98)
-    // }
-    // background-color: chocolate;
-    
-    
     .hero-text {
       width: 50%;
       height: 100%;
@@ -53,13 +45,11 @@
     
     
     .hero-img {
-      // @include center;
       width: 50%;
       height: 100%;
       border-radius: 0 12px 12px 0;
       display: flex;
       justify-content: center;
-      
       background: 
         linear-gradient($brandOrangeTrans, $brandYellowTrans),
           url('../../assets/BG_imgs/emy-XoByiBymX20-unsplash.jpg');
@@ -78,7 +68,6 @@
         margin: 2rem 0;
         padding: 1em;
       }
-      
     }
   }
 }

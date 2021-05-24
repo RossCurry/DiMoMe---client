@@ -1,12 +1,9 @@
 @import '../../styles/varibles.styles.scss';
 
 .edit-menu-container {
-  // display: grid;
-  // grid-template-columns: repeat(2,1fr) 1.5fr; 
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   width: 86%;
-  // background-color: bisque;
   margin: 0 auto;
 }

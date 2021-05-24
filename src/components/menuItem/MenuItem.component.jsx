@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './MenuItem.styles.scss'
-
-//COMPONENTS
 import Category from '../categories/Category.component'
 import CategoryItem from '../catergoryItem/CategoryItem.componet';
 import ItemDetail from '../itemDetail/ItemDetail.component'
@@ -25,12 +23,7 @@ function MenuItem({
   setState }) 
   {
 
-  // states
-  //user input on menu item form
   const [text, setText] = useState('');
-  
-  
-
   const [ selectItem , setSelectItem ] = useState(null);
 
   const handleInput = (e) => {
@@ -42,13 +35,10 @@ function MenuItem({
     e.preventDefault();
     if (!text) return;
     //TODO database insertion here
-    // validation of some sort
     //TODO send to edit menu page
     addMenuItem(text)
     setText('');
   }
-
-
 
   const categoryNames = categoryList.map( category => (
     //TODO toggle selected category in the array
@@ -57,8 +47,6 @@ function MenuItem({
   )
 
  const menuItemNames = menuItemList.map( item => {
-
-  // IF MENU ITEM HAS THE SAME CATEGORY ID AS THE SELECTED ONE THEN MAP
       if (item.categoryId === selectedCategory._id){
       return (<div 
         key={item._id}
@@ -71,13 +59,9 @@ function MenuItem({
 
  });
 
- 
-
-
   return (
     <React.Fragment>
       <div className="menu-item-container">
-
         <div className="row-1">
         <Category addNewCategory={addNewCategory} className="col-1" />
           <div className="category-list">
@@ -85,7 +69,6 @@ function MenuItem({
           </div>
         </div>
         <div className="row-2">
-
           <div className="col-1">
               <label for="menuItemInput">
                 Add a new item
@@ -106,15 +89,12 @@ function MenuItem({
                 onChange={handleInput}
               />
             </form>
-            
             <div className="menu-item-list">
               <h2 className="label-title">{selectedCategory ? selectedCategory.categoryName : 'Select a category'}</h2>
               {menuItemNames}
             </div>
           </div>
-
           <div className="col-2">
-            {/* {toggleState && itemSavedForDisplay */}
             {state === 'view' && 
             (<ItemDetailDisplay 
               itemSavedForDisplay={itemSavedForDisplay}
@@ -130,9 +110,7 @@ function MenuItem({
             {state === 'select' && (
             <SelectItem />
             )}
-           
           </div>
-
         </div>
       </div>
     </React.Fragment>

@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import cameraIcon from '../../assets/svg/camera.svg'
-import {Image, Video, Transformation, CloudinaryContext} from 'cloudinary-react';
 import './ItemDetail.styles.scss'
 
 function ItemDetail({ itemSelected, editMenuItem, setToggleState, setState }) {
-
   const initialState = {
     itemName: '',
     _id: '',
@@ -13,7 +11,6 @@ function ItemDetail({ itemSelected, editMenuItem, setToggleState, setState }) {
     allergyContent: [],
     dietaryContent: []
   }
-  
   const allergensInit = [
     {name: 'Cereals', checked:false}, 
     {name: 'Crustaceans', checked:false}, 
@@ -30,7 +27,6 @@ function ItemDetail({ itemSelected, editMenuItem, setToggleState, setState }) {
     {name: 'Lupin', checked:false}, 
     {name: 'Molluscs', checked:false}, 
   ]
-
   const [ product, setProduct ] = useState(initialState)
   const [ allergensList, setAllergensList ] = useState(allergensInit);
   const [ previewImageFile, setPreviewImageFile ] = useState(null);
@@ -41,7 +37,6 @@ function ItemDetail({ itemSelected, editMenuItem, setToggleState, setState }) {
     return (
       <div className="item-detail-container">
         <h2 className="section-title">No item selected yet</h2>
-        
       </div>
     )
   }
@@ -74,7 +69,6 @@ function ItemDetail({ itemSelected, editMenuItem, setToggleState, setState }) {
       }
     });
     setAllergensList(newState);
-    
   };
 
   const handleChangeImage = async (e) => {
@@ -87,7 +81,6 @@ function ItemDetail({ itemSelected, editMenuItem, setToggleState, setState }) {
         setPreviewImageFile(reader.result);
       }
     }
-
   };
 
   const handleSubmit = (e) => {
@@ -132,11 +125,8 @@ function ItemDetail({ itemSelected, editMenuItem, setToggleState, setState }) {
     }
    }
 
-
-  //COMPONENT VIEW
   const editMenuItemView = () => {
     return (
-      // left side
       <React.Fragment>
         <form onSubmit={handleSubmit}>
           <div className="item-detail-sub-container">
@@ -217,17 +207,11 @@ function ItemDetail({ itemSelected, editMenuItem, setToggleState, setState }) {
                         <br />
                       </div>
                     )
-            
                   })}
-                
                 </div>
                 <input type="submit" value="Save details" />
               </div>
             </div>
-         
-            
-              
-
           </div>
         </form>
       </React.Fragment>

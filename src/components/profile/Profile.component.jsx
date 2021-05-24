@@ -6,33 +6,28 @@ import editUser from '../../assets/svg/edit_user.svg'
 import { useSelector } from 'react-redux';
 
 function Profile(props) {
-  const currentUser = useSelector(state => state.currentUser.user)
+  const currentUser = useSelector(state => state.currentUser.user);
+
   return (
     <div className="profile-page">
-      
       <div className="profile-msg">
         <h2>Hi {currentUser.name}!</h2>
         <p>What would you like to do today?</p>
       </div>
-
       <div className="profile-options-container">
-        
         <Link to={`/editProfile/${currentUser._id}`}>
           <div className="profile-card">
             <h2>Edit Profile</h2>
             <img src={ editUser} alt="Edit currentUser profile icon" />
           </div>
         </Link>
-        
         <Link to={`/editMenu/${currentUser._id}/${currentUser.localName}`}>
           <div className="profile-card">
             <h2>Edit {currentUser.localName}</h2>
             <img src={editLocal } alt="Edit user local icon" />
           </div>
         </Link>
-
       </div>
-
     </div>
   );
 }

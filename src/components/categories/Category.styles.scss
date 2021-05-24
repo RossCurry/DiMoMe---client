@@ -1,21 +1,13 @@
 @import '../../styles/varibles.styles.scss';
 
 .category-container {
-  // @include cardBorders;
-  // max-width: 33%;
-  // height: 50%;
-  // width: 30%;
   margin: 0 01rem 0 2rem;
-  // margin-top: 3rem;
   .local-title{
-    // margin: 1rem .5rem;
     h1,
     p {
       margin: 0 0 .5rem 0;
       color: $brandOrange;
     }
-    
-    
   } 
   label {
     @include formLabelStyles;
@@ -43,9 +35,6 @@
       text-align: center;
       margin: .5rem 0;
       border-radius: $inputBorderRad 0 0 $inputBorderRad;
-      // padding-right: .5em;
     }
   }
-
-  
 }

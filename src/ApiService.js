@@ -1,6 +1,5 @@
 const BASE_URL = "http://localhost:3005"
 
-
 async function registerNewUser(newUser) {
   const sendBody = JSON.stringify(newUser);
   const USER_PATH = '/user/subscribe'
@@ -29,8 +28,6 @@ async function loginUser(userLogin) {
     .catch((err) => console.log(err));
 }
   
-
-
 const newCategoryDB = async (newCategory) => {
   const CATEGORY_PATH = '/category';
   return await fetch(BASE_URL + CATEGORY_PATH, {
@@ -43,7 +40,6 @@ const newCategoryDB = async (newCategory) => {
     .then((res) => res.json())
     .then(data => data)
     .catch((err) => console.log(err));
-
 };
 
 const newMenuItemDB = async (newMenuItem) => {
@@ -74,7 +70,6 @@ const editMenuItemDB = async (menuItem) => {
     .then((res) => res.json())
     .then(data => data)
     .catch((err) => console.log(err));
-
 };
 
 const fetchAllCategoriesByUserId = async (userId) => {
@@ -88,7 +83,6 @@ const fetchAllCategoriesByUserId = async (userId) => {
     .then((res) => res.json())
     .then(data => data)
     .catch((err) => console.log(err));
-
 };
 
 const fetchAllMenuItemsByUserId = async (userId) => {
