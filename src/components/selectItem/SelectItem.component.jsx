@@ -1,5 +1,5 @@
 import React from 'react';
-import './SelectItem.styles.scss'
+import './SelectItem.styles.scss';
 
 function SelectItem(props) {
   return (

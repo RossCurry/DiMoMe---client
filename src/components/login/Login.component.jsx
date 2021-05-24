@@ -1,5 +1,5 @@
 import React from 'react';
-import Authentication from '../../containers/authentication/Authentication.container'
+import Authentication from '../../containers/authentication/Authentication.container';
 
 function Login({ match }) {
   

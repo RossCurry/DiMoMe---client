@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
 import './MenuItem.styles.scss'
 import Category from '../categories/Category.component'
 import CategoryItem from '../catergoryItem/CategoryItem.componet';
@@ -24,7 +23,6 @@ function MenuItem({
   {
 
   const [text, setText] = useState('');
-  const [ selectItem , setSelectItem ] = useState(null);
 
   const handleInput = (e) => {
     const textInput = e.target.value;

@@ -30,7 +30,6 @@ function ItemDetail({ itemSelected, editMenuItem, setToggleState, setState }) {
   const [ product, setProduct ] = useState(initialState)
   const [ allergensList, setAllergensList ] = useState(allergensInit);
   const [ previewImageFile, setPreviewImageFile ] = useState(null);
-  const [ imageForCloud, setImageForCloud ] = useState(null);
 
   //TODO change default to include the layout of the edit item
   const defaultDisplay = () => {
@@ -59,7 +58,6 @@ function ItemDetail({ itemSelected, editMenuItem, setToggleState, setState }) {
   
   const handleChecked = (e) => {
     const { value } = e.target;
-    const { checked } = e.target;
     const newState = allergensList.map( item => {
       if (item.name === value) {
         item.checked = !item.checked;

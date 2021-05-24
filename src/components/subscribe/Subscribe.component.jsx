@@ -1,6 +1,6 @@
 import React from 'react';
-import './Subscribe.styles.scss'
-import Authentication from '../../containers/authentication/Authentication.container'
+import './Subscribe.styles.scss';
+import Authentication from '../../containers/authentication/Authentication.container';
 
 function subscribe({ match }) {
 

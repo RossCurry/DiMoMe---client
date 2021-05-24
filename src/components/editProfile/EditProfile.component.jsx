@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import './EditProfile.styles.scss'
 
-function EditProfile(props) {
+function EditProfile() {
   const currentUser = useSelector(state => state.currentUser.user)
   return (
     <React.Fragment>

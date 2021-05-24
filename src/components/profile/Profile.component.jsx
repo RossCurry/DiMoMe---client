@@ -1,11 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import './Profile.styles.scss'
-import editLocal from '../../assets/svg/edit_local.svg'
-import editUser from '../../assets/svg/edit_user.svg'
+import './Profile.styles.scss';
+import editLocal from '../../assets/svg/edit_local.svg';
+import editUser from '../../assets/svg/edit_user.svg';
 import { useSelector } from 'react-redux';
 
-function Profile(props) {
+function Profile() {
   const currentUser = useSelector(state => state.currentUser.user);
 
   return (

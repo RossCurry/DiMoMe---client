@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './Home.styles.scss';
 import mobileqr from '../../assets/svg/mobileQR.svg'
 
-function Home(props) {
+function Home() {
   return (
     <div>
       <section className="home-section">

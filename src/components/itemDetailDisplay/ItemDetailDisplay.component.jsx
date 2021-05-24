@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { CloudinaryContext, Image } from 'cloudinary-react'
-import './itemDetailDisplay.styles.scss'
+import React, { useEffect } from 'react';
+import './itemDetailDisplay.styles.scss';
 
 function ItemDetailDisplay({itemSavedForDisplay, setToggleState, itemSelected, setState}) {
 useEffect( () => {
@@ -85,12 +84,6 @@ useEffect( () => {
           </div>
         </div>
       </div>
-    )
-  }
-
-  const renderPageLoading = () => {
-    return (
-      <div><h1>Page Loading...one sec</h1></div>
     )
   }
 
