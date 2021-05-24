@@ -1,4 +1,5 @@
-const BASE_URL = "http://localhost:3005"
+const { REACT_APP_SV_URL, REACT_APP_SV_PORT } = process.env;
+const BASE_URL = `http://${REACT_APP_SV_URL}:${REACT_APP_SV_PORT}`;
 
 async function registerNewUser(newUser) {
   const sendBody = JSON.stringify(newUser);
