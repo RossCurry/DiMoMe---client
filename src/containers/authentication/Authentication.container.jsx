@@ -68,8 +68,6 @@ function Authentication({ subscribe }) {
     }
   };
 
-
-
   const base64 = (str) => {
     const regExp = /[^<>]+/g
     const cleanString = str.match(regExp);
@@ -118,7 +116,6 @@ function Authentication({ subscribe }) {
     )
   }
 
-
   const passwordInput = () => {
     return (
       <React.Fragment>
@@ -143,7 +140,6 @@ function Authentication({ subscribe }) {
     )
   }
 
-
   const nameInput = () => {
     return (
       <React.Fragment>
@@ -158,7 +154,6 @@ function Authentication({ subscribe }) {
       </React.Fragment>
     )
   }
-
 
   const localSelectorInput = () => {
     return (
@@ -179,7 +174,6 @@ function Authentication({ subscribe }) {
     )
   }
 
-
   const localNameInput = () => {
     return (
       <React.Fragment>
@@ -194,7 +188,6 @@ function Authentication({ subscribe }) {
       </React.Fragment>
     )
   }
-
 
   const submitButtonRegister = () => {
     return (
@@ -232,9 +225,6 @@ function Authentication({ subscribe }) {
     )
   }
 
-
-
-
   return (
     <div>
       <h1 className="subscribe-heading">{
@@ -253,8 +243,6 @@ function Authentication({ subscribe }) {
             ? 'Registerbelow with an email'
             : 'Login below with your email & password'}
         </h3>
-
-
         {subscribe ? emailInput() : emailInput()}
         {subscribe ? emailConfirm() : null}
         {subscribe ? passwordInput() : passwordInput()}
@@ -262,11 +250,7 @@ function Authentication({ subscribe }) {
         {subscribe ? localSelectorInput() : null}
         {subscribe ? localNameInput() : null}
         {subscribe ? submitButtonRegister() : submitButtonLogin()}
-
-
       </form>
-
-
     </div>
   );
 }

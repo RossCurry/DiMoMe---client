@@ -5,7 +5,6 @@ import './ItemDetail.styles.scss'
 
 function ItemDetail({ itemSelected, editMenuItem, setToggleState, setState }) {
 
-
   const initialState = {
     itemName: '',
     _id: '',
@@ -32,19 +31,10 @@ function ItemDetail({ itemSelected, editMenuItem, setToggleState, setState }) {
     {name: 'Molluscs', checked:false}, 
   ]
 
-  // states
-
-  // const [ product, setProduct ] = useState(itemSelected ? itemSelected : initialState)
   const [ product, setProduct ] = useState(initialState)
-
   const [ allergensList, setAllergensList ] = useState(allergensInit);
-
   const [ previewImageFile, setPreviewImageFile ] = useState(null);
-  
   const [ imageForCloud, setImageForCloud ] = useState(null);
-
-  
-
 
   //TODO change default to include the layout of the edit item
   const defaultDisplay = () => {
@@ -64,9 +54,6 @@ function ItemDetail({ itemSelected, editMenuItem, setToggleState, setState }) {
     )
   }
   
-
-
-
   const handleChange = (e) => {
     const { name, value } = e.target
     setProduct( prevState => ({
@@ -90,10 +77,8 @@ function ItemDetail({ itemSelected, editMenuItem, setToggleState, setState }) {
     
   };
 
-
   const handleChangeImage = async (e) => {
 
-    // TWO:get the image for preview
     if (e.target.files[0]) {
       const selectedImageFile = e.target.files[0];
       const reader = new FileReader(selectedImageFile)
@@ -107,17 +92,10 @@ function ItemDetail({ itemSelected, editMenuItem, setToggleState, setState }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    //TODO delele me - for testing submit
-    // console.log('submit button');
-    // console.log('product.description', product.description);
-    // console.log('product.price', product.itemPrice);
-    // console.log('previewImageFile', previewImageFile);
     if (!product.description || !product.itemPrice || !previewImageFile ){
-      console.log('mising description, price or image');
       return;
     } 
     //TODO pretty sure I'm not supposed to edit state like this.
-    // ADD NAME, ID and 
     product.itemName = itemSelected.itemName;
     product._id = itemSelected._id;
     product.allergyContent = allergensList.filter( allergen => allergen.checked === true );
@@ -133,13 +111,8 @@ function ItemDetail({ itemSelected, editMenuItem, setToggleState, setState }) {
     .then(() => editMenuItem(product))
     .catch((err) => console.log(err));
     //TODO call a function from edit menu component
-    //fetch image details, 
-    // then add to the menuItem
-    // save menu item
-    // editMenuItem(product);
     setAllergensList(allergensInit);
     setProduct(initialState);
-    //show detail component
     setState('view');
   }
 
@@ -173,7 +146,6 @@ function ItemDetail({ itemSelected, editMenuItem, setToggleState, setState }) {
               <div className="col-top-left-item-detail">
                 <h1>{itemSelected.itemName.toUpperCase()}</h1>
               </div>
-              {/* <div className="col-bottom-left-item-detail"> */}
                
               <div className="col-top-right-item-detail">
                   <div className="item-photo">
@@ -193,10 +165,6 @@ function ItemDetail({ itemSelected, editMenuItem, setToggleState, setState }) {
                       onChange={handleChangeImage}
                     />
 
-                    {/* <Image 
-                      cloudName='dimome'
-                      // public_id='https://res.cloudinary.com/dimome/image/upload/v1619437624/test-images/pip2ttqzeobbydfvcynt.jpg'
-                    /> */}
                   </div>
               </div>
               
@@ -266,8 +234,6 @@ function ItemDetail({ itemSelected, editMenuItem, setToggleState, setState }) {
     )
   }
 
-  
-// COMPONENT RENDER
   return (
     <React.Fragment>
      {itemSelected ? displaySelectedItem() : defaultDisplay()}

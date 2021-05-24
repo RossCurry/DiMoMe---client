@@ -5,17 +5,11 @@ import './itemDetailDisplay.styles.scss'
 
 function ItemDetailDisplay({itemSavedForDisplay, setToggleState, itemSelected, setState}) {
 
-  // const [ product, setProduct ] = useState(itemSelected ? itemSelected : null)
-
-console.log('itemSelected in item display: ', itemSelected);
-
 useEffect( () => {
-  console.log('call use effect');
   renderDisplayOnSelect()
 }, [itemSelected])
 
   const renderDisplayOnSave = () => {
-    console.log('display rendered');
     return (
       <div
         className="item-detail-display-container"
@@ -59,7 +53,6 @@ useEffect( () => {
 
 
   const renderDisplayOnSelect = () => {
-    console.log('display rendered');
     return (
       <div
         className="item-detail-display-container"
@@ -106,15 +99,6 @@ useEffect( () => {
       <div><h1>Page Loading...one sec</h1></div>
     )
   }
-
-  // const defaultDisplay = () => {
-  //   return (
-  //     <div className="item-detail-container">
-  //       <h2 className="section-title">No item selected yet</h2>
-        
-  //     </div>
-  //   )
-  // }
 
   return (
     <React.Fragment>

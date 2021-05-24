@@ -47,9 +47,7 @@ function EditMenu(props) {
 
 
 //TODO try to figure out how to re-render
-  // indicates a selected item in category list
   const handleSelected = (category) => {
-    console.log('e.target', category);
     category.selected = !category.selected;
     const newList = categoryList.map( item => {
       if (item._id !== category._id )
@@ -57,7 +55,6 @@ function EditMenu(props) {
       return item;
     })
     setCategoryList(newList)
-    console.log('category.selected', category.selected);
     setSelectedCategory(category);
   }
 
@@ -77,8 +74,6 @@ function EditMenu(props) {
 
   }
 
- 
-
   ///////////////
   // API CALLS //
   ///////////////
@@ -93,22 +88,15 @@ function EditMenu(props) {
 
     //Category Object from DB
     const storedCategory = await newCategoryDB(categoryObj);
-    // console.log('storedCategory', storedCategory);
     const currentList = [...categoryList]
     currentList.push(storedCategory)
     setCategoryList(currentList);
 
     //TODO use dispatch to send to redux store
-    // would add DB category to the store
-    //dispatch(addCategory(storedCategory));
-    //setCategory(initialState);
   }
  
   //send to aPI
   const addMenuItem = async (newItem) => {
-
-    console.log('addMenuItem category', selectedCategory._id );
-
     const menuItemObj = {
       itemName: newItem,
       description: 'Write a small description of the product here...',
@@ -118,8 +106,6 @@ function EditMenu(props) {
       userId: currentUser._id,
       categoryId: selectedCategory._id
     }
-
-    console.log('menuItem to send to DB', menuItemObj);
     const storedMenuItem = await newMenuItemDB(menuItemObj);
     const currentList = [...menuItemList]
     currentList.push(storedMenuItem)
@@ -128,16 +114,12 @@ function EditMenu(props) {
 
   // send to API to Edit Item
   const editMenuItem = async (menuItem) => {
-    // console.log('editMenuItem', menuItem);
-    //SEND TO API
     const editedItem = await editMenuItemDB(menuItem);
-    console.log('editedItem', editedItem);
     setItemSavedForDisplay(editedItem)
 
   };
 
   const fetchAllCategories = async () => {
-    
     await fetchAllCategoriesByUserId(currentUser._id)
     .then(res =>  {
       setCategoryList(res);
@@ -149,21 +131,16 @@ function EditMenu(props) {
 
   const fetchAllMenuItems = async () => {
     const allMenuItems = await fetchAllMenuItemsByUserId(currentUser._id);
-    console.log('MenuItems fetched', allMenuItems);
     setMenuItemList(allMenuItems);
   }
 
   useEffect(()=>{
-    //fetchAllCategoriesWithUserID
-    //fetchAllMenuItemsWithUserID
     fetchAllCategories();
     fetchAllMenuItems();
   }, [])
 
   return (
     <div className="edit-menu-container">
-      {/* {console.log('selectedCategory in div', selectedCategory)} */}
-      {/* <Category addNewCategory={addNewCategory} /> */}
       <MenuItem 
         categoryList={categoryList}
         addNewCategory={addNewCategory}
@@ -179,7 +156,6 @@ function EditMenu(props) {
         state={state}
         setState={setState}
       />
-     
     </div>
   );
 }
