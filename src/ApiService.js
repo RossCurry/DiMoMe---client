@@ -1,7 +1,7 @@
 const { REACT_APP_SV_URL, REACT_APP_SV_PORT } = process.env;
 const BASE_URL = `http://${REACT_APP_SV_URL}:${REACT_APP_SV_PORT}`;
 
-async function registerNewUser(newUser) {
+export async function registerNewUser(newUser) {
   const sendBody = JSON.stringify(newUser);
   const USER_PATH = '/user/subscribe'
   return await fetch(BASE_URL + USER_PATH, {
@@ -15,7 +15,7 @@ async function registerNewUser(newUser) {
     .catch((err) => console.log(err));
 }
 
-async function loginUser(userLogin) {
+export async function loginUser(userLogin) {
   const sendBody = JSON.stringify(userLogin);
   const USER_PATH = '/user/login';
   return await fetch(BASE_URL + USER_PATH, {
@@ -29,7 +29,7 @@ async function loginUser(userLogin) {
     .catch((err) => console.log(err));
 }
   
-const newCategoryDB = async (newCategory) => {
+export const newCategoryDB = async (newCategory) => {
   const CATEGORY_PATH = '/category';
   return await fetch(BASE_URL + CATEGORY_PATH, {
     method: 'POST',
@@ -43,7 +43,7 @@ const newCategoryDB = async (newCategory) => {
     .catch((err) => console.log(err));
 };
 
-const newMenuItemDB = async (newMenuItem) => {
+export const newMenuItemDB = async (newMenuItem) => {
   const PRODUCT_PATH = '/item';
   return await fetch(BASE_URL + PRODUCT_PATH, {
     method: 'POST',
@@ -57,7 +57,7 @@ const newMenuItemDB = async (newMenuItem) => {
     .catch((err) => console.log(err));
 }
 
-const editMenuItemDB = async (menuItem) => {
+export const editMenuItemDB = async (menuItem) => {
   const { _id } = menuItem;
   // The ID might be unnecessary
   const PRODUCT_PATH = `/item/${_id}`;
@@ -73,7 +73,7 @@ const editMenuItemDB = async (menuItem) => {
     .catch((err) => console.log(err));
 };
 
-const fetchAllCategoriesByUserId = async (userId) => {
+export const fetchAllCategoriesByUserId = async (userId) => {
   const CATEGORY_PATH = `/categories/${userId}`;
   return await fetch(BASE_URL + CATEGORY_PATH, {
     method: 'GET',
@@ -86,7 +86,7 @@ const fetchAllCategoriesByUserId = async (userId) => {
     .catch((err) => console.log(err));
 };
 
-const fetchAllMenuItemsByUserId = async (userId) => {
+export const fetchAllMenuItemsByUserId = async (userId) => {
   const CATEGORY_PATH = `/items/${userId}`;
   return await fetch(BASE_URL + CATEGORY_PATH, {
     method: 'GET',
@@ -98,13 +98,3 @@ const fetchAllMenuItemsByUserId = async (userId) => {
     .then(data => data)
     .catch((err) => console.log(err));
 };
-
-module.exports = { 
-  registerNewUser, 
-  loginUser, 
-  newCategoryDB, 
-  newMenuItemDB,
-  editMenuItemDB,
-  fetchAllCategoriesByUserId,
-  fetchAllMenuItemsByUserId
- }
