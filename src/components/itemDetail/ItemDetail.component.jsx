@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import cameraIcon from '../../assets/svg/camera.svg'
+import cameraIcon from '../../assets/svg/camera.svg';
+import { BASE_URL } from '../../ApiService';
 import './ItemDetail.styles.scss'
 
 function ItemDetail({ itemSelected, editMenuItem, setToggleState, setState }) {
@@ -108,7 +109,7 @@ function ItemDetail({ itemSelected, editMenuItem, setToggleState, setState }) {
   }
 
    const uploadImage = async (image) => {
-    const BASE_URL = "http://localhost:3005"
+    // const BASE_URL = "http://localhost:3005"
     const API_PATH = '/image/upload'
     try {
       return await fetch(BASE_URL+API_PATH, {

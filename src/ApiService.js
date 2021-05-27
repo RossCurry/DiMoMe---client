@@ -1,6 +1,7 @@
 // const { REACT_APP_SV_URL, REACT_APP_SV_PORT } = process.env;
 // const BASE_URL = `http://${REACT_APP_SV_URL}:${REACT_APP_SV_PORT}`;
-const BASE_URL = `https://dimome-server-v1.herokuapp.com`;
+// TODO adapt ENV variables to match server address.
+export const BASE_URL = `https://dimome-server-v1.herokuapp.com`;
 
 export async function registerNewUser(newUser) {
   const sendBody = JSON.stringify(newUser);
