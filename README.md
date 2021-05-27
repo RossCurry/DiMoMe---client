@@ -11,6 +11,8 @@ Since 2016 the EU has made it a requirement for any eatery to provide informatio
 
 Furthermore the use of DiMoMe will lead to savings in menu print costs. It's a win for customers and restauranteurs alike.
 
+You can check out the site on [heroku](https://dimome-v1.herokuapp.com/)
+
 ### **screenshot**
 
 ![dimome-mock](https://i.imgur.com/vsrkH0u.jpg)
