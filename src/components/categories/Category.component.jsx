@@ -47,7 +47,7 @@ function Category({ addNewCategory }) {
   };
       
 
-  return (
+    return (
     <div className="category-container">
       <div className="local-title">
         {currentUser ? userGreetingMessage() : defaultGreeting()}
