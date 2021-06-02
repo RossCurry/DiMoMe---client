@@ -7,45 +7,56 @@
         "plugin:react/recommended",
         "airbnb",
         "plugin:@typescript-eslint/recommended",
-        "plugin:prettier/recommended"
+        "plugin:prettier/recommended",
+        "plugin:import/errors",
+        "plugin:import/warnings",
+        "plugin:import/typescript"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
         },
-        "ecmaVersion": 12,
+        "ecmaVersion": 11,
         "sourceType": "module"
     },
     "plugins": ["react", "@typescript-eslint", "react-hooks"],
     "settings": {
         "import/resolver": {
+          "node": {
+            "extensions": [".js", ".jsx", ".ts", ".tsx"],
+            "moduleDirectory": ["node_modules", "src/"]
+          },
           "typescript": {}
+        },
+        "react": {
+          "pragma": "React",
+          "version": "detect"
         }
       },
     "rules": {
-        "no-use-before-define": "off",
-    "@typescript-eslint/no-use-before-define": ["error"],
-    "react/jsx-filename-extension": ["warn", { "extensions": [".tsx"] }],
-    "import/extensions": [
-      "error",
-      "ignorePackages",
-      {
-        "ts": "never",
-        "tsx": "never"
-      }
-    ],
-    "no-shadow": "off",
-    "@typescript-eslint/no-shadow": ["error"],
-    "@typescript-eslint/explicit-function-return-type": [
-      "error",
-      {
-        "allowExpressions": true
-      }
-    ],
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
-    "import/prefer-default-export": "off",
-    "react/prop-types": "off"
+      "no-use-before-define": "off",
+      "@typescript-eslint/no-use-before-define": ["error"],
+      "react/jsx-filename-extension": ["warn", { "extensions": [".tsx", "jsx"] }],
+      "import/extensions": [
+          "error",
+          "ignorePackages",
+          {
+            "ts": "never",
+            "tsx": "never"
+          }
+        ],
+      "no-shadow": "off",
+      "@typescript-eslint/no-shadow": ["error"],
+      "@typescript-eslint/explicit-function-return-type": [
+          "error",
+        {
+          "allowExpressions": true
+        }
+      ],
+     "react-hooks/rules-of-hooks": "error",
+     "react-hooks/exhaustive-deps": "warn",
+     "import/prefer-default-export": "off",
+     "react/prop-types": "off"
     }
 }
