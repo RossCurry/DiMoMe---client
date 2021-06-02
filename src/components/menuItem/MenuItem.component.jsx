@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import './MenuItem.styles.scss'
-import Category from '../categories/Category.component'
+import './MenuItem.styles.scss';
+import Category from '../categories/Category.component';
 import CategoryItem from '../catergoryItem/CategoryItem.componet';
-import ItemDetail from '../itemDetail/ItemDetail.component'
-import ItemDetailDisplay from '../itemDetailDisplay/ItemDetailDisplay.component'
-import SelectItem from '../selectItem/SelectItem.component'
+import ItemDetail from '../itemDetail/ItemDetail.component';
+import ItemDetailDisplay from '../itemDetailDisplay/ItemDetailDisplay.component';
+import SelectItem from '../selectItem/SelectItem.component';
 
 
 function MenuItem({ 
