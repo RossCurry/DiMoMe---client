@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@reduxjs/toolkit": "^1.5.1",
     "@types/react-router-dom": "^5.1.7",
     "cloudinary-react": "^1.7.0",
     "node-sass": "^5.0.0",
