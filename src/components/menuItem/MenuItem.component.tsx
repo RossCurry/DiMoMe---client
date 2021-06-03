@@ -6,78 +6,71 @@ import ItemDetail from '../itemDetail/ItemDetail.component';
 import ItemDetailDisplay from '../itemDetailDisplay/ItemDetailDisplay.component';
 import SelectItem from '../selectItem/SelectItem.component';
 
-
-function MenuItem({ 
+function MenuItem({
   addNewCategory,
-  categoryList, 
-  addMenuItem, 
-  menuItemList, 
-  handleSelected, 
+  categoryList,
+  addMenuItem,
+  menuItemList,
+  handleSelected,
   handleMenuItem,
   itemSelected,
   editMenuItem,
   itemSavedForDisplay,
   selectedCategory,
   state,
-  setState }) 
-  {
-
+  setState,
+}) {
   const [text, setText] = useState('');
 
   const handleInput = (e) => {
     const textInput = e.target.value;
     setText(textInput);
-  }
-  
-  const handleSubmit = (e) =>  {
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (!text) return;
     //TODO database insertion here
     //TODO send to edit menu page
-    addMenuItem(text)
+    addMenuItem(text);
     setText('');
-  }
+  };
 
-  const categoryNames = categoryList.map( category => (
+  const categoryNames = categoryList.map((category) => (
     //TODO toggle selected category in the array
-      <CategoryItem key={category._id} category={category} handleSelected={handleSelected}/>
-    )
-  )
+    <CategoryItem
+      key={category._id}
+      category={category}
+      handleSelected={handleSelected}
+    />
+  ));
 
- const menuItemNames = menuItemList.map( item => {
-      if (item.categoryId === selectedCategory._id){
-      return (<div 
-        key={item._id}
-        className="menu-item-label"
-        onClick={() => handleMenuItem(item)}
-      >
-        {item.itemName}
-      </div>)
-      } 
-
- });
+  const menuItemNames = menuItemList.map((item) => {
+    if (item.categoryId === selectedCategory._id) {
+      return (
+        <div
+          key={item._id}
+          className="menu-item-label"
+          onClick={() => handleMenuItem(item)}
+        >
+          {item.itemName}
+        </div>
+      );
+    }
+  });
 
   return (
     <React.Fragment>
       <div className="menu-item-container">
         <div className="row-1">
-        <Category addNewCategory={addNewCategory} className="col-1" />
-          <div className="category-list">
-            {categoryNames}
-          </div>
+          <Category addNewCategory={addNewCategory} className="col-1" />
+          <div className="category-list">{categoryNames}</div>
         </div>
         <div className="row-2">
           <div className="col-1">
-              <label for="menuItemInput">
-                Add a new item
-              </label>
-            <form
-              onSubmit={handleSubmit}
-              className="menu-item-form">
-                <input
-                  type="submit"
-                  value="+"
-                />
+            <label for="menuItemInput">Add a new item</label>
+            <form onSubmit={handleSubmit} className="menu-item-form">
+              <input type="submit" value="+" />
               <input
                 type="text"
                 name="menuItemInput"
@@ -88,26 +81,30 @@ function MenuItem({
               />
             </form>
             <div className="menu-item-list">
-              <h2 className="label-title">{selectedCategory ? selectedCategory.categoryName : 'Select a category'}</h2>
+              <h2 className="label-title">
+                {selectedCategory
+                  ? selectedCategory.categoryName
+                  : 'Select a category'}
+              </h2>
               {menuItemNames}
             </div>
           </div>
           <div className="col-2">
-            {state === 'view' && 
-            (<ItemDetailDisplay 
-              itemSavedForDisplay={itemSavedForDisplay}
-              itemSelected={itemSelected}
-              setState={setState}/>
+            {state === 'view' && (
+              <ItemDetailDisplay
+                itemSavedForDisplay={itemSavedForDisplay}
+                itemSelected={itemSelected}
+                setState={setState}
+              />
             )}
-            {state === 'edit' && 
-            (<ItemDetail
-            itemSelected={itemSelected}
-            editMenuItem={editMenuItem}
-            setState={setState}/>
+            {state === 'edit' && (
+              <ItemDetail
+                itemSelected={itemSelected}
+                editMenuItem={editMenuItem}
+                setState={setState}
+              />
             )}
-            {state === 'select' && (
-            <SelectItem />
-            )}
+            {state === 'select' && <SelectItem />}
           </div>
         </div>
       </div>

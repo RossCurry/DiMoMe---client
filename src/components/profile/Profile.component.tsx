@@ -6,7 +6,7 @@ import editUser from '../../assets/svg/edit_user.svg';
 import { useSelector } from 'react-redux';
 
 function Profile() {
-  const currentUser = useSelector(state => state.currentUser.user);
+  const currentUser = useSelector((state) => state.currentUser.user);
 
   return (
     <div className="profile-page">
@@ -18,13 +18,13 @@ function Profile() {
         <Link to={`/editProfile/${currentUser._id}`}>
           <div className="profile-card">
             <h2>Edit Profile</h2>
-            <img src={ editUser} alt="Edit currentUser profile icon" />
+            <img src={editUser} alt="Edit currentUser profile icon" />
           </div>
         </Link>
         <Link to={`/editMenu/${currentUser._id}/${currentUser.localName}`}>
           <div className="profile-card">
             <h2>Edit {currentUser.localName}</h2>
-            <img src={editLocal } alt="Edit user local icon" />
+            <img src={editLocal} alt="Edit user local icon" />
           </div>
         </Link>
       </div>

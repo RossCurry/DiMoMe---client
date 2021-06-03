@@ -6,8 +6,7 @@ function Dashboard(props) {
   return (
     <Router>
       <Switch>
-        <div className="dashboard">
-        </div>
+        <div className="dashboard"></div>
       </Switch>
     </Router>
   );
