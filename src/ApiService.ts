@@ -81,6 +81,7 @@ export const newCategoryDB = async (
     .catch((err) => console.log(err));
 };
 
+// TODO possibly unneccessary
 export type allergenSchema = {
   name: string;
   checked: boolean;
@@ -91,7 +92,7 @@ export type newMenuItem = {
   categoryId: number;
   description: string;
   itemPrice: number;
-  allergyContent: allergenSchema;
+  allergyContent: allergenSchema[];
   dietaryContent: string;
   userId: number;
   public_id: string;
@@ -104,7 +105,7 @@ export type menuItemFromDB = {
   categoryId: number;
   description: string;
   itemPrice: number;
-  allergyContent: allergenSchema;
+  allergyContent: [{ name: string }];
   dietaryContent: string;
   userId: number;
   public_id: string;
