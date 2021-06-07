@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './Home.styles.scss';
 import mobileqr from '../../assets/svg/mobileQR.svg';
 
-function Home() {
+const Home = (): JSX.Element => {
   return (
     <div>
       <section className="home-section">
@@ -12,12 +12,13 @@ function Home() {
             <h2>Digital Mobile Menu</h2>
             <p>
               Convert your menu to an interactive,{' '}
-              <strong>mobile friendly</strong> version in minutes
+              <strong>mobile friendly</strong>
+              version in minutes
             </p>
             <div className="hero-invite">
               <h2>Try for Free!</h2>
-              <Link to={'/subscribe'}>
-                <button>CREATE</button>
+              <Link to={'/subscribe' as string}>
+                <button type="button">CREATE</button>
               </Link>
             </div>
           </div>
@@ -32,6 +33,6 @@ function Home() {
       </section>
     </div>
   );
-}
+};
 
 export default Home;
