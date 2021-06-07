@@ -2,14 +2,14 @@ import React from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import './Dashboard.styles.scss';
 
-function Dashboard(props) {
+const Dashboard = (): JSX.Element => {
   return (
     <Router>
       <Switch>
-        <div className="dashboard"></div>
+        <div className="dashboard" />
       </Switch>
     </Router>
   );
-}
+};
 
 export default Dashboard;
