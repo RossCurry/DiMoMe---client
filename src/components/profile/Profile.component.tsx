@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Profile.styles.scss';
+import { useSelector } from 'react-redux';
 import editLocal from '../../assets/svg/edit_local.svg';
 import editUser from '../../assets/svg/edit_user.svg';
-import { useSelector } from 'react-redux';
 
-function Profile() {
+const Profile = (): JSX.Element => {
   const currentUser = useSelector((state) => state.currentUser.user);
 
   return (
