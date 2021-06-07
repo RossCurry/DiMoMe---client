@@ -21,12 +21,14 @@ const userCategories = (
   }
 };
 
-interface currentUser {
+export interface currentUser {
   user: string;
+  _id: number;
 }
 
 const currentUserInit = {
   user: '',
+  _id: 0,
 };
 
 const currentUser = (

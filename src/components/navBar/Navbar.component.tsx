@@ -1,25 +1,32 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+/* eslint-disable no-underscore-dangle */
 import React from 'react';
 import './Navbar.styles.scss';
+import { RootStateOrAny, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Logo from '../../assets/svg/logo.svg';
-import { useSelector } from 'react-redux';
+import { currentUser as currentUserType } from '../../redux/reducers';
 
-function Navbar(props) {
-  const currentUser = useSelector((state) => state.currentUser.user);
+const Navbar = (): JSX.Element => {
+  // TODO figure out how to type the redux state
+  const { user } = useSelector<currentUserType>(
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    (state) => state
+  );
   return (
     <div className="navbar">
-      <Link to={currentUser ? `/profile/${currentUser._id}` : '/'}>
+      <Link to={user ? `/profile/${user._id}` : '/'}>
         <img src={Logo} className="logo" alt="Logo for DiMoMe" />
       </Link>
 
       <div className="login">
-        <p>{!currentUser ? 'Already have an account?' : ``}</p>
-        <Link to={currentUser ? '/login' : '/login'}>
-          <p>{currentUser ? 'Log out' : 'Log in'}</p>
+        <p>{!user ? 'Already have an account?' : ``}</p>
+        <Link to={user ? '/login' : '/login'}>
+          <p>{user ? 'Log out' : 'Log in'}</p>
         </Link>
 
-        <Link to={'/subscribe'}>
-          <div className="login-img"></div>
+        <Link to={'/subscribe' as string}>
+          <div className="login-img" />
         </Link>
       </div>
     </div>
