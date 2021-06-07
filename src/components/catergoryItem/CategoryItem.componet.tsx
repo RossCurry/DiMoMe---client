@@ -7,7 +7,7 @@ import { categoryFromDB } from '../../ApiService';
 type CategoryItemProps = {
   category: categoryFromDB;
   // TODO use correct TYPING
-  handleSelected: any;
+  handleSelected: (category: categoryFromDB) => void;
 };
 
 const CategoryItem = ({

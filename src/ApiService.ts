@@ -63,6 +63,7 @@ export type categoryFromDB = {
   categoryId: number;
   categoryName: string;
   userId: number;
+  selected?: boolean;
 };
 
 export const newCategoryDB = async (

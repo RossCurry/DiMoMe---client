@@ -4,7 +4,7 @@ import store, { useDispatch, useSelector } from 'react-redux';
 import './Category.styles.scss';
 
 function Category({ addNewCategory }): JSX.Element {
-  const [text, setText] = useState('');
+  const [text, setText] = useState('' as string);
   const currentUser = useSelector((state) => state.currentUser.user);
   const history = useHistory();
   const dispatch = useDispatch();
