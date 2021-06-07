@@ -2,17 +2,22 @@ import React, { useEffect } from 'react';
 import './itemDetailDisplay.styles.scss';
 import { menuItemFromDB, newMenuItem } from '../../ApiService';
 
+// interface IProps {
+//   itemSavedForDisplay: menuItemFromDB;
+//   setToggleState: boolean;
+//   itemSelected: menuItemFromDB;
+//   // TODO give this useState an interface so TS can infer the type
+//   setState: string;
+// }
+
 interface IProps {
   itemSavedForDisplay: menuItemFromDB;
-  setToggleState: boolean;
   itemSelected: menuItemFromDB;
-  // TODO give this useState an interface so TS can infer the type
-  setState: string;
+  setState: (state: string) => void;
 }
 
 const ItemDetailDisplay = ({
   itemSavedForDisplay,
-  setToggleState,
   itemSelected,
   setState,
 }: IProps): JSX.Element => {

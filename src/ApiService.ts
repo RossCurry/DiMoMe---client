@@ -60,7 +60,8 @@ export type newCategory = {
 };
 
 export type categoryFromDB = {
-  categoryId: number;
+  // categoryId: number;
+  _id: number;
   categoryName: string;
   userId: number;
   selected?: boolean;

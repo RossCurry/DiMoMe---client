@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React, { useState } from 'react';
 import './MenuItem.styles.scss';
 import Category from '../categories/Category.component';
@@ -5,8 +6,24 @@ import CategoryItem from '../catergoryItem/CategoryItem.componet';
 import ItemDetail from '../itemDetail/ItemDetail.component';
 import ItemDetailDisplay from '../itemDetailDisplay/ItemDetailDisplay.component';
 import SelectItem from '../selectItem/SelectItem.component';
+import { categoryFromDB, newCategory, menuItemFromDB } from '../../ApiService';
 
-function MenuItem({
+interface MenuItemProps {
+  addNewCategory: newCategory;
+  categoryList: categoryFromDB[];
+  addMenuItem: (text: string) => void;
+  menuItemList: menuItemFromDB[];
+  handleSelected: () => void;
+  handleMenuItem: (item: menuItemFromDB) => void;
+  itemSelected: menuItemFromDB;
+  editMenuItem: (item: menuItemFromDB) => void;
+  itemSavedForDisplay: menuItemFromDB;
+  selectedCategory: categoryFromDB;
+  state: string;
+  setState: () => void;
+}
+
+const MenuItem = ({
   addNewCategory,
   categoryList,
   addMenuItem,
@@ -19,25 +36,25 @@ function MenuItem({
   selectedCategory,
   state,
   setState,
-}) {
-  const [text, setText] = useState('');
+}: MenuItemProps): JSX.Element => {
+  const [text, setText] = useState('' as string);
 
-  const handleInput = (e) => {
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const textInput = e.target.value;
     setText(textInput);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     if (!text) return;
-    //TODO database insertion here
-    //TODO send to edit menu page
+    // TODO database insertion here
+    // TODO send to edit menu page
     addMenuItem(text);
     setText('');
   };
 
   const categoryNames = categoryList.map((category) => (
-    //TODO toggle selected category in the array
+    // TODO toggle selected category in the array
     <CategoryItem
       key={category._id}
       category={category}
@@ -48,37 +65,44 @@ function MenuItem({
   const menuItemNames = menuItemList.map((item) => {
     if (item.categoryId === selectedCategory._id) {
       return (
-        <div
+        <button
+          type="button"
           key={item._id}
           className="menu-item-label"
           onClick={() => handleMenuItem(item)}
         >
           {item.itemName}
-        </div>
+        </button>
       );
     }
+    return null;
   });
 
   return (
-    <React.Fragment>
+    <>
       <div className="menu-item-container">
         <div className="row-1">
-          <Category addNewCategory={addNewCategory} className="col-1" />
+          {/* TS forced me to add a new div, might cause CSS issues */}
+          <div className="col-1">
+            <Category addNewCategory={addNewCategory} />
+          </div>
           <div className="category-list">{categoryNames}</div>
         </div>
         <div className="row-2">
           <div className="col-1">
-            <label for="menuItemInput">Add a new item</label>
             <form onSubmit={handleSubmit} className="menu-item-form">
-              <input type="submit" value="+" />
-              <input
-                type="text"
-                name="menuItemInput"
-                id="menuItemInput"
-                placeholder="Type new items here..."
-                value={text}
-                onChange={handleInput}
-              />
+              <label htmlFor="menuItemInput">
+                Add a new item
+                <input type="submit" value="+" />
+                <input
+                  type="text"
+                  name="menuItemInput"
+                  id="menuItemInput"
+                  placeholder="Type new items here..."
+                  value={text}
+                  onChange={handleInput}
+                />
+              </label>
             </form>
             <div className="menu-item-list">
               <h2 className="label-title">
@@ -108,8 +132,8 @@ function MenuItem({
           </div>
         </div>
       </div>
-    </React.Fragment>
+    </>
   );
-}
+};
 
 export default MenuItem;

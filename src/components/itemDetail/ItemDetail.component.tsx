@@ -13,55 +13,54 @@ import './ItemDetail.styles.scss';
 
 interface IProps {
   itemSelected: menuItemFromDB;
-  editMenuItem: newMenuItem;
-  setToggleState: menuItemFromDB;
+  editMenuItem: (product: menuItemFromDB) => void;
   // TODO give this useState an interface so TS can infer the type
-  setState: string;
+  setState: (state: string) => void;
 }
+
+interface initialState {
+  itemName: string;
+  _id: number | null;
+  description: string;
+  itemPrice: string;
+  allergyContent: allergenSchema[];
+  dietaryContent: string[];
+  // eslint-disable-next-line camelcase
+  public_id: number | null;
+  imageUrl: string;
+}
+const initialState = {
+  itemName: '',
+  _id: null,
+  description: '',
+  itemPrice: '',
+  allergyContent: [],
+  dietaryContent: [],
+  public_id: null,
+  imageUrl: '',
+};
+const allergensInit = [
+  { name: 'Cereals', checked: false },
+  { name: 'Crustaceans', checked: false },
+  { name: 'Eggs', checked: false },
+  { name: 'Fish', checked: false },
+  { name: 'Peanuts', checked: false },
+  { name: 'Soybeans', checked: false },
+  { name: 'Milk', checked: false },
+  { name: 'Nuts', checked: false },
+  { name: 'Celery', checked: false },
+  { name: 'Mustard', checked: false },
+  { name: 'Sesame', checked: false },
+  { name: 'Sulphur', checked: false },
+  { name: 'Lupin', checked: false },
+  { name: 'Molluscs', checked: false },
+];
 
 const ItemDetail = ({
   itemSelected,
   editMenuItem,
-  setToggleState,
   setState,
 }: IProps): JSX.Element => {
-  interface initialState {
-    itemName: string;
-    _id: number | null;
-    description: string;
-    itemPrice: string;
-    allergyContent: allergenSchema[];
-    dietaryContent: string[];
-    // eslint-disable-next-line camelcase
-    public_id: number | null;
-    imageUrl: string;
-  }
-  const initialState = {
-    itemName: '',
-    _id: null,
-    description: '',
-    itemPrice: '',
-    allergyContent: [],
-    dietaryContent: [],
-    public_id: null,
-    imageUrl: '',
-  };
-  const allergensInit = [
-    { name: 'Cereals', checked: false },
-    { name: 'Crustaceans', checked: false },
-    { name: 'Eggs', checked: false },
-    { name: 'Fish', checked: false },
-    { name: 'Peanuts', checked: false },
-    { name: 'Soybeans', checked: false },
-    { name: 'Milk', checked: false },
-    { name: 'Nuts', checked: false },
-    { name: 'Celery', checked: false },
-    { name: 'Mustard', checked: false },
-    { name: 'Sesame', checked: false },
-    { name: 'Sulphur', checked: false },
-    { name: 'Lupin', checked: false },
-    { name: 'Molluscs', checked: false },
-  ];
   const [product, setProduct] = useState<initialState>(initialState);
   const [allergensList, setAllergensList] = useState(allergensInit);
   const [previewImageFile, setPreviewImageFile] = useState('');
