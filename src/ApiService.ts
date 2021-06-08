@@ -94,11 +94,11 @@ export type newMenuItem = {
   categoryId: number;
   description: string;
   itemPrice: number;
-  allergyContent: allergenSchema[];
-  dietaryContent: string;
+  allergyContent?: allergenSchema[];
+  dietaryContent?: string;
   userId: number;
-  public_id: string;
-  imageUrl: string;
+  public_id?: string;
+  imageUrl?: string;
 };
 
 export type menuItemFromDB = {
@@ -114,9 +114,7 @@ export type menuItemFromDB = {
   imageUrl: string;
 };
 
-export const newMenuItemDB = async (
-  newMenuItem: newMenuItem
-): Promise<newMenuItem> => {
+export const newMenuItemDB = async (newMenuItem: newMenuItem): Promise<menuItemFromDB> => {
   const PRODUCT_PATH = '/item';
   return fetch(BASE_URL + PRODUCT_PATH, {
     method: 'POST',

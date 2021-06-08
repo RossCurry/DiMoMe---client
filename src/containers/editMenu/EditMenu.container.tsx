@@ -1,5 +1,6 @@
+/* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { RootStateOrAny, useSelector } from 'react-redux';
 import './EditMenu.styles.scss';
 import {
   newCategoryDB,
@@ -7,44 +8,60 @@ import {
   editMenuItemDB,
   fetchAllCategoriesByUserId,
   fetchAllMenuItemsByUserId,
+  categoryFromDB,
+  menuItemFromDB,
+  newCategory as newCategoryType,
+  newMenuItem as newMenuItemType,
 } from '../../ApiService';
 import MenuItem from '../../components/menuItem/MenuItem.component';
+import { currentUser as currentUserType } from '../../redux/reducers';
 
-function EditMenu(props) {
+const EditMenu = (): JSX.Element => {
   // get user details to insert into category
-  const currentUser = useSelector((state) => state.currentUser.user);
+  const currentUser = useSelector(
+    (state): currentUserType => state.currentUser.user
+  );
 
   // state for list
-  const [categoryList, setCategoryList] = useState([]);
+  const [categoryList, setCategoryList] = useState<categoryFromDB[]>();
 
   // state for menu items
-  const [menuItemList, setMenuItemList] = useState([]);
+  const [menuItemList, setMenuItemList] = useState<menuItemFromDB[]>();
 
   // item to send to detail
-  const [itemSelected, setItemSelected] = useState(null);
+  const [itemSelected, setItemSelected] = useState<menuItemFromDB>();
 
   // category selected
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState<categoryFromDB>();
 
   // edited item returned from DB
-  const [itemSavedForDisplay, setItemSavedForDisplay] = useState(null);
+  const [itemSavedForDisplay, setItemSavedForDisplay] =
+    useState<menuItemFromDB>();
 
   // state to change edit/view of item
-  const [state, setState] = useState('select');
+  const [state, setState] = useState<string>('select');
 
-  //TODO try to figure out how to re-render
-  const handleSelected = (category) => {
+  // TODO try to figure out how to re-render
+  const handleSelected = (category: categoryFromDB): void => {
+    // eslint-disable-next-line no-param-reassign
     category.selected = !category.selected;
-    const newList = categoryList.map((item) => {
-      if (item._id !== category._id) item.selected = false;
-      return item;
-    });
-    setCategoryList(newList);
-    setSelectedCategory(category);
+    if (categoryList) {
+      const newList = categoryList.map((item) => {
+        // eslint-disable-next-line no-underscore-dangle
+        if (item._id !== category._id) {
+          const modItem = item;
+          modItem.selected = false;
+          return modItem;
+        }
+        return item;
+      });
+      setCategoryList(newList);
+      setSelectedCategory(category);
+    }
   };
 
-  //send menu item to menu detail comp. & toggle views
-  const handleMenuItem = (menuItem) => {
+  // send menu item to menu detail comp. & toggle views
+  const handleMenuItem = (menuItem: menuItemFromDB): void => {
     if (menuItem !== itemSelected) {
       setState('view');
       setItemSelected(menuItem);
@@ -57,64 +74,71 @@ function EditMenu(props) {
     }
   };
 
-  ///////////////
   // API CALLS //
-  ///////////////
 
-  const addNewCategory = async (newCategory) => {
-    //Basic category object for DB
+  const addNewCategory = async (newCategory: string): Promise<void> => {
+    // Basic category object for DB
+
     const categoryObj = {
       categoryName: newCategory,
+      // eslint-disable-next-line no-underscore-dangle
       userId: currentUser._id,
     };
-    //Category Object from DB
+    // Category Object from DB
     const storedCategory = await newCategoryDB(categoryObj);
-    const currentList = [...categoryList];
-    currentList.push(storedCategory);
-    setCategoryList(currentList);
-    //TODO use dispatch to send to redux store
+    if (categoryList) {
+      const currentList = [...categoryList];
+      currentList.push(storedCategory);
+      setCategoryList(currentList);
+      // TODO use dispatch to send to redux store
+    }
   };
 
-  //send to aPI
-  const addMenuItem = async (newItem) => {
-    const menuItemObj = {
-      itemName: newItem,
-      description: 'Write a small description of the product here...',
-      itemPrice: 0,
-      allergyContent: [],
-      dietaryContent: [],
-      userId: currentUser._id,
-      categoryId: selectedCategory._id,
-    };
-    const storedMenuItem = await newMenuItemDB(menuItemObj);
-    const currentList = [...menuItemList];
-    currentList.push(storedMenuItem);
-    setMenuItemList(currentList);
+  // send to aPI
+  const addMenuItem = async (newItem: string): Promise<void> => {
+    if (selectedCategory && currentUser) {
+      const menuItemObj = {
+        itemName: newItem,
+        description: 'Write a small description of the product here...',
+        itemPrice: 0,
+        userId: currentUser._id,
+        categoryId: selectedCategory._id,
+      };
+      const storedMenuItem = await newMenuItemDB(menuItemObj);
+      if (menuItemList) {
+        const currentList = [...menuItemList, storedMenuItem];
+        // currentList.push(storedMenuItem);
+        setMenuItemList(currentList);
+      }
+    }
   };
 
   // send to API to Edit Item
-  const editMenuItem = async (menuItem) => {
+  const editMenuItem = async (menuItem: menuItemFromDB): Promise<void> => {
     const editedItem = await editMenuItemDB(menuItem);
-    setItemSavedForDisplay(editedItem);
+    if (editedItem) setItemSavedForDisplay(editedItem);
   };
 
-  const fetchAllCategories = async () => {
+  const fetchAllCategories = async (): Promise<void> => {
     await fetchAllCategoriesByUserId(currentUser._id)
       .then((res) => {
         setCategoryList(res);
         setSelectedCategory(res[0]);
       })
-      .catch((err) => console.error);
+      .catch((err: Error) => console.error({ message: err }));
   };
 
-  const fetchAllMenuItems = async () => {
+  const fetchAllMenuItems = async (): Promise<void> => {
     const allMenuItems = await fetchAllMenuItemsByUserId(currentUser._id);
     setMenuItemList(allMenuItems);
   };
 
-  useEffect(() => {
-    fetchAllCategories();
-    fetchAllMenuItems();
+  useEffect((): void => {
+    // eslint-disable-next-line no-void
+    void fetchAllCategories();
+    // eslint-disable-next-line no-void
+    void fetchAllMenuItems();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -130,12 +154,12 @@ function EditMenu(props) {
         editMenuItem={editMenuItem}
         itemSavedForDisplay={itemSavedForDisplay}
         selectedCategory={selectedCategory}
-        setSelectedCategory={setSelectedCategory}
+        // setSelectedCategory={setSelectedCategory}
         state={state}
         setState={setState}
       />
     </div>
   );
-}
+};
 
 export default EditMenu;

@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import React, { useState } from 'react';
+import React, { useState, Dispatch, SetStateAction } from 'react';
 import './MenuItem.styles.scss';
 import Category from '../categories/Category.component';
 import CategoryItem from '../catergoryItem/CategoryItem.componet';
@@ -9,18 +9,18 @@ import SelectItem from '../selectItem/SelectItem.component';
 import { categoryFromDB, newCategory, menuItemFromDB } from '../../ApiService';
 
 interface MenuItemProps {
-  addNewCategory: newCategory;
-  categoryList: categoryFromDB[];
+  addNewCategory: (newCategory: string) => void;
+  categoryList: categoryFromDB[] | undefined;
   addMenuItem: (text: string) => void;
-  menuItemList: menuItemFromDB[];
-  handleSelected: () => void;
+  menuItemList: menuItemFromDB[] | undefined;
+  handleSelected: (category: categoryFromDB) => void;
   handleMenuItem: (item: menuItemFromDB) => void;
-  itemSelected: menuItemFromDB;
+  itemSelected: menuItemFromDB | undefined;
   editMenuItem: (item: menuItemFromDB) => void;
-  itemSavedForDisplay: menuItemFromDB;
-  selectedCategory: categoryFromDB;
+  itemSavedForDisplay: menuItemFromDB | undefined;
+  selectedCategory: categoryFromDB | undefined;
   state: string;
-  setState: () => void;
+  setState: Dispatch<SetStateAction<string>>;
 }
 
 const MenuItem = ({

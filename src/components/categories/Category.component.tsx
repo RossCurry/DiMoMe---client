@@ -2,12 +2,17 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import store, { useDispatch, useSelector } from 'react-redux';
 import './Category.styles.scss';
+import { newCategory } from '../../ApiService';
 
-function Category({ addNewCategory }): JSX.Element {
+interface CatergoryProps {
+  addNewCategory: (newCategory: string) => void;
+}
+
+const Category = ({ addNewCategory }: CatergoryProps): JSX.Element => {
   const [text, setText] = useState('' as string);
   const currentUser = useSelector((state) => state.currentUser.user);
   const history = useHistory();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   // TODO a more complete list to store in the database?
 
