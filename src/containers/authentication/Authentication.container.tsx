@@ -1,11 +1,21 @@
+/* eslint-disable no-underscore-dangle */
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import './Authentication.styles.scss';
-import { registerNewUser, loginUser } from '../../ApiService';
+import {
+  registerNewUser,
+  loginUser,
+  newUser,
+  userLogin,
+} from '../../ApiService';
 import { updateUser } from '../../redux/actions';
 
-function Authentication({ subscribe }) {
+interface AuthenticationProps {
+  subscribe: boolean;
+}
+
+const Authentication = ({ subscribe }: AuthenticationProps): JSX.Element => {
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -19,8 +29,20 @@ function Authentication({ subscribe }) {
   };
 
   const [registry, setRegistry] = useState(initialState);
+  const base64 = (str: string): string | null => {
+    const regExp = /[^<>]+/g;
+    const cleanString = str.match(regExp);
+    if (cleanString) {
+      // TODO rewrite to create a msg for the user console.log('input wasnt clean');
+      if (str !== cleanString[0]) return null;
+      return btoa(cleanString[0]);
+    }
+    return null;
+  };
 
-  const handleChange = (e) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ): void => {
     const { name, value } = e.target;
     setRegistry((prevState) => ({
       ...prevState,
@@ -28,11 +50,13 @@ function Authentication({ subscribe }) {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     e.preventDefault();
     if (subscribe) {
       const { email, password, name, localSelector, localName } = registry;
-      const newUser = {
+      const newUserForDB = {
         email: base64(email),
         password: btoa(password),
         name: base64(name),
@@ -40,7 +64,7 @@ function Authentication({ subscribe }) {
         localName: base64(localName),
       };
       // TO and FROM API
-      const registeredUser = await registerNewUser(newUser);
+      const registeredUser = await registerNewUser(newUserForDB as newUser);
       dispatch(updateUser(registeredUser));
       history.push(`/profile/${registeredUser._id}`, registeredUser);
     } else {
@@ -49,13 +73,13 @@ function Authentication({ subscribe }) {
         email: base64(email),
         password: btoa(password),
       };
-      const userInfo = await loginUser(userLoginDetails);
+      const userInfo = await loginUser(userLoginDetails as userLogin);
       dispatch(updateUser(userInfo));
       history.push(`/profile/${userInfo._id}`, userInfo);
     }
   };
 
-  const validateRegister = () => {
+  const validateRegister = (): boolean => {
     if (subscribe) {
       return (
         !registry.email ||
@@ -64,158 +88,152 @@ function Authentication({ subscribe }) {
         !registry.name ||
         !registry.localName
       );
-    } else {
-      return !registry.email || !registry.password;
     }
+    return !registry.email || !registry.password;
   };
 
-  const base64 = (str) => {
-    const regExp = /[^<>]+/g;
-    const cleanString = str.match(regExp);
-    //TODO rewrite to create a msg for the user console.log('input wasnt clean');
-    if (str !== cleanString[0]) return;
-    return btoa(cleanString[0]);
-  };
-
-  const emailInput = () => {
+  const emailInput = (): JSX.Element => {
     return (
-      <React.Fragment>
-        <label for="email">
+      <>
+        <label htmlFor="email">
           {subscribe
             ? 'What is your email address?'
             : 'Please use your email address to sign in'}
+
+          <input
+            type="email"
+            placeholder={
+              subscribe ? 'write your email here...' : 'Type your email here...'
+            }
+            name="email"
+            value={registry.email}
+            onChange={handleChange}
+          />
         </label>
-        <input
-          type="email"
-          placeholder={
-            subscribe ? 'write your email here...' : 'Type your email here...'
-          }
-          name="email"
-          value={registry.email}
-          onChange={handleChange}
-        ></input>
-      </React.Fragment>
+      </>
     );
   };
 
-  const emailConfirm = () => {
+  const emailConfirm = (): JSX.Element => {
     return (
-      <React.Fragment>
-        <label for="emailConfirm">Confirm your email address</label>
-        <input
-          type="email"
-          placeholder="re-enter your email..."
-          name="emailConfirm"
-          value={registry.emailConfirm}
-          onChange={handleChange}
-        ></input>
-      </React.Fragment>
+      <>
+        <label htmlFor="emailConfirm">
+          Confirm your email address
+          <input
+            type="email"
+            placeholder="re-enter your email..."
+            name="emailConfirm"
+            value={registry.emailConfirm}
+            onChange={handleChange}
+          />
+        </label>
+      </>
     );
   };
 
-  const passwordInput = () => {
+  const passwordInput = (): JSX.Element => {
     return (
-      <React.Fragment>
-        <label for="password">
+      <>
+        <label htmlFor="password">
           {subscribe ? 'Create a password' : 'Use your Password'}
+
+          <input
+            type="password"
+            placeholder={
+              subscribe ? 'Create a password...' : 'Type your password here...'
+            }
+            name="password"
+            value={registry.password}
+            onChange={handleChange}
+          />
         </label>
-        <input
-          type="password"
-          placeholder={
-            subscribe ? 'Create a password...' : 'Type your password here...'
-          }
-          name="password"
-          value={registry.password}
-          onChange={handleChange}
-        ></input>
-      </React.Fragment>
+      </>
     );
   };
 
-  const nameInput = () => {
+  const nameInput = (): JSX.Element => {
     return (
-      <React.Fragment>
-        <label for="name">What would you like your profile name to be? </label>
-        <input
-          type="text"
-          placeholder="Write your profile name here..."
-          name="name"
-          value={registry.name}
-          onChange={handleChange}
-        ></input>
-      </React.Fragment>
+      <>
+        <label htmlFor="name">
+          What would you like your profile name to be?
+          <input
+            type="text"
+            placeholder="Write your profile name here..."
+            name="name"
+            value={registry.name}
+            onChange={handleChange}
+          />
+        </label>
+      </>
     );
   };
 
-  const localSelectorInput = () => {
+  const localSelectorInput = (): JSX.Element => {
     return (
-      <React.Fragment>
-        <label for="localSelector">What kind of place do you have? </label>
-        <select
-          name="localSelector"
-          id="localSelect"
-          value={registry.localSelector}
-          onChange={handleChange}
-        >
-          <option value="">--Please choose an option--</option>
-          <option value="Restaurant">Restaurant</option>
-          <option value="Coffeeshop">Coffeeshop</option>
-          <option value="Bar">Bar</option>
-        </select>
-      </React.Fragment>
+      <>
+        <label htmlFor="localSelector">
+          What kind of place do you have?
+          <select
+            name="localSelector"
+            id="localSelect"
+            value={registry.localSelector}
+            onChange={handleChange}
+          >
+            <option value="">--Please choose an option--</option>
+            <option value="Restaurant">Restaurant</option>
+            <option value="Coffeeshop">Coffeeshop</option>
+            <option value="Bar">Bar</option>
+          </select>
+        </label>
+      </>
     );
   };
 
-  const localNameInput = () => {
+  const localNameInput = (): JSX.Element => {
     return (
-      <React.Fragment>
-        <label for="localName">What's the name of your place</label>
-        <input
-          type="text"
-          placeholder="Write the name of your place here..."
-          name="localName"
-          value={registry.localName}
-          onChange={handleChange}
-        ></input>
-      </React.Fragment>
+      <>
+        <label htmlFor="localName">
+          {/* // TODO check if this works on the screen output */}
+          What&apos;s the name of your place
+          <input
+            type="text"
+            placeholder="Write the name of your place here..."
+            name="localName"
+            value={registry.localName}
+            onChange={handleChange}
+          />
+        </label>
+      </>
     );
   };
 
-  const submitButtonRegister = () => {
+  const submitButtonRegister = (): JSX.Element => {
     return (
-      <React.Fragment>
-        <input
-          type="submit"
-          value="Register"
-          disabled={validateRegister()}
-        ></input>
+      <>
+        <input type="submit" value="Register" disabled={validateRegister()} />
 
         <div className="subscribe-login">
           <p>Already have an account?</p>
-          <Link to={'/Login'}>
+          <Link to="/Login">
             <p>Login here</p>
           </Link>
         </div>
-      </React.Fragment>
+      </>
     );
   };
 
-  const submitButtonLogin = () => {
+  const submitButtonLogin = (): JSX.Element => {
     return (
-      <React.Fragment>
-        <input
-          type="submit"
-          value="Log in"
-          disabled={validateRegister()}
-        ></input>
+      <>
+        <input type="submit" value="Log in" disabled={validateRegister()} />
 
         <div className="subscribe-login">
-          <p>Don't have an account yet?</p>
-          <Link to={'/Subscribe'}>
+          <p>Don&apos;t have an account yet?</p>
+          <Link to="/Subscribe">
             <p>Register here</p>
           </Link>
         </div>
-      </React.Fragment>
+      </>
     );
   };
 
@@ -243,6 +261,6 @@ function Authentication({ subscribe }) {
       </form>
     </div>
   );
-}
+};
 
 export default Authentication;

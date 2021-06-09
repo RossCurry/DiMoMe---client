@@ -1,4 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit';
+import { userFromDB } from '../ApiService';
 // CATEGORY
 export const addCategory = (newCategory: string): PayloadAction<string> => ({
   type: 'ADD_CATEGORY',
@@ -14,7 +15,7 @@ export const deleteCategory = (categoryId: number): PayloadAction<number> => ({
 });
 
 // USER
-export const updateUser = (user: string): PayloadAction<string> => ({
+export const updateUser = (user: userFromDB): PayloadAction<userFromDB> => ({
   type: 'UPDATE_USER',
   payload: user,
 });
