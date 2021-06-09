@@ -2,6 +2,9 @@
 /* eslint-disable camelcase */
 // const { REACT_APP_SV_URL, REACT_APP_SV_PORT } = process.env;
 // const BASE_URL = `http://${REACT_APP_SV_URL}:${REACT_APP_SV_PORT}`;
+
+import { response } from 'express';
+
 // TODO adapt ENV variables to match server address.
 export const BASE_URL = process.env.REACT_APP_SV_URL;
 
@@ -26,18 +29,44 @@ export type userLogin = {
   password: string;
 };
 
-export async function registerNewUser(newUser: newUser): Promise<userFromDB> {
+export async function registerNewUser(
+  newUser: newUser
+): Promise<userFromDB | null> {
   const sendBody = JSON.stringify(newUser);
   const USER_PATH = '/user/subscribe';
-  return fetch(BASE_URL + USER_PATH, {
+  type responseType = {
+    data?: userFromDB;
+    errors?: Error;
+  };
+  // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+  const userInfo = await fetch(`${BASE_URL}${USER_PATH}`, {
     method: 'POST',
     credentials: 'include',
     mode: 'cors',
     headers: { 'Content-Type': 'application/json' },
     body: sendBody,
-  })
-    .then((res) => res.json())
-    .catch((err) => console.log(err));
+  });
+  const { data, errors }: responseType =
+    (await userInfo.json()) as responseType;
+  if (userInfo.ok) {
+    if (data) return data;
+  }
+  if (errors) console.error({ message: errors });
+  return null;
+  // return fetch(`${BASE_URL}${USER_PATH}`, {
+  //   method: 'POST',
+  //   credentials: 'include',
+  //   mode: 'cors',
+  //   headers: { 'Content-Type': 'application/json' },
+  //   body: sendBody,
+  // })
+  //   .then((res: responseType) => {
+  //     if (!res.ok) {
+  //       throw new Error(res.statusText);
+  //     }
+  //     return res.json();
+  //   })
+  //   .catch((err: Error) => console.log(err));
 }
 
 export async function loginUser(userLogin: userLogin): Promise<userFromDB> {
@@ -114,7 +143,9 @@ export type menuItemFromDB = {
   imageUrl: string;
 };
 
-export const newMenuItemDB = async (newMenuItem: newMenuItem): Promise<menuItemFromDB> => {
+export const newMenuItemDB = async (
+  newMenuItem: newMenuItem
+): Promise<menuItemFromDB> => {
   const PRODUCT_PATH = '/item';
   return fetch(BASE_URL + PRODUCT_PATH, {
     method: 'POST',
