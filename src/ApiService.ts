@@ -3,10 +3,8 @@
 // const { REACT_APP_SV_URL, REACT_APP_SV_PORT } = process.env;
 // const BASE_URL = `http://${REACT_APP_SV_URL}:${REACT_APP_SV_PORT}`;
 
-import { response } from 'express';
-
 // TODO adapt ENV variables to match server address.
-export const BASE_URL = process.env.REACT_APP_SV_URL;
+export const BASE_URL = process.env.REACT_APP_SV_URL || '';
 
 export type newUser = {
   email: string;
@@ -38,7 +36,6 @@ export async function registerNewUser(
     data?: userFromDB;
     errors?: Error;
   };
-  // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
   const userInfo = await fetch(`${BASE_URL}${USER_PATH}`, {
     method: 'POST',
     credentials: 'include',
@@ -69,18 +66,27 @@ export async function registerNewUser(
   //   .catch((err: Error) => console.log(err));
 }
 
-export async function loginUser(userLogin: userLogin): Promise<userFromDB> {
+export async function loginUser(
+  userLogin: userLogin
+): Promise<userFromDB | null> {
   const sendBody = JSON.stringify(userLogin);
   const USER_PATH = '/user/login';
-  return fetch(BASE_URL + USER_PATH, {
-    method: 'POST',
-    credentials: 'include',
-    mode: 'cors',
-    headers: { 'Content-Type': 'application/json' },
-    body: sendBody,
-  })
-    .then((res) => res.json())
-    .catch((err) => console.log(err));
+  try {
+    const returnInfo = await fetch(`${BASE_URL}${USER_PATH}`, {
+      method: 'POST',
+      credentials: 'include',
+      mode: 'cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: sendBody,
+    }).then(async (res) => {
+      const user = (await res.json()) as userFromDB;
+      return user;
+    });
+    return returnInfo;
+  } catch (error) {
+    console.error(error);
+  }
+  return null;
 }
 
 export type newCategory = {
@@ -98,18 +104,22 @@ export type categoryFromDB = {
 
 export const newCategoryDB = async (
   newCategory: newCategory
-): Promise<categoryFromDB> => {
+): Promise<categoryFromDB | null> => {
   const CATEGORY_PATH = '/category';
-  return fetch(BASE_URL + CATEGORY_PATH, {
-    method: 'POST',
-    credentials: 'include',
-    mode: 'cors',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(newCategory),
-  })
-    .then((res) => res.json())
-    .then((data) => data)
-    .catch((err) => console.log(err));
+  try {
+    const returnInfo = await fetch(`${BASE_URL}${CATEGORY_PATH}`, {
+      method: 'POST',
+      credentials: 'include',
+      mode: 'cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newCategory),
+    });
+    const category = (await returnInfo.json()) as categoryFromDB;
+    return category;
+  } catch (error) {
+    console.error(error);
+  }
+  return null;
 };
 
 // TODO possibly unneccessary
