@@ -128,8 +128,8 @@ export type menuItemFromDB = {
   categoryId: number;
   description: string;
   itemPrice: number;
-  allergyContent: [{ name: string }];
-  dietaryContent: string;
+  allergyContent: { name: string }[];
+  dietaryContent: string[];
   userId: number;
   public_id: string;
   imageUrl: string;

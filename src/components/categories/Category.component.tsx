@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import store, { useDispatch, useSelector } from 'react-redux';
 import './Category.styles.scss';
 import { newCategory } from '../../ApiService';
+import { mockCurrentUser } from '../editProfile/EditProfile.component';
 
 interface CatergoryProps {
   addNewCategory: (newCategory: string) => void;
@@ -10,7 +12,9 @@ interface CatergoryProps {
 
 const Category = ({ addNewCategory }: CatergoryProps): JSX.Element => {
   const [text, setText] = useState('' as string);
-  const currentUser = useSelector((state) => state.currentUser.user);
+  // TODO refactor Redux to make this work
+  // const currentUser = useSelector((state) => state.currentUser.user);
+  const currentUser = mockCurrentUser;
   const history = useHistory();
   // const dispatch = useDispatch();
 
@@ -67,6 +71,6 @@ const Category = ({ addNewCategory }: CatergoryProps): JSX.Element => {
       </label>
     </div>
   );
-}
+};
 
 export default Category;

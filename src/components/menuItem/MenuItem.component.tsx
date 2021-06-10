@@ -53,30 +53,36 @@ const MenuItem = ({
     setText('');
   };
 
-  const categoryNames = categoryList.map((category) => (
-    // TODO toggle selected category in the array
-    <CategoryItem
-      key={category._id}
-      category={category}
-      handleSelected={handleSelected}
-    />
-  ));
+  const categoryNames = categoryList
+    ? categoryList.map((category) => (
+        // TODO toggle selected category in the array
+        <CategoryItem
+          key={category._id}
+          category={category}
+          handleSelected={handleSelected}
+        />
+      ))
+    : null;
 
-  const menuItemNames = menuItemList.map((item) => {
-    if (item.categoryId === selectedCategory._id) {
-      return (
-        <button
-          type="button"
-          key={item._id}
-          className="menu-item-label"
-          onClick={() => handleMenuItem(item)}
-        >
-          {item.itemName}
-        </button>
-      );
-    }
-    return null;
-  });
+  const menuItemNames = menuItemList
+    ? menuItemList.map((item) => {
+        if (selectedCategory) {
+          if (item.categoryId === selectedCategory._id) {
+            return (
+              <button
+                type="button"
+                key={item._id}
+                className="menu-item-label"
+                onClick={() => handleMenuItem(item)}
+              >
+                {item.itemName}
+              </button>
+            );
+          }
+        }
+        return null;
+      })
+    : null;
 
   return (
     <>
@@ -114,20 +120,20 @@ const MenuItem = ({
             </div>
           </div>
           <div className="col-2">
-            {state === 'view' && (
+            {state === 'view' && itemSavedForDisplay && itemSelected ? (
               <ItemDetailDisplay
                 itemSavedForDisplay={itemSavedForDisplay}
                 itemSelected={itemSelected}
                 setState={setState}
               />
-            )}
-            {state === 'edit' && (
+            ) : null}
+            {state === 'edit' && itemSelected ? (
               <ItemDetail
                 itemSelected={itemSelected}
                 editMenuItem={editMenuItem}
                 setState={setState}
               />
-            )}
+            ) : null}
             {state === 'select' && <SelectItem />}
           </div>
         </div>

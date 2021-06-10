@@ -6,13 +6,15 @@ import { RootStateOrAny, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Logo from '../../assets/svg/logo.svg';
 import { currentUser as currentUserType } from '../../redux/reducers';
+import { mockCurrentUser } from '../editProfile/EditProfile.component';
 
 const Navbar = (): JSX.Element => {
   // TODO figure out how to type the redux state
-  const { user } = useSelector<currentUserType>(
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    (state) => state
-  );
+  // const { user } = useSelector<currentUserType>(
+  //   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  //   (state) => state
+  // );
+  const user = mockCurrentUser;
   return (
     <div className="navbar">
       <Link to={user ? `/profile/${user._id}` : '/'}>
@@ -31,6 +33,6 @@ const Navbar = (): JSX.Element => {
       </div>
     </div>
   );
-}
+};
 
 export default Navbar;

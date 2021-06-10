@@ -15,13 +15,14 @@ import {
 } from '../../ApiService';
 import MenuItem from '../../components/menuItem/MenuItem.component';
 import { currentUser as currentUserType } from '../../redux/reducers';
+import { mockCurrentUser } from '../../components/editProfile/EditProfile.component';
 
 const EditMenu = (): JSX.Element => {
   // get user details to insert into category
-  const currentUser = useSelector(
-    (state): currentUserType => state.currentUser.user
-  );
-
+  // const currentUser = useSelector(
+  //   (state): currentUserType => state.currentUser.user
+  // );
+  const currentUser = mockCurrentUser;
   // state for list
   const [categoryList, setCategoryList] = useState<categoryFromDB[]>();
 
@@ -86,11 +87,13 @@ const EditMenu = (): JSX.Element => {
     };
     // Category Object from DB
     const storedCategory = await newCategoryDB(categoryObj);
-    if (categoryList) {
-      const currentList = [...categoryList];
-      currentList.push(storedCategory);
-      setCategoryList(currentList);
-      // TODO use dispatch to send to redux store
+    if (storedCategory) {
+      if (categoryList) {
+        const currentList = [...categoryList];
+        currentList.push(storedCategory);
+        setCategoryList(currentList);
+        // TODO use dispatch to send to redux store
+      }
     }
   };
 
@@ -105,10 +108,12 @@ const EditMenu = (): JSX.Element => {
         categoryId: selectedCategory._id,
       };
       const storedMenuItem = await newMenuItemDB(menuItemObj);
-      if (menuItemList) {
-        const currentList = [...menuItemList, storedMenuItem];
-        // currentList.push(storedMenuItem);
-        setMenuItemList(currentList);
+      if (storedMenuItem) {
+        if (menuItemList) {
+          const currentList = [...menuItemList, storedMenuItem];
+          // currentList.push(storedMenuItem);
+          setMenuItemList(currentList);
+        }
       }
     }
   };
@@ -122,15 +127,19 @@ const EditMenu = (): JSX.Element => {
   const fetchAllCategories = async (): Promise<void> => {
     await fetchAllCategoriesByUserId(currentUser._id)
       .then((res) => {
-        setCategoryList(res);
-        setSelectedCategory(res[0]);
+        if (res) {
+          setCategoryList(res);
+          setSelectedCategory(res[0]);
+        }
       })
       .catch((err: Error) => console.error({ message: err }));
   };
 
   const fetchAllMenuItems = async (): Promise<void> => {
     const allMenuItems = await fetchAllMenuItemsByUserId(currentUser._id);
-    setMenuItemList(allMenuItems);
+    if (allMenuItems) {
+      setMenuItemList(allMenuItems);
+    }
   };
 
   useEffect((): void => {

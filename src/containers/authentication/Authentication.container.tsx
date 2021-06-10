@@ -65,8 +65,10 @@ const Authentication = ({ subscribe }: AuthenticationProps): JSX.Element => {
       };
       // TO and FROM API
       const registeredUser = await registerNewUser(newUserForDB as newUser);
-      dispatch(updateUser(registeredUser));
-      history.push(`/profile/${registeredUser._id}`, registeredUser);
+      if (registeredUser) {
+        dispatch(updateUser(registeredUser));
+        history.push(`/profile/${registeredUser._id}`, registeredUser);
+      }
     } else {
       const { email, password } = registry;
       const userLoginDetails = {
@@ -74,8 +76,10 @@ const Authentication = ({ subscribe }: AuthenticationProps): JSX.Element => {
         password: btoa(password),
       };
       const userInfo = await loginUser(userLoginDetails as userLogin);
-      dispatch(updateUser(userInfo));
-      history.push(`/profile/${userInfo._id}`, userInfo);
+      if (userInfo) {
+        dispatch(updateUser(userInfo));
+        history.push(`/profile/${userInfo._id}`, userInfo);
+      }
     }
   };
 

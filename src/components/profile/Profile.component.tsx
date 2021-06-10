@@ -1,12 +1,15 @@
+/* eslint-disable no-underscore-dangle */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Profile.styles.scss';
 import { useSelector } from 'react-redux';
 import editLocal from '../../assets/svg/edit_local.svg';
 import editUser from '../../assets/svg/edit_user.svg';
+import { mockCurrentUser } from '../editProfile/EditProfile.component';
 
 const Profile = (): JSX.Element => {
-  const currentUser = useSelector((state) => state.currentUser.user);
+  // const currentUser = useSelector((state) => state.currentUser.user);
+  const currentUser = mockCurrentUser;
 
   return (
     <div className="profile-page">
@@ -30,6 +33,6 @@ const Profile = (): JSX.Element => {
       </div>
     </div>
   );
-}
+};
 
 export default Profile;

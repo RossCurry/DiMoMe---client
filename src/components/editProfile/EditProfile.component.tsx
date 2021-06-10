@@ -1,11 +1,22 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import React from 'react';
 import { useSelector } from 'react-redux';
 import './EditProfile.styles.scss';
 
+export const mockCurrentUser = {
+  _id: 5,
+  email: 'string@fffe.com',
+  name: 'yellow',
+  localType: 'string',
+  localName: 'string',
+};
+
 const EditProfile = (): JSX.Element => {
   // TODO i'm having this redux issue all over the place
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const currentUser = useSelector((state) => state.currentUser.user);
+  // const currentUser = useSelector((state) => state.currentUser.user);
+  const currentUser = mockCurrentUser;
   return (
     <>
       <div className="edit-profile-container">

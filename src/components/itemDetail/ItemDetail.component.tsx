@@ -30,14 +30,24 @@ interface initialState {
   imageUrl: string;
 }
 const initialState = {
-  itemName: '',
-  _id: null,
-  description: '',
-  itemPrice: '',
-  allergyContent: [],
-  dietaryContent: [],
-  public_id: null,
-  imageUrl: '',
+  // itemName: '',
+  // _id: null,
+  // description: '',
+  // itemPrice: '',
+  // allergyContent: [],
+  // dietaryContent: [],
+  // public_id: null,
+  // imageUrl: '',
+  _id: 0,
+  itemName: 'string',
+  categoryId: 0,
+  description: 'string',
+  itemPrice: 0,
+  allergyContent: [{ name: 'string' }],
+  dietaryContent: ['string'],
+  userId: 0,
+  public_id: 'string',
+  imageUrl: 'string',
 };
 const allergensInit = [
   { name: 'Cereals', checked: false },
@@ -61,7 +71,7 @@ const ItemDetail = ({
   editMenuItem,
   setState,
 }: IProps): JSX.Element => {
-  const [product, setProduct] = useState<initialState>(initialState);
+  const [product, setProduct] = useState<menuItemFromDB>(initialState);
   const [allergensList, setAllergensList] = useState(allergensInit);
   const [previewImageFile, setPreviewImageFile] = useState('');
 
