@@ -32,38 +32,20 @@ export async function registerNewUser(
 ): Promise<userFromDB | null> {
   const sendBody = JSON.stringify(newUser);
   const USER_PATH = '/user/subscribe';
-  type responseType = {
-    data?: userFromDB;
-    errors?: Error;
-  };
-  const userInfo = await fetch(`${BASE_URL}${USER_PATH}`, {
-    method: 'POST',
-    credentials: 'include',
-    mode: 'cors',
-    headers: { 'Content-Type': 'application/json' },
-    body: sendBody,
-  });
-  const { data, errors }: responseType =
-    (await userInfo.json()) as responseType;
-  if (userInfo.ok) {
-    if (data) return data;
+  try {
+    const returnInfo = await fetch(`${BASE_URL}${USER_PATH}`, {
+      method: 'POST',
+      credentials: 'include',
+      mode: 'cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: sendBody,
+    });
+    const userInfo = (await returnInfo.json()) as userFromDB;
+    return userInfo;
+  } catch (error) {
+    console.error(error);
   }
-  if (errors) console.error({ message: errors });
   return null;
-  // return fetch(`${BASE_URL}${USER_PATH}`, {
-  //   method: 'POST',
-  //   credentials: 'include',
-  //   mode: 'cors',
-  //   headers: { 'Content-Type': 'application/json' },
-  //   body: sendBody,
-  // })
-  //   .then((res: responseType) => {
-  //     if (!res.ok) {
-  //       throw new Error(res.statusText);
-  //     }
-  //     return res.json();
-  //   })
-  //   .catch((err: Error) => console.log(err));
 }
 
 export async function loginUser(
@@ -155,64 +137,80 @@ export type menuItemFromDB = {
 
 export const newMenuItemDB = async (
   newMenuItem: newMenuItem
-): Promise<menuItemFromDB> => {
+): Promise<menuItemFromDB | null> => {
   const PRODUCT_PATH = '/item';
-  return fetch(BASE_URL + PRODUCT_PATH, {
-    method: 'POST',
-    credentials: 'include',
-    mode: 'cors',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(newMenuItem),
-  })
-    .then((res) => res.json())
-    .then((data) => data)
-    .catch((err) => console.log(err));
+  try {
+    const returnInfo = await fetch(`${BASE_URL}${PRODUCT_PATH}`, {
+      method: 'POST',
+      credentials: 'include',
+      mode: 'cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newMenuItem),
+    });
+    const menuItem = (await returnInfo.json()) as menuItemFromDB;
+    return menuItem;
+  } catch (error) {
+    console.error(error);
+  }
+  return null;
 };
 
 export const editMenuItemDB = async (
   menuItem: menuItemFromDB
-): Promise<menuItemFromDB> => {
+): Promise<menuItemFromDB | null> => {
   const { _id } = menuItem;
   // The ID might be unnecessary
   const PRODUCT_PATH = `/item/${_id}`;
-  return fetch(BASE_URL + PRODUCT_PATH, {
-    method: 'PUT',
-    credentials: 'include',
-    mode: 'cors',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(menuItem),
-  })
-    .then((res) => res.json())
-    .then((data) => data)
-    .catch((err) => console.log(err));
+  try {
+    const returnInfo = await fetch(`${BASE_URL}${PRODUCT_PATH}`, {
+      method: 'PUT',
+      credentials: 'include',
+      mode: 'cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(menuItem),
+    });
+    const editedMenuItem = (await returnInfo.json()) as menuItemFromDB;
+    return editedMenuItem;
+  } catch (error) {
+    console.error(error);
+  }
+  return null;
 };
 
 export const fetchAllCategoriesByUserId = async (
   userId: number
-): Promise<categoryFromDB[]> => {
+): Promise<categoryFromDB[] | null> => {
   const CATEGORY_PATH = `/categories/${userId}`;
-  return fetch(BASE_URL + CATEGORY_PATH, {
-    method: 'GET',
-    credentials: 'include',
-    mode: 'cors',
-    headers: { 'Content-Type': 'application/json' },
-  })
-    .then((res) => res.json())
-    .then((data) => data)
-    .catch((err) => console.log(err));
+  try {
+    const returnInfo = await fetch(BASE_URL + CATEGORY_PATH, {
+      method: 'GET',
+      credentials: 'include',
+      mode: 'cors',
+      headers: { 'Content-Type': 'application/json' },
+    });
+    const categories = (await returnInfo.json()) as categoryFromDB[];
+    return categories;
+  } catch (error) {
+    console.error(error);
+  }
+  return null;
 };
 
 export const fetchAllMenuItemsByUserId = async (
   userId: number
-): Promise<menuItemFromDB[]> => {
+): Promise<menuItemFromDB[] | null> => {
   const CATEGORY_PATH = `/items/${userId}`;
-  return fetch(BASE_URL + CATEGORY_PATH, {
-    method: 'GET',
-    credentials: 'include',
-    mode: 'cors',
-    headers: { 'Content-Type': 'application/json' },
-  })
-    .then((res) => res.json())
-    .then((data) => data)
-    .catch((err) => console.log(err));
+  try {
+    const returnInfo = await fetch(BASE_URL + CATEGORY_PATH, {
+      method: 'GET',
+      credentials: 'include',
+      mode: 'cors',
+      headers: { 'Content-Type': 'application/json' },
+    });
+    const menuItems = (await returnInfo.json()) as menuItemFromDB[];
+    return menuItems;
+  } catch (error) {
+    console.error(error);
+  }
+  return null;
 };
