@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import store, { useDispatch, useSelector } from 'react-redux';
+import { useAppSelector } from '../../redux/hooks';
 import './Category.styles.scss';
 import { newCategory } from '../../ApiService';
-import { mockCurrentUser } from '../editProfile/EditProfile.component';
 
 interface CatergoryProps {
   addNewCategory: (newCategory: string) => void;
@@ -12,15 +11,12 @@ interface CatergoryProps {
 
 const Category = ({ addNewCategory }: CatergoryProps): JSX.Element => {
   const [text, setText] = useState('' as string);
-  // TODO refactor Redux to make this work
-  // const currentUser = useSelector((state) => state.currentUser.user);
-  const currentUser = mockCurrentUser;
+  const { user } = useAppSelector((state) => state);
   const history = useHistory();
-  // const dispatch = useDispatch();
 
   // TODO a more complete list to store in the database?
 
-  if (!currentUser) history.push(`/`);
+  if (!user) history.push(`/`);
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const textInput = e.target.value;
     setText(textInput);
@@ -38,8 +34,8 @@ const Category = ({ addNewCategory }: CatergoryProps): JSX.Element => {
     return (
       <>
         <h1>
-          {currentUser.localName}
-          {currentUser.localType}
+          {user.localName}
+          {user.localType}
         </h1>
       </>
     );
@@ -54,7 +50,7 @@ const Category = ({ addNewCategory }: CatergoryProps): JSX.Element => {
   return (
     <div className="category-container">
       <div className="local-title">
-        {currentUser ? userGreetingMessage() : defaultGreeting()}
+        {user ? userGreetingMessage() : defaultGreeting()}
       </div>
       <label htmlFor="category">
         Create a New Catergory

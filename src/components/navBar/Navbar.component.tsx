@@ -1,20 +1,12 @@
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable no-underscore-dangle */
 import React from 'react';
 import './Navbar.styles.scss';
-import { RootStateOrAny, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { useAppSelector } from '../../redux/hooks';
 import Logo from '../../assets/svg/logo.svg';
-import { currentUser as currentUserType } from '../../redux/reducers';
-import { mockCurrentUser } from '../editProfile/EditProfile.component';
 
 const Navbar = (): JSX.Element => {
-  // TODO figure out how to type the redux state
-  // const { user } = useSelector<currentUserType>(
-  //   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-  //   (state) => state
-  // );
-  const user = mockCurrentUser;
+  const { user } = useAppSelector((state) => state);
   return (
     <div className="navbar">
       <Link to={user ? `/profile/${user._id}` : '/'}>

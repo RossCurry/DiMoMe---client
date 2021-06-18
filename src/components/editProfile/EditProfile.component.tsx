@@ -1,22 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../../redux/hooks';
 import './EditProfile.styles.scss';
 
-export const mockCurrentUser = {
-  _id: 5,
-  email: 'string@fffe.com',
-  name: 'yellow',
-  localType: 'string',
-  localName: 'string',
-};
-
 const EditProfile = (): JSX.Element => {
-  // TODO i'm having this redux issue all over the place
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  // const currentUser = useSelector((state) => state.currentUser.user);
-  const currentUser = mockCurrentUser;
+  const { user } = useAppSelector((state) => state);
   return (
     <>
       <div className="edit-profile-container">
@@ -25,9 +12,7 @@ const EditProfile = (): JSX.Element => {
             You can change your email address here
             <input
               type="text"
-              placeholder={
-                currentUser ? currentUser.email : 'Type your new email here...'
-              }
+              placeholder={user ? user.email : 'Type your new email here...'}
               name="email"
               id="email-profile"
             />
@@ -36,9 +21,7 @@ const EditProfile = (): JSX.Element => {
             You can change your profile name
             <input
               type="text"
-              placeholder={
-                currentUser ? currentUser.name : 'Type your new name here...'
-              }
+              placeholder={user ? user.name : 'Type your new name here...'}
               name="name"
               id="name-profile"
             />
@@ -48,8 +31,8 @@ const EditProfile = (): JSX.Element => {
             <input
               type="text"
               placeholder={
-                currentUser
-                  ? currentUser.localName
+                user
+                  ? user.localName
                   : `Type the new name of your local here...`
               }
               name="localName"

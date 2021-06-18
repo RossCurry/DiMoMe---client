@@ -1,6 +1,5 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState } from 'react';
-import { RootStateOrAny, useSelector } from 'react-redux';
 import './EditMenu.styles.scss';
 import {
   newCategoryDB,
@@ -14,15 +13,11 @@ import {
   newMenuItem as newMenuItemType,
 } from '../../ApiService';
 import MenuItem from '../../components/menuItem/MenuItem.component';
-import { currentUser as currentUserType } from '../../redux/reducers';
-import { mockCurrentUser } from '../../components/editProfile/EditProfile.component';
+import { useAppSelector } from '../../redux/hooks';
 
 const EditMenu = (): JSX.Element => {
-  // get user details to insert into category
-  // const currentUser = useSelector(
-  //   (state): currentUserType => state.currentUser.user
-  // );
-  const currentUser = mockCurrentUser;
+  const { user } = useAppSelector((state) => state);
+
   // state for list
   const [categoryList, setCategoryList] = useState<categoryFromDB[]>();
 
@@ -83,7 +78,7 @@ const EditMenu = (): JSX.Element => {
     const categoryObj = {
       categoryName: newCategory,
       // eslint-disable-next-line no-underscore-dangle
-      userId: currentUser._id,
+      userId: user._id,
     };
     // Category Object from DB
     const storedCategory = await newCategoryDB(categoryObj);
@@ -99,12 +94,12 @@ const EditMenu = (): JSX.Element => {
 
   // send to aPI
   const addMenuItem = async (newItem: string): Promise<void> => {
-    if (selectedCategory && currentUser) {
+    if (selectedCategory && user) {
       const menuItemObj = {
         itemName: newItem,
         description: 'Write a small description of the product here...',
         itemPrice: 0,
-        userId: currentUser._id,
+        userId: user._id,
         categoryId: selectedCategory._id,
       };
       const storedMenuItem = await newMenuItemDB(menuItemObj);
@@ -125,7 +120,7 @@ const EditMenu = (): JSX.Element => {
   };
 
   const fetchAllCategories = async (): Promise<void> => {
-    await fetchAllCategoriesByUserId(currentUser._id)
+    await fetchAllCategoriesByUserId(user._id)
       .then((res) => {
         if (res) {
           setCategoryList(res);
@@ -136,7 +131,7 @@ const EditMenu = (): JSX.Element => {
   };
 
   const fetchAllMenuItems = async (): Promise<void> => {
-    const allMenuItems = await fetchAllMenuItemsByUserId(currentUser._id);
+    const allMenuItems = await fetchAllMenuItemsByUserId(user._id);
     if (allMenuItems) {
       setMenuItemList(allMenuItems);
     }
