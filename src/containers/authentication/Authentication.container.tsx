@@ -1,7 +1,10 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
+// import { updateUser } from '../../redux/actions';
+import { useAppDispatch } from '../../redux/hooks';
+import { updateUser } from '../../redux/reducers/userSlice';
 import './Authentication.styles.scss';
 import {
   registerNewUser,
@@ -9,7 +12,6 @@ import {
   newUser,
   userLogin,
 } from '../../ApiService';
-import { updateUser } from '../../redux/actions';
 
 interface AuthenticationProps {
   subscribe: boolean;
@@ -17,18 +19,19 @@ interface AuthenticationProps {
 
 const Authentication = ({ subscribe }: AuthenticationProps): JSX.Element => {
   const history = useHistory();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const initialState = {
     email: '',
     emailConfirm: '',
     password: '',
     name: '',
-    localSelector: '',
+    localType: '',
     localName: '',
   };
 
-  const [registry, setRegistry] = useState(initialState);
+  const [userInput, setUserInput] = useState(initialState);
   const base64 = (str: string): string | null => {
     const regExp = /[^<>]+/g;
     const cleanString = str.match(regExp);
@@ -44,7 +47,7 @@ const Authentication = ({ subscribe }: AuthenticationProps): JSX.Element => {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ): void => {
     const { name, value } = e.target;
-    setRegistry((prevState) => ({
+    setUserInput((prevState) => ({
       ...prevState,
       [name]: value,
     }));
@@ -55,22 +58,23 @@ const Authentication = ({ subscribe }: AuthenticationProps): JSX.Element => {
   ): Promise<void> => {
     e.preventDefault();
     if (subscribe) {
-      const { email, password, name, localSelector, localName } = registry;
+      const { email, password, name, localType, localName } = userInput;
       const newUserForDB = {
         email: base64(email),
         password: btoa(password),
         name: base64(name),
-        localSelector: base64(localSelector),
+        localType: base64(localType),
         localName: base64(localName),
       };
       // TO and FROM API
       const registeredUser = await registerNewUser(newUserForDB as newUser);
       if (registeredUser) {
+        // here we add the user info to the Redux store
         dispatch(updateUser(registeredUser));
         history.push(`/profile/${registeredUser._id}`, registeredUser);
       }
     } else {
-      const { email, password } = registry;
+      const { email, password } = userInput;
       const userLoginDetails = {
         email: base64(email),
         password: btoa(password),
@@ -86,14 +90,14 @@ const Authentication = ({ subscribe }: AuthenticationProps): JSX.Element => {
   const validateRegister = (): boolean => {
     if (subscribe) {
       return (
-        !registry.email ||
-        !registry.emailConfirm ||
-        !registry.password ||
-        !registry.name ||
-        !registry.localName
+        !userInput.email ||
+        !userInput.emailConfirm ||
+        !userInput.password ||
+        !userInput.name ||
+        !userInput.localName
       );
     }
-    return !registry.email || !registry.password;
+    return !userInput.email || !userInput.password;
   };
 
   const emailInput = (): JSX.Element => {
@@ -110,7 +114,7 @@ const Authentication = ({ subscribe }: AuthenticationProps): JSX.Element => {
               subscribe ? 'write your email here...' : 'Type your email here...'
             }
             name="email"
-            value={registry.email}
+            value={userInput.email}
             onChange={handleChange}
           />
         </label>
@@ -118,22 +122,22 @@ const Authentication = ({ subscribe }: AuthenticationProps): JSX.Element => {
     );
   };
 
-  const emailConfirm = (): JSX.Element => {
-    return (
-      <>
-        <label htmlFor="emailConfirm">
-          Confirm your email address
-          <input
-            type="email"
-            placeholder="re-enter your email..."
-            name="emailConfirm"
-            value={registry.emailConfirm}
-            onChange={handleChange}
-          />
-        </label>
-      </>
-    );
-  };
+  // const emailConfirm = (): JSX.Element => {
+  //   return (
+  //     <>
+  //       <label htmlFor="emailConfirm">
+  //         Confirm your email address
+  //         <input
+  //           type="email"
+  //           placeholder="re-enter your email..."
+  //           name="emailConfirm"
+  //           value={userInput.emailConfirm}
+  //           onChange={handleChange}
+  //         />
+  //       </label>
+  //     </>
+  //   );
+  // };
 
   const passwordInput = (): JSX.Element => {
     return (
@@ -147,7 +151,7 @@ const Authentication = ({ subscribe }: AuthenticationProps): JSX.Element => {
               subscribe ? 'Create a password...' : 'Type your password here...'
             }
             name="password"
-            value={registry.password}
+            value={userInput.password}
             onChange={handleChange}
           />
         </label>
@@ -164,7 +168,7 @@ const Authentication = ({ subscribe }: AuthenticationProps): JSX.Element => {
             type="text"
             placeholder="Write your profile name here..."
             name="name"
-            value={registry.name}
+            value={userInput.name}
             onChange={handleChange}
           />
         </label>
@@ -172,15 +176,15 @@ const Authentication = ({ subscribe }: AuthenticationProps): JSX.Element => {
     );
   };
 
-  const localSelectorInput = (): JSX.Element => {
+  const localTypeInput = (): JSX.Element => {
     return (
       <>
-        <label htmlFor="localSelector">
+        <label htmlFor="localType">
           What kind of place do you have?
           <select
-            name="localSelector"
+            name="localType"
             id="localSelect"
-            value={registry.localSelector}
+            value={userInput.localType}
             onChange={handleChange}
           >
             <option value="">--Please choose an option--</option>
@@ -203,7 +207,7 @@ const Authentication = ({ subscribe }: AuthenticationProps): JSX.Element => {
             type="text"
             placeholder="Write the name of your place here..."
             name="localName"
-            value={registry.localName}
+            value={userInput.localName}
             onChange={handleChange}
           />
         </label>
@@ -214,7 +218,11 @@ const Authentication = ({ subscribe }: AuthenticationProps): JSX.Element => {
   const submitButtonRegister = (): JSX.Element => {
     return (
       <>
-        <input type="submit" value="Register" disabled={validateRegister()} />
+        <input
+          type="submit"
+          value="Register"
+          // disabled={validateRegister()}
+        />
 
         <div className="subscribe-login">
           <p>Already have an account?</p>
@@ -229,7 +237,11 @@ const Authentication = ({ subscribe }: AuthenticationProps): JSX.Element => {
   const submitButtonLogin = (): JSX.Element => {
     return (
       <>
-        <input type="submit" value="Log in" disabled={validateRegister()} />
+        <input
+          type="submit"
+          value="Log in"
+          // disabled={validateRegister()}
+        />
 
         <div className="subscribe-login">
           <p>Don&apos;t have an account yet?</p>
@@ -256,10 +268,10 @@ const Authentication = ({ subscribe }: AuthenticationProps): JSX.Element => {
             : 'Login below with your email & password'}
         </h3>
         {subscribe ? emailInput() : emailInput()}
-        {subscribe ? emailConfirm() : null}
+        {/* {subscribe ? emailConfirm() : null} */}
         {subscribe ? passwordInput() : passwordInput()}
         {subscribe ? nameInput() : null}
-        {subscribe ? localSelectorInput() : null}
+        {subscribe ? localTypeInput() : null}
         {subscribe ? localNameInput() : null}
         {subscribe ? submitButtonRegister() : submitButtonLogin()}
       </form>

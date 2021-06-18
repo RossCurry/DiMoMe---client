@@ -4,12 +4,13 @@
 // const BASE_URL = `http://${REACT_APP_SV_URL}:${REACT_APP_SV_PORT}`;
 
 // TODO adapt ENV variables to match server address.
-export const BASE_URL = process.env.REACT_APP_SV_URL || '';
+export const BASE_URL = 'http://localhost:3005';
+// export const BASE_URL = process.env.REACT_APP_SV_URL || '';
 
 export type newUser = {
   email: string;
   name: string;
-  localSelector: string;
+  localType: string;
   localName: string;
   password: string;
 };
@@ -32,6 +33,18 @@ export async function registerNewUser(
 ): Promise<userFromDB | null> {
   const sendBody = JSON.stringify(newUser);
   const USER_PATH = '/user/subscribe';
+  // check email
+  // const { email, password } = newUser;
+  // const checkUser = { email, password };
+  // const returnConfirmation = await fetch(`${BASE_URL}/check`, {
+  //   method: 'POST',
+  //   credentials: 'include',
+  //   mode: 'cors',
+  //   headers: { 'Content-Type': 'application/json' },
+  //   body: JSON.stringify(checkUser),
+  // });
+  // const hasEmail = (await returnConfirmation.json()) as boolean;
+  // register user
   try {
     const returnInfo = await fetch(`${BASE_URL}${USER_PATH}`, {
       method: 'POST',

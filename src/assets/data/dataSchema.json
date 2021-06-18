@@ -42,5 +42,12 @@
     "Pescatarian": "description",
     "Beegan": "description",
     "Flexitarian": "description"
+  },
+  "user": {
+    "_id": 2423422,
+    "email": "some@fefef.com",
+    "name": "somebody",
+    "localType": "rest/caf/bar",
+    "localName": "some name"
   }
 }

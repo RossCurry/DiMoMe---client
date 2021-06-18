@@ -1,18 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
-import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import App from './App';
-import reducers from './redux/reducers';
-
-const myStore = createStore(reducers);
-// const myStore = createStore(reducers, window.__REDUX_DEVTOOLS_EXTENSION__ &&
-//   window.__REDUX_DEVTOOLS_EXTENSION__()); //takes reducers - combined
+import { store } from './redux/store';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={myStore}>
+    <Provider store={store}>
       <App />
     </Provider>
   </React.StrictMode>,
