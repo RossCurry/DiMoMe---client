@@ -1,5 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import './EditMenu.styles.scss';
 import {
   newCategoryDB,
@@ -17,7 +18,10 @@ import { useAppSelector } from '../../redux/hooks';
 
 const EditMenu = (): JSX.Element => {
   const { user } = useAppSelector((state) => state);
-
+  const history = useHistory();
+  useEffect(() => {
+    if (user._id === 0) history.push('/login');
+  }, [user, history]);
   // state for list
   const [categoryList, setCategoryList] = useState<categoryFromDB[]>();
 

@@ -1,9 +1,15 @@
-import React from 'react';
+/* eslint-disable no-underscore-dangle */
+import React, { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useAppSelector } from '../../redux/hooks';
 import './EditProfile.styles.scss';
 
 const EditProfile = (): JSX.Element => {
   const { user } = useAppSelector((state) => state);
+  const history = useHistory();
+  useEffect(() => {
+    if (user._id === 0) history.push('/login');
+  }, [user, history]);
   return (
     <>
       <div className="edit-profile-container">

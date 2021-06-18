@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import './Profile.styles.scss';
 import { useAppSelector } from '../../redux/hooks';
 import editLocal from '../../assets/svg/edit_local.svg';
@@ -8,7 +8,10 @@ import editUser from '../../assets/svg/edit_user.svg';
 
 const Profile = (): JSX.Element => {
   const { user } = useAppSelector((state) => state);
-
+  const history = useHistory();
+  useEffect(() => {
+    if (user._id === 0) history.push('/login');
+  }, [user, history]);
   return (
     <div className="profile-page">
       <div className="profile-msg">
