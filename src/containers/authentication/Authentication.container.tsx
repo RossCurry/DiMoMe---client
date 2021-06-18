@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 // import { useDispatch } from 'react-redux';
 // import { updateUser } from '../../redux/actions';
@@ -15,11 +15,14 @@ import {
 
 interface AuthenticationProps {
   subscribe: boolean;
+  message: string;
 }
 
-const Authentication = ({ subscribe }: AuthenticationProps): JSX.Element => {
+const Authentication = ({
+  subscribe,
+  message,
+}: AuthenticationProps): JSX.Element => {
   const history = useHistory();
-  // const dispatch = useDispatch();
   const dispatch = useAppDispatch();
 
   const initialState = {
@@ -32,6 +35,12 @@ const Authentication = ({ subscribe }: AuthenticationProps): JSX.Element => {
   };
 
   const [userInput, setUserInput] = useState(initialState);
+  const [loginMessage, setLoginMessage] = useState(
+    'Login below with your email & password'
+  );
+  useEffect(() => {
+    if (message.length > 0) setLoginMessage(message);
+  }, [message]);
   const base64 = (str: string): string | null => {
     const regExp = /[^<>]+/g;
     const cleanString = str.match(regExp);
@@ -72,6 +81,13 @@ const Authentication = ({ subscribe }: AuthenticationProps): JSX.Element => {
         // here we add the user info to the Redux store
         dispatch(updateUser(registeredUser));
         history.push(`/profile/${registeredUser._id}`, registeredUser);
+      } else {
+        history.push({
+          pathname: '/login',
+          state: {
+            message: 'Looks like youve been here before',
+          },
+        });
       }
     } else {
       const { email, password } = userInput;
@@ -121,23 +137,6 @@ const Authentication = ({ subscribe }: AuthenticationProps): JSX.Element => {
       </>
     );
   };
-
-  // const emailConfirm = (): JSX.Element => {
-  //   return (
-  //     <>
-  //       <label htmlFor="emailConfirm">
-  //         Confirm your email address
-  //         <input
-  //           type="email"
-  //           placeholder="re-enter your email..."
-  //           name="emailConfirm"
-  //           value={userInput.emailConfirm}
-  //           onChange={handleChange}
-  //         />
-  //       </label>
-  //     </>
-  //   );
-  // };
 
   const passwordInput = (): JSX.Element => {
     return (
@@ -201,7 +200,6 @@ const Authentication = ({ subscribe }: AuthenticationProps): JSX.Element => {
     return (
       <>
         <label htmlFor="localName">
-          {/* // TODO check if this works on the screen output */}
           What&apos;s the name of your place
           <input
             type="text"
@@ -260,13 +258,8 @@ const Authentication = ({ subscribe }: AuthenticationProps): JSX.Element => {
           ? "It's free to register an account"
           : 'To continue log in here'}
       </h1>
-
       <form className="subscribe-form" onSubmit={handleSubmit}>
-        <h3>
-          {subscribe
-            ? 'Registerbelow with an email'
-            : 'Login below with your email & password'}
-        </h3>
+        <h3>{subscribe ? 'Registerbelow with an email' : loginMessage}</h3>
         {subscribe ? emailInput() : emailInput()}
         {/* {subscribe ? emailConfirm() : null} */}
         {subscribe ? passwordInput() : passwordInput()}

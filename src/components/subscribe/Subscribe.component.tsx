@@ -3,12 +3,12 @@ import './Subscribe.styles.scss';
 import Authentication from '../../containers/authentication/Authentication.container';
 import { LoginProps } from '../login/Login.component';
 
-const subscribe = ({ match }: LoginProps): JSX.Element => {
+const Subscribe = ({ match }: LoginProps): JSX.Element => {
   return (
     <div className="subscribe-container">
-      <Authentication subscribe={match.isExact} />
+      <Authentication subscribe={match.isExact} message="" />
     </div>
   );
 };
 
-export default subscribe;
+export default Subscribe;
