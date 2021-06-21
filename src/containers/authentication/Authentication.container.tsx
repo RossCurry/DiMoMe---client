@@ -5,9 +5,18 @@ import { Link, useHistory } from 'react-router-dom';
 // import { updateUser } from '../../redux/actions';
 import { useAppDispatch } from '../../redux/hooks';
 import { updateUser } from '../../redux/reducers/userSlice';
+import {
+  addNewCategoryToStore,
+  loadCategories,
+} from '../../redux/reducers/categorySlice';
 import './Authentication.styles.scss';
 import { newUser, userLogin } from '../../types/customTypes';
-import { registerNewUser, loginUser } from '../../ApiService';
+import {
+  registerNewUser,
+  loginUser,
+  fetchAllCategoriesByUserId,
+  fetchAllMenuItemsByUserId,
+} from '../../ApiService';
 
 interface AuthenticationProps {
   subscribe: boolean;
@@ -47,7 +56,6 @@ const Authentication = ({
     }
     return null;
   };
-
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ): void => {
@@ -76,6 +84,12 @@ const Authentication = ({
       if (registeredUser) {
         // here we add the user info to the Redux store
         dispatch(updateUser(registeredUser));
+        const userCategories = await fetchAllCategoriesByUserId(
+          registeredUser._id
+        );
+        if (userCategories) dispatch(loadCategories(userCategories));
+        const userItems = await fetchAllMenuItemsByUserId(registeredUser._id);
+        // TODO send all user items to store
         history.push(`/profile/${registeredUser._id}`, registeredUser);
       } else {
         history.push({
@@ -94,6 +108,8 @@ const Authentication = ({
       const userInfo = await loginUser(userLoginDetails as userLogin);
       if (userInfo) {
         dispatch(updateUser(userInfo));
+        const userCategories = await fetchAllCategoriesByUserId(userInfo._id);
+        if (userCategories) dispatch(loadCategories(userCategories));
         history.push(`/profile/${userInfo._id}`, userInfo);
       }
     }

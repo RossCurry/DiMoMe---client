@@ -3,10 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import './EditMenu.styles.scss';
 import {
-  newCategoryDB,
   newMenuItemDB,
   editMenuItemDB,
-  fetchAllCategoriesByUserId,
   fetchAllMenuItemsByUserId,
 } from '../../ApiService';
 import {
@@ -24,8 +22,6 @@ const EditMenu = (): JSX.Element => {
   useEffect(() => {
     if (user._id === 0) history.push('/login');
   }, [user, history]);
-  // state for list
-  const [categoryList, setCategoryList] = useState<categoryFromDB[]>();
 
   // state for menu items
   const [menuItemList, setMenuItemList] = useState<menuItemFromDB[]>();
@@ -43,25 +39,6 @@ const EditMenu = (): JSX.Element => {
   // state to change edit/view of item
   const [state, setState] = useState<string>('select');
 
-  // TODO try to figure out how to re-render
-  const handleSelected = (category: categoryFromDB): void => {
-    // eslint-disable-next-line no-param-reassign
-    category.selected = !category.selected;
-    if (categoryList) {
-      const newList = categoryList.map((item) => {
-        // eslint-disable-next-line no-underscore-dangle
-        if (item._id !== category._id) {
-          const modItem = item;
-          modItem.selected = false;
-          return modItem;
-        }
-        return item;
-      });
-      setCategoryList(newList);
-      setSelectedCategory(category);
-    }
-  };
-
   // send menu item to menu detail comp. & toggle views
   const handleMenuItem = (menuItem: menuItemFromDB): void => {
     if (menuItem !== itemSelected) {
@@ -78,26 +55,6 @@ const EditMenu = (): JSX.Element => {
 
   // API CALLS //
 
-  const addNewCategory = async (newCategory: string): Promise<void> => {
-    // Basic category object for DB
-
-    const categoryObj = {
-      categoryName: newCategory,
-      // eslint-disable-next-line no-underscore-dangle
-      userId: user._id,
-    };
-    // Category Object from DB
-    const storedCategory = await newCategoryDB(categoryObj);
-    if (storedCategory) {
-      if (categoryList) {
-        const currentList = [...categoryList];
-        currentList.push(storedCategory);
-        setCategoryList(currentList);
-        // TODO use dispatch to send to redux store
-      }
-    }
-  };
-
   // send to aPI
   const addMenuItem = async (newItem: string): Promise<void> => {
     if (selectedCategory && user) {
@@ -112,7 +69,7 @@ const EditMenu = (): JSX.Element => {
       if (storedMenuItem) {
         if (menuItemList) {
           const currentList = [...menuItemList, storedMenuItem];
-          // currentList.push(storedMenuItem);
+          currentList.push(storedMenuItem);
           setMenuItemList(currentList);
         }
       }
@@ -125,17 +82,6 @@ const EditMenu = (): JSX.Element => {
     if (editedItem) setItemSavedForDisplay(editedItem);
   };
 
-  const fetchAllCategories = async (): Promise<void> => {
-    await fetchAllCategoriesByUserId(user._id)
-      .then((res) => {
-        if (res) {
-          setCategoryList(res);
-          setSelectedCategory(res[0]);
-        }
-      })
-      .catch((err: Error) => console.error({ message: err }));
-  };
-
   const fetchAllMenuItems = async (): Promise<void> => {
     const allMenuItems = await fetchAllMenuItemsByUserId(user._id);
     if (allMenuItems) {
@@ -145,8 +91,6 @@ const EditMenu = (): JSX.Element => {
 
   useEffect((): void => {
     // eslint-disable-next-line no-void
-    void fetchAllCategories();
-    // eslint-disable-next-line no-void
     void fetchAllMenuItems();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -154,18 +98,13 @@ const EditMenu = (): JSX.Element => {
   return (
     <div className="edit-menu-container">
       <MenuItem
-        categoryList={categoryList}
-        addNewCategory={addNewCategory}
         menuItemList={menuItemList}
         addMenuItem={addMenuItem}
-        handleSelected={handleSelected}
         handleMenuItem={handleMenuItem}
         itemSelected={itemSelected}
         editMenuItem={editMenuItem}
         itemSavedForDisplay={itemSavedForDisplay}
-        selectedCategory={selectedCategory}
-        // setSelectedCategory={setSelectedCategory}
-        state={state}
+        stateValue={state}
         setState={setState}
       />
     </div>
