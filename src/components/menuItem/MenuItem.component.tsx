@@ -6,7 +6,11 @@ import CategoryItem from '../catergoryItem/CategoryItem.componet';
 import ItemDetail from '../itemDetail/ItemDetail.component';
 import ItemDetailDisplay from '../itemDetailDisplay/ItemDetailDisplay.component';
 import SelectItem from '../selectItem/SelectItem.component';
-import { categoryFromDB, newCategory, menuItemFromDB } from '../../ApiService';
+import {
+  categoryFromDB,
+  newCategory,
+  menuItemFromDB,
+} from '../../types/customTypes';
 
 interface MenuItemProps {
   addNewCategory: (newCategory: string) => void;

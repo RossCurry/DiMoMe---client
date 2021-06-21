@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useAppSelector } from '../../redux/hooks';
 import './Category.styles.scss';
-import { newCategory } from '../../ApiService';
+import { newCategory } from '../../types/customTypes';
 
 interface CatergoryProps {
   addNewCategory: (newCategory: string) => void;

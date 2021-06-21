@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import './itemDetailDisplay.styles.scss';
-import { menuItemFromDB, newMenuItem } from '../../ApiService';
+import { menuItemFromDB, newMenuItem } from '../../types/customTypes';
 
 // interface IProps {
 //   itemSavedForDisplay: menuItemFromDB;

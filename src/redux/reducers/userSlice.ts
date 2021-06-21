@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-underscore-dangle */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { userFromDB } from '../../ApiService';
+import { userFromDB } from '../../types/customTypes';
 
 export interface userState {
   _id: number;

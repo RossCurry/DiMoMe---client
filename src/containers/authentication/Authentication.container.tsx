@@ -6,12 +6,8 @@ import { Link, useHistory } from 'react-router-dom';
 import { useAppDispatch } from '../../redux/hooks';
 import { updateUser } from '../../redux/reducers/userSlice';
 import './Authentication.styles.scss';
-import {
-  registerNewUser,
-  loginUser,
-  newUser,
-  userLogin,
-} from '../../ApiService';
+import { newUser, userLogin } from '../../types/customTypes';
+import { registerNewUser, loginUser } from '../../ApiService';
 
 interface AuthenticationProps {
   subscribe: boolean;

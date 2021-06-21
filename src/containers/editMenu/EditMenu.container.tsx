@@ -8,11 +8,13 @@ import {
   editMenuItemDB,
   fetchAllCategoriesByUserId,
   fetchAllMenuItemsByUserId,
+} from '../../ApiService';
+import {
   categoryFromDB,
   menuItemFromDB,
   newCategory as newCategoryType,
   newMenuItem as newMenuItemType,
-} from '../../ApiService';
+} from '../../types/customTypes';
 import MenuItem from '../../components/menuItem/MenuItem.component';
 import { useAppSelector } from '../../redux/hooks';
 

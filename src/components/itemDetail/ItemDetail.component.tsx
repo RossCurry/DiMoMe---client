@@ -4,11 +4,11 @@
 import React, { useState } from 'react';
 import cameraIcon from '../../assets/svg/camera.svg';
 import {
-  BASE_URL,
   menuItemFromDB,
   newMenuItem,
   allergenSchema,
-} from '../../ApiService';
+} from '../../types/customTypes';
+import { BASE_URL } from '../../ApiService';
 import './ItemDetail.styles.scss';
 
 interface IProps {
